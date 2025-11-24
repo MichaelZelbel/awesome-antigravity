@@ -10,9 +10,17 @@ This bot is built using **n8n** workflows.
 
 ## 🚀 Setup
 
+### n8n Workflows
 1.  **Import Workflows**: Import the JSON files from the `workflows` directory into your n8n instance.
-2.  **Credentials**: Set up Discord Webhook, Postgres, and Google Gemini credentials in n8n.
-3.  **Environment Variables**: `DISCORD_APP_ID`, `DISCORD_PUBLIC_KEY`.
+2.  **Credentials**: Set up Google Gemini API credentials in n8n.
+3.  **Update Placeholders**: Replace `YOUR_PROJECT_ID`, `YOUR_CORPUS_ID`, and credential IDs in the workflows.
+
+### Bridge Script (The Listener)
+1.  **Deploy to Coolify**: Follow the instructions in `DEPLOYMENT.md`.
+2.  **Environment Variables**:
+    -   `DISCORD_TOKEN`: Your Discord bot token.
+    -   `N8N_WEBHOOK_URL`: Your n8n webhook URL (from the `Discord_Handler` workflow).
+3.  **Enable Discord Intent**: Go to Discord Developer Portal → Your App → Bot → Enable **MESSAGE CONTENT INTENT**.
 
 ## 🧠 Persona
 
