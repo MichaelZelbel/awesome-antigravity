@@ -7,7 +7,7 @@
                     "assignments": [
                         {
                             "name": "query",
-                            "value": "={{ $('When chat message received').first().json.chatInput }}",
+                            "value": "={{ $json.chatInput || $json.query || $json.body.content }}",
                             "type": "string"
                         },
                         {
@@ -45,21 +45,21 @@
         },
         {
             "parameters": {
-                "model": "models/gemini-1.5-pro",
+                "model": "google/gemini-pro-1.5",
                 "options": {}
             },
-            "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+            "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
             "typeVersion": 1,
             "position": [
                 860,
                 520
             ],
-            "id": "gemini_model",
-            "name": "Google Gemini Chat Model",
+            "id": "openrouter_model",
+            "name": "OpenRouter Model",
             "credentials": {
-                "googleGeminiApi": {
-                    "id": "YOUR_CREDENTIAL_ID",
-                    "name": "Google Gemini account"
+                "openRouterApi": {
+                    "id": "YOUR_OPENROUTER_CREDENTIAL_ID",
+                    "name": "OpenRouter account"
                 }
             }
         },
@@ -71,7 +71,7 @@
                 "genericAuthType": "httpQueryAuth",
                 "sendBody": true,
                 "specifyBody": "json",
-                "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        { \"text\": \"{{ $fromAI(\"query\",\"the question to search for\") }}\" }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"google_search_retrieval\": {\n        \"dynamic_retrieval_config\": {\n          \"mode\": \"MODE_DYNAMIC\",\n          \"dynamic_threshold\": 0.7\n        }\n      }\n    }\n  ]\n}",
+                "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        { \"text\": \"{{ $fromAI(\"query\",\"the question to search for\") }}\" }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"file_search\": {\n        \"file_search_store_names\": [\n          \"{{ $('Config').first().json.file_store_name }}\"\n        ]\n      }\n    }\n  ]\n}",
                 "options": {}
             },
             "type": "n8n-nodes-base.httpRequestTool",
@@ -84,7 +84,7 @@
             "name": "Knowledge Base",
             "credentials": {
                 "httpQueryAuth": {
-                    "id": "YOUR_API_KEY_CREDENTIAL",
+                    "id": "YOUR_GOOGLE_API_KEY_CREDENTIAL",
                     "name": "Google Gemini API Key"
                 }
             }
@@ -102,10 +102,36 @@
             "id": "chat_trigger",
             "name": "When chat message received",
             "webhookId": "zerog-chat-trigger"
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "zerog",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                240,
+                140
+            ],
+            "id": "webhook_trigger",
+            "name": "Webhook"
         }
     ],
     "connections": {
         "When chat message received": {
+            "main": [
+                [
+                    {
+                        "node": "Config",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Webhook": {
             "main": [
                 [
                     {
@@ -127,7 +153,7 @@
                 ]
             ]
         },
-        "Google Gemini Chat Model": {
+        "OpenRouter Model": {
             "ai_languageModel": [
                 [
                     {
