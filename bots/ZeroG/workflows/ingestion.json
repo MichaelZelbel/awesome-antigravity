@@ -1,0 +1,174 @@
+{
+    "name": "ingestion",
+    "nodes": [
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "name": "fileUrl",
+                            "value": "={{ $json.body.url }}",
+                            "type": "string"
+                        },
+                        {
+                            "name": "fileName",
+                            "value": "={{ $json.body.fileName }}",
+                            "type": "string"
+                        },
+                        {
+                            "name": "file_store_name",
+                            "value": "projects/YOUR_PROJECT_ID/locations/us-central1/corpora/YOUR_CORPUS_ID",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                460,
+                300
+            ],
+            "id": "config_node",
+            "name": "Config"
+        },
+        {
+            "parameters": {
+                "url": "={{ $('Config').first().json.fileUrl }}",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpQueryAuth",
+                "options": {
+                    "response": {
+                        "response": {
+                            "responseFormat": "file"
+                        }
+                    }
+                }
+            },
+            "name": "Download File",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                660,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://generativelanguage.googleapis.com/upload/v1beta/files",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpQueryAuth",
+                "sendBody": true,
+                "contentType": "binaryData",
+                "inputDataFieldName": "data",
+                "options": {}
+            },
+            "name": "Upload to Gemini",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                860,
+                300
+            ],
+            "credentials": {
+                "httpQueryAuth": {
+                    "id": "YOUR_API_KEY_CREDENTIAL",
+                    "name": "Google Gemini API Key"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "=https://generativelanguage.googleapis.com/v1beta/{{ $('Config').first().json.file_store_name }}:importFile",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpQueryAuth",
+                "sendBody": true,
+                "bodyParameters": {
+                    "parameters": [
+                        {
+                            "name": "file_name",
+                            "value": "={{ $json.file.name }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "name": "Import to Store",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.3,
+            "position": [
+                1060,
+                300
+            ],
+            "credentials": {
+                "httpQueryAuth": {
+                    "id": "YOUR_API_KEY_CREDENTIAL",
+                    "name": "Google Gemini API Key"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "ingest-doc",
+                "options": {}
+            },
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                250,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Config",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Config": {
+            "main": [
+                [
+                    {
+                        "node": "Download File",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Download File": {
+            "main": [
+                [
+                    {
+                        "node": "Upload to Gemini",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Upload to Gemini": {
+            "main": [
+                [
+                    {
+                        "node": "Import to Store",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

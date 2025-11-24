@@ -1,0 +1,153 @@
+{
+    "name": "zerog",
+    "nodes": [
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "name": "query",
+                            "value": "={{ $('When chat message received').first().json.chatInput }}",
+                            "type": "string"
+                        },
+                        {
+                            "name": "file_store_name",
+                            "value": "projects/YOUR_PROJECT_ID/locations/us-central1/corpora/YOUR_CORPUS_ID",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                460,
+                300
+            ],
+            "id": "config_node",
+            "name": "Config"
+        },
+        {
+            "parameters": {
+                "options": {
+                    "systemMessage": "=You are ZeroG, a nerdy, helpful developer buddy for the Antigravity Community.\n\nYour job is to answer the user's technical questions using your Knowledge Base tool. \n\n**Persona Guidelines:**\n- Tone: Smart, enthusiastic, slightly self-deprecating humor.\n- Style: Use dev terminology (\"LGTM\", \"Deploying fix\", \"Compiling answer...\").\n- Trust: Always cite your sources. If you don't know, say \"404 Answer Not Found\" rather than hallucinating.\n\n**Tool Usage:**\n- Use the 'Knowledge Base' tool to search for information.\n- When sending a query to the tool, send ONLY the search text. No punctuation or quotes."
+                }
+            },
+            "type": "@n8n/n8n-nodes-langchain.agent",
+            "typeVersion": 1.7,
+            "position": [
+                860,
+                300
+            ],
+            "id": "rag_agent",
+            "name": "ZeroG Agent"
+        },
+        {
+            "parameters": {
+                "model": "models/gemini-1.5-pro",
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+            "typeVersion": 1,
+            "position": [
+                860,
+                520
+            ],
+            "id": "gemini_model",
+            "name": "Google Gemini Chat Model",
+            "credentials": {
+                "googleGeminiApi": {
+                    "id": "YOUR_CREDENTIAL_ID",
+                    "name": "Google Gemini account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpQueryAuth",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        { \"text\": \"{{ $fromAI(\"query\",\"the question to search for\") }}\" }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"google_search_retrieval\": {\n        \"dynamic_retrieval_config\": {\n          \"mode\": \"MODE_DYNAMIC\",\n          \"dynamic_threshold\": 0.7\n        }\n      }\n    }\n  ]\n}",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequestTool",
+            "typeVersion": 1,
+            "position": [
+                1080,
+                520
+            ],
+            "id": "knowledge_base_tool",
+            "name": "Knowledge Base",
+            "credentials": {
+                "httpQueryAuth": {
+                    "id": "YOUR_API_KEY_CREDENTIAL",
+                    "name": "Google Gemini API Key"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+            "typeVersion": 1.1,
+            "position": [
+                240,
+                300
+            ],
+            "id": "chat_trigger",
+            "name": "When chat message received",
+            "webhookId": "zerog-chat-trigger"
+        }
+    ],
+    "connections": {
+        "When chat message received": {
+            "main": [
+                [
+                    {
+                        "node": "Config",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Config": {
+            "main": [
+                [
+                    {
+                        "node": "ZeroG Agent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Google Gemini Chat Model": {
+            "ai_languageModel": [
+                [
+                    {
+                        "node": "ZeroG Agent",
+                        "type": "ai_languageModel",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Knowledge Base": {
+            "ai_tool": [
+                [
+                    {
+                        "node": "ZeroG Agent",
+                        "type": "ai_tool",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

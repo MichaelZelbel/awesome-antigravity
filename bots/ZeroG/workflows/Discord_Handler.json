@@ -1,0 +1,232 @@
+{
+    "name": "Discord_Handler",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "discord-listener",
+                "options": {}
+            },
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                250,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "assignments": {
+                    "assignments": [
+                        {
+                            "name": "chatInput",
+                            "value": "={{ $json.body.content }}",
+                            "type": "string"
+                        },
+                        {
+                            "name": "userId",
+                            "value": "={{ $json.body.author_id }}",
+                            "type": "string"
+                        },
+                        {
+                            "name": "userName",
+                            "value": "={{ $json.body.author }}",
+                            "type": "string"
+                        },
+                        {
+                            "name": "channelId",
+                            "value": "={{ $json.body.channel_id }}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "name": "Config",
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 3.4,
+            "position": [
+                460,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "modelId": {
+                    "__rl": true,
+                    "value": "gemini-1.5-flash",
+                    "mode": "list",
+                    "cachedResultName": "Gemini 1.5 Flash"
+                },
+                "messages": {
+                    "values": [
+                        {
+                            "content": "You are a classifier. Determine if the following Discord message is a TECHNICAL QUESTION about Antigravity, Gemini, or coding, or if it is just CHIT-CHAT.\n\nMessage: {{$('Config').first().json.chatInput}}\n\nRespond with strictly one word: \"QUESTION\" or \"CHIT_CHAT\"."
+                        }
+                    ]
+                }
+            },
+            "name": "Classifier (Gemini)",
+            "type": "n8n-nodes-base.googleGeminiChat",
+            "typeVersion": 1,
+            "position": [
+                660,
+                300
+            ],
+            "credentials": {
+                "googleGeminiApi": {
+                    "id": "YOUR_CREDENTIAL_ID",
+                    "name": "Google Gemini account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "dataType": "string",
+                "value1": "={{$json.content}}",
+                "rules": {
+                    "rules": [
+                        {
+                            "value2": "QUESTION"
+                        },
+                        {
+                            "value2": "CHIT_CHAT",
+                            "output": 1
+                        }
+                    ]
+                }
+            },
+            "name": "Switch",
+            "type": "n8n-nodes-base.switch",
+            "typeVersion": 1,
+            "position": [
+                860,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "workflowId": "zerog"
+            },
+            "name": "Execute ZeroG",
+            "type": "n8n-nodes-base.executeWorkflow",
+            "typeVersion": 1,
+            "position": [
+                1060,
+                200
+            ]
+        },
+        {
+            "parameters": {
+                "modelId": {
+                    "__rl": true,
+                    "value": "gemini-1.5-flash",
+                    "mode": "list",
+                    "cachedResultName": "Gemini 1.5 Flash"
+                },
+                "messages": {
+                    "values": [
+                        {
+                            "content": "You are ZeroG, a nerdy developer buddy bot. Respond to this chit-chat message with a short, funny, developer-themed quip.\n\nMessage: {{$('Config').first().json.chatInput}}"
+                        }
+                    ]
+                }
+            },
+            "name": "Chit-Chat Response",
+            "type": "n8n-nodes-base.googleGeminiChat",
+            "typeVersion": 1,
+            "position": [
+                1060,
+                400
+            ]
+        },
+        {
+            "parameters": {
+                "content": "={{$json.content}}"
+            },
+            "name": "Discord Response",
+            "type": "n8n-nodes-base.discord",
+            "typeVersion": 1,
+            "position": [
+                1300,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Config",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Config": {
+            "main": [
+                [
+                    {
+                        "node": "Classifier (Gemini)",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Classifier (Gemini)": {
+            "main": [
+                [
+                    {
+                        "node": "Switch",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Switch": {
+            "main": [
+                [
+                    {
+                        "node": "Execute ZeroG",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Chit-Chat Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Execute ZeroG": {
+            "main": [
+                [
+                    {
+                        "node": "Discord Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Chit-Chat Response": {
+            "main": [
+                [
+                    {
+                        "node": "Discord Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}
