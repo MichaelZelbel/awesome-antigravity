@@ -1,19 +1,66 @@
-# Awesome Antigravity
+# Awesome Antigravity [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-Welcome to the **Antigravity Community** repository! 🚀
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white)](https://discord.gg/X3um7vxX8J)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is the central hub for the Antigravity community, where we share prompts, hacks, and build the future of AI agents together.
+> A curated list of awesome plugins, themes, agent workflows, and resources for **Google Antigravity**, the next-generation agentic IDE.
 
-## 🤖 Antigravity Bot
+**[Antigravity](https://antigravity.google)** is Google's new AI-first Integrated Development Environment designed to build, test, and deploy full-stack applications with the help of autonomous agents.
 
-This repository also hosts the source code for the **Antigravity Bot**, an AI-powered Discord assistant designed to help users with technical questions.
+## 👋 Join the Community
+The best place to get help, share prompts, and discuss plugin development is our Discord server.
+<br>
+👉 **[Click here to join the Antigravity Community Discord](https://discord.gg/X3um7vxX8J)**
 
-### Features (Planned)
-- **Technical Q&A**: Identifies technical questions and provides answers based on indexed documentation.
-- **Google File Search Integration**: Uses a vector database to search through extensive documentation.
-- **n8n Powered**: Built using n8n workflows for flexibility and power.
+---
 
-## 📂 Repository Structure
+## 📚 Contents
+- [Official Resources](#-official-resources)
+- [Extensions & Plugins](#-extensions--plugins)
+- [Agent Workflows & Prompts](#-agent-workflows--prompts)
+- [Themes](#-themes)
+- [Tutorials & Articles](#-tutorials--articles)
+- [Contributing](#-contributing)
 
-- `/bot`: Source code and workflows for the Discord bot.
-- `/assets`: Community assets (logos, banners, etc.).
+---
+
+## 🪐 Official Resources
+*   [Antigravity Home](https://antigravity.google) - The official landing page.
+*   [Documentation](https://antigravity.google/docs) - Official guides and API references.
+*   [Release Notes](https://antigravity.google/updates) - Changelogs and version history.
+*   [Issue Tracker](https://issues.antigravity.google) - Report bugs or request features directly to Google.
+
+## 🧩 Extensions & Plugins
+*Currently populating... [Submit a PR to add yours!]*
+
+*   **[Community Plugin Template](https://github.com/placeholder)** - A starter repo for building your own Antigravity extensions.
+
+## 🤖 Agent Workflows & Prompts
+Tips for getting the most out of the built-in AI Agent.
+
+*   **Scaffolding React Apps:**
+    ```text
+    @Agent create a responsive dashboard layout using Tailwind CSS and Lucide icons. Structure it as separate components in /src/components.
+    ```
+*   **Unit Testing:**
+    ```text
+    @Agent analyze /src/utils.ts and generate comprehensive Jest tests covering edge cases.
+    ```
+
+## 🎨 Themes
+*   **[Antigravity Dark (Default)]()** - The standard dark mode.
+*   *(Community themes coming soon)*
+
+## 📝 Tutorials & Articles
+*   [Getting Started with Antigravity](https://medium.com/google-developers) - Official kickstart guide.
+*   [Migrating from VS Code](https://dev.to) - Keybinding mapping and workspace setup.
+
+---
+
+## 🤝 Contributing
+Contributions are welcome!
+1.  Fork this repository.
+2.  Add your link/resource to the appropriate section.
+3.  Submit a **Pull Request**.
+
+Please ensure your pull request adheres to the [Contributor Covenant](https://www.contributor-covenant.org/version/2/0/code_of_conduct/) code of conduct.
