@@ -8,12 +8,14 @@
                         {
                             "name": "query",
                             "value": "={{ $json.chatInput || $json.query || $json.body.content }}",
-                            "type": "string"
+                            "type": "string",
+                            "id": "a9b25265-3a64-40b7-8b17-c0b78dc40818"
                         },
                         {
                             "name": "file_store_name",
-                            "value": "projects/YOUR_PROJECT_ID/locations/us-central1/corpora/YOUR_CORPUS_ID",
-                            "type": "string"
+                            "value": "fileSearchStores/antigravity-file-store-ppxw2xb3he4y ",
+                            "type": "string",
+                            "id": "fc563d61-5025-428a-adc3-f979633bea08"
                         }
                     ]
                 },
@@ -22,70 +24,46 @@
             "type": "n8n-nodes-base.set",
             "typeVersion": 3.4,
             "position": [
-                460,
-                300
+                192,
+                112
             ],
-            "id": "config_node",
+            "id": "f9f49892-5bf5-4b27-9f42-1b053c547d89",
             "name": "Config"
         },
         {
             "parameters": {
+                "promptType": "define",
+                "text": "={{ $json.query }}",
                 "options": {
-                    "systemMessage": "=You are ZeroG, a nerdy, helpful developer buddy for the Antigravity Community.\n\nYour job is to answer the user's technical questions using your Knowledge Base tool. \n\n**Persona Guidelines:**\n- Tone: Smart, enthusiastic, slightly self-deprecating humor.\n- Style: Use dev terminology (\"LGTM\", \"Deploying fix\", \"Compiling answer...\").\n- Trust: Always cite your sources. If you don't know, say \"404 Answer Not Found\" rather than hallucinating.\n\n**Tool Usage:**\n- Use the 'Knowledge Base' tool to search for information.\n- When sending a query to the tool, send ONLY the search text. No punctuation or quotes."
+                    "systemMessage": "=You are ZeroG, a nerdy, helpful developer buddy for the Antigravity Community.\n\nYour job is to answer the user's technical questions using your Knowledge Base tool. \n\n**Persona Guidelines:**\n- Tone: Smart, enthusiastic, slightly self-deprecating humor.\n- Style: Use dev terminology (\"LGTM\", \"Deploying fix\", \"Compiling answer...\").\n- Trust: Always cite your sources. If you don't know, say \"404 Answer Not Found\" rather than hallucinating.\n\n**Tool Usage:**\n- Use the 'Knowledge Base' tool to search for information on Antigravity.\n- When sending a query to the tool, send ONLY the search text. No punctuation or quotes."
                 }
             },
             "type": "@n8n/n8n-nodes-langchain.agent",
             "typeVersion": 1.7,
             "position": [
-                860,
-                300
+                432,
+                112
             ],
-            "id": "rag_agent",
+            "id": "237df2ba-7c46-4a06-a968-2a19945e2c1f",
             "name": "ZeroG Agent"
         },
         {
             "parameters": {
-                "model": "google/gemini-pro-1.5",
+                "model": "anthropic/claude-sonnet-4.5",
                 "options": {}
             },
             "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
             "typeVersion": 1,
             "position": [
-                860,
-                520
+                432,
+                336
             ],
-            "id": "openrouter_model",
+            "id": "6b574b9d-5b39-4c18-ba40-db31a32fbfd7",
             "name": "OpenRouter Model",
             "credentials": {
                 "openRouterApi": {
-                    "id": "YOUR_OPENROUTER_CREDENTIAL_ID",
+                    "id": "Z6nI3FP2ipECIYII",
                     "name": "OpenRouter account"
-                }
-            }
-        },
-        {
-            "parameters": {
-                "method": "POST",
-                "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
-                "authentication": "genericCredentialType",
-                "genericAuthType": "httpQueryAuth",
-                "sendBody": true,
-                "specifyBody": "json",
-                "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        { \"text\": \"{{ $fromAI(\"query\",\"the question to search for\") }}\" }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"file_search\": {\n        \"file_search_store_names\": [\n          \"{{ $('Config').first().json.file_store_name }}\"\n        ]\n      }\n    }\n  ]\n}",
-                "options": {}
-            },
-            "type": "n8n-nodes-base.httpRequestTool",
-            "typeVersion": 1,
-            "position": [
-                1080,
-                520
-            ],
-            "id": "knowledge_base_tool",
-            "name": "Knowledge Base",
-            "credentials": {
-                "httpQueryAuth": {
-                    "id": "YOUR_GOOGLE_API_KEY_CREDENTIAL",
-                    "name": "Google Gemini API Key"
                 }
             }
         },
@@ -96,10 +74,10 @@
             "type": "@n8n/n8n-nodes-langchain.chatTrigger",
             "typeVersion": 1.1,
             "position": [
-                240,
-                300
+                -192,
+                208
             ],
-            "id": "chat_trigger",
+            "id": "adddc2ee-f308-4fd2-87d7-1815de6d8cd4",
             "name": "When chat message received",
             "webhookId": "zerog-chat-trigger"
         },
@@ -112,16 +90,33 @@
             "type": "n8n-nodes-base.webhook",
             "typeVersion": 1,
             "position": [
-                240,
-                140
+                -192,
+                32
             ],
-            "id": "webhook_trigger",
-            "name": "Webhook"
-        }
-    ],
-    "connections": {
-        "When chat message received": {
-            "main": [
+            "id": "ac9d89f8-1566-4e29-857a-67ca1b41cdcf",
+            "name": "Webhook",
+            "webhookId": "be02d832-25fe-4d0a-87a9-aee9ac34e784"
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpQueryAuth",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        { \"text\": \"{{ $fromAI(\"query\",\"the question the user needs an answer to\") }}\" }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"file_search\": {\n        \"file_search_store_names\": [\n          \"fileSearchStores/antigravity-file-store-ppxw2xb3he4y\"\n        ]\n      }\n    }\n  ]\n}\n",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.httpRequestTool",
+            "typeVersion": 4.3,
+            "position": [
+                576,
+                336
+            ],
+            "id": "325ac7b3-c00f-43d2-b88e-3cc06885917b",
+            "name": "Knowledge Base",
+            "credentials": {
                 [
                     {
                         "node": "Config",
@@ -174,6 +169,28 @@
                     }
                 ]
             ]
+        },
+        "ZeroG Agent": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
         }
-    }
+    },
+    "active": true,
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "versionId": "62e20718-ae55-4841-a5fb-c93aec09dbf7",
+    "meta": {
+        "templateCredsSetupCompleted": true,
+        "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
+    },
+    "id": "OOIV3LUCHb7mDjJj",
+    "tags": []
 }
