@@ -43,10 +43,17 @@ async def on_message(message):
             "channel_name": message.channel.name, # Context!
             "server_id": str(message.guild.id)
         }
-        # Send to n8n and forget (don't wait for response)
+        # Send to n8n and wait for the bot's response
         try:
-            requests.post(N8N_WEBHOOK_URL, json=payload, timeout=1)
+            response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=30)
+            if response.status_code == 200:
+                # Extract the bot's answer from n8n response
+                bot_answer = response.text
+                # Send the answer back to the Discord channel
+                await message.channel.send(bot_answer)
+            else:
+                print(f"n8n returned status {response.status_code}: {response.text}")
         except Exception as e:
-            print(f"Failed to send to n8n: {e}")
+            print(f"Failed to communicate with n8n: {e}")
 
 client.run(os.getenv('DISCORD_TOKEN'))
