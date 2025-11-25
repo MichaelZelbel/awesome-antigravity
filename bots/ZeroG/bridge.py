@@ -29,12 +29,13 @@ async def on_message(message):
     # if message.channel.id not in allowed_channels:
     #     return
 
-    # 3. Simple Heuristic: Is this a question?
-    # This saves n8n executions. You can make this smarter later.
+    # 3. Heuristic: Is this a question, a mention, or a reply?
     content = message.content.lower()
     is_question = "?" in content or any(w in content for w in ["error", "bug", "help", "fix", "fail", "broken"])
+    is_mention = client.user.mentioned_in(message)
+    is_reply = message.reference is not None
 
-    if is_question and N8N_WEBHOOK_URL:
+    if (is_question or is_mention or is_reply) and N8N_WEBHOOK_URL:
         payload = {
             "content": message.content,
             "author": message.author.name,
