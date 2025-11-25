@@ -1,5 +1,8 @@
 FROM python:3.11-slim
 
+# Prevent Python from buffering stdout/stderr (ensures logs appear immediately)
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
 COPY requirements.txt .

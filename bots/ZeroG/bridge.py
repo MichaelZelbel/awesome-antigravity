@@ -4,7 +4,8 @@ import os
 
 # Your n8n Webhook URL (The "Ear" of your flow)
 # REPLACE THIS with your actual n8n webhook URL
-N8N_WEBHOOK_URL = "https://your-n8n-instance.com/webhook/discord-listener"
+# Your n8n Webhook URL (The "Ear" of your flow)
+N8N_WEBHOOK_URL = os.getenv('N8N_WEBHOOK_URL')
 
 # Basic config
 intents = discord.Intents.default()
@@ -14,6 +15,8 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print(f'Logged in as {client.user}')
+    if not N8N_WEBHOOK_URL:
+        print("WARNING: N8N_WEBHOOK_URL environment variable is not set!")
 
 @client.event
 async def on_message(message):
@@ -31,7 +34,7 @@ async def on_message(message):
     content = message.content.lower()
     is_question = "?" in content or any(w in content for w in ["error", "bug", "help", "fix", "fail", "broken"])
 
-    if is_question:
+    if is_question and N8N_WEBHOOK_URL:
         payload = {
             "content": message.content,
             "author": message.author.name,
@@ -43,7 +46,7 @@ async def on_message(message):
         # Send to n8n and forget (don't wait for response)
         try:
             requests.post(N8N_WEBHOOK_URL, json=payload, timeout=1)
-        except:
-            pass
+        except Exception as e:
+            print(f"Failed to send to n8n: {e}")
 
 client.run(os.getenv('DISCORD_TOKEN'))
