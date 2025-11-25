@@ -1,22 +1,3 @@
-            ]
-        },
-        "OpenRouter Model": {
-            "ai_languageModel": [
-                [
-                    {
-                        "node": "ZeroG Agent",
-                        "type": "ai_languageModel",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Knowledge Base": {
-            "ai_tool": [
-                [
-                    {
-                        "node": "ZeroG Agent",
-                        "type": "ai_tool",
                         "index": 0
                     }
                 ]
