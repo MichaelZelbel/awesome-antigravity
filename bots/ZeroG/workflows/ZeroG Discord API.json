@@ -1,0 +1,226 @@
+{
+  "name": "ZeroG Discord API",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "query",
+              "value": "={{ $json.body?.content || $json.query || $json.chatInput }}",
+              "type": "string",
+              "id": "a9b25265-3a64-40b7-8b17-c0b78dc40818"
+            },
+            {
+              "name": "file_store_name",
+              "value": "fileSearchStores/antigravity-file-store-ppxw2xb3he4y ",
+              "type": "string",
+              "id": "fc563d61-5025-428a-adc3-f979633bea08"
+            },
+            {
+              "id": "968c81bb-ac78-42eb-96be-d72a81c199f5",
+              "name": "author_name",
+              "value": "={{ $json.body.author }}",
+              "type": "string"
+            },
+            {
+              "id": "a0de3470-d97e-4e59-b2c8-e26aa0d540f1",
+              "name": "channel_name",
+              "value": "={{ $json.body.channel_name }}",
+              "type": "string"
+            },
+            {
+              "id": "372fa9c1-36ff-4b30-8fb3-13d635feb39e",
+              "name": "server_id",
+              "value": "={{ $json.body.server_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        64,
+        112
+      ],
+      "id": "f9f49892-5bf5-4b27-9f42-1b053c547d89",
+      "name": "Config"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "zerog",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        112
+      ],
+      "id": "ac9d89f8-1566-4e29-857a-67ca1b41cdcf",
+      "name": "Webhook",
+      "webhookId": "be02d832-25fe-4d0a-87a9-aee9ac34e784"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        480,
+        112
+      ],
+      "id": "aeccb663-f13e-4271-ad0e-f0e120e4f62d",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RAEscX2JIdjcYo50",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/RAEscX2JIdjcYo50",
+          "cachedResultName": "ZeroG Core"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ $json.query }}",
+            "author_name": "={{ $json.author_name }}",
+            "channel_name": "={{ $json.channel_name }}",
+            "server_id": "={{ $json.server_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "author_name",
+              "displayName": "author_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "channel_name",
+              "displayName": "channel_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "server_id",
+              "displayName": "server_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        112
+      ],
+      "id": "99245f73-8c41-497b-ae62-9c7064034b2c",
+      "name": "Execute ZeroG Core"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -176,
+        304
+      ],
+      "id": "adddc2ee-f308-4fd2-87d7-1815de6d8cd4",
+      "name": "Chat Trigger for Testing",
+      "webhookId": "zerog-chat-trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Execute ZeroG Core",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute ZeroG Core": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger for Testing": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "72a57a65-648b-4f69-9107-35cf6c713b80",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
+  },
+  "id": "OOIV3LUCHb7mDjJj",
+  "tags": []
+}

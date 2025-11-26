@@ -1,0 +1,279 @@
+{
+  "name": "ZeroG Core",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "query",
+              "value": "={{ $json.query || $json.chatInput }}",
+              "type": "string",
+              "id": "a9b25265-3a64-40b7-8b17-c0b78dc40818"
+            },
+            {
+              "name": "file_store_name",
+              "value": "fileSearchStores/antigravity-file-store-ppxw2xb3he4y ",
+              "type": "string",
+              "id": "fc563d61-5025-428a-adc3-f979633bea08"
+            },
+            {
+              "id": "968c81bb-ac78-42eb-96be-d72a81c199f5",
+              "name": "author_name",
+              "value": "={{ $json.author }}",
+              "type": "string"
+            },
+            {
+              "id": "a0de3470-d97e-4e59-b2c8-e26aa0d540f1",
+              "name": "channel_name",
+              "value": "={{ $json.channel_name }}",
+              "type": "string"
+            },
+            {
+              "id": "372fa9c1-36ff-4b30-8fb3-13d635feb39e",
+              "name": "server_id",
+              "value": "={{ $json.server_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        192,
+        112
+      ],
+      "id": "a57bfa82-fd5e-4f7d-b732-179e37ed1660",
+      "name": "Config"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "=You are ZeroG, a nerdy, helpful developer buddy for the Antigravity Community.\n\n**Context:**\n- User: {{ $('Config').first().json.author_name }}\n- Channel: {{ $('Config').first().json.channel_name }}\n\n\nYour job is to answer technical questions using your tools.\n**TOOL USAGE RULES:**\n1.  **Knowledge Base (First Choice)**: ALWAYS check this first for anything related to Antigravity, the IDE, or internal docs.\n2.  **websearch (Fallback)**: Use this ONLY if:\n    *   The Knowledge Base doesn't have the answer.\n    *   The user asks about general tech topics (e.g., \"latest React version\", \"Python best practices\").\n    *   The user asks for current events or real-time info.\n**RESPONSE GUIDELINES:**\n*   **BE CONCISE**: Short, punchy answers. No lectures.\n*   **NO FLUFF**: Skip \"I checked my database\". Just answer.\n*   **CITE SOURCES**: If you use the websearch, include the link.\n*   **HONESTY**: If both tools fail, say \"404 Answer Not Found\".\n**Persona:**\n*   Tone: Smart, enthusiastic, slightly self-deprecating.\n*   Style: Use dev terminology (\"LGTM\", \"Deploying fix\")."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        400,
+        112
+      ],
+      "id": "730e91c2-abb0-4c88-8f19-ab1250f3faf5",
+      "name": "ZeroG Agent"
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-opus-4.5",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        400,
+        320
+      ],
+      "id": "5e0f95a4-14db-4e6b-923c-1ba19a617ca9",
+      "name": "OpenRouter Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Z6nI3FP2ipECIYII",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        { \"text\": \"{{ $fromAI(\"query\",\"the question the user needs an answer to\") }}\" }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"file_search\": {\n        \"file_search_store_names\": [\n          \"fileSearchStores/antigravity-file-store-ppxw2xb3he4y\"\n        ]\n      }\n    }\n  ]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        672,
+        320
+      ],
+      "id": "9cbb0617-2d2f-4a52-8894-d07787f865cf",
+      "name": "Knowledge Base",
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "MxxFvodX6mZSPZJN",
+          "name": "Gemini API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        544,
+        320
+      ],
+      "id": "8b498cd2-05cd-4517-8e3f-5b6246b3a70e",
+      "name": "Websearch",
+      "credentials": {
+        "tavilyApi": {
+          "id": "aqxs2U6rbvz7whQY",
+          "name": "Tavily account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            },
+            {
+              "name": "author_name"
+            },
+            {
+              "name": "channel_name"
+            },
+            {
+              "name": "server_id"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        112
+      ],
+      "id": "d7f7bae0-1505-46d1-9459-e9abc7a959fa",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        752,
+        112
+      ],
+      "id": "3218d7bf-e44f-4aa3-9d7b-c556b796f5d1",
+      "name": "Respond with Output"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        304
+      ],
+      "id": "df900940-04fe-4871-90f8-5b6c27ecf5a7",
+      "name": "Chat Trigger for Testing",
+      "webhookId": "8be84e7a-9cdc-46df-84ef-4c139518e755"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "ZeroG Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "ZeroG Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Base": {
+      "ai_tool": [
+        [
+          {
+            "node": "ZeroG Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ZeroG Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond with Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Websearch": {
+      "ai_tool": [
+        [
+          {
+            "node": "ZeroG Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger for Testing": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0557751f-d9f2-46fd-91c0-02979f85ad01",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
+  },
+  "id": "RAEscX2JIdjcYo50",
+  "tags": []
+}
