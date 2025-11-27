@@ -29,13 +29,16 @@ async def on_message(message):
     # if message.channel.id not in allowed_channels:
     #     return
 
-    # 3. Heuristic: Is this a question, a mention, or a reply?
-    content = message.content.lower()
-    is_question = "?" in content or any(w in content for w in ["error", "bug", "help", "fix", "fail", "broken"])
+    # 3. Heuristic: Is this a mention, a DM, or a reply to the bot?
     is_mention = client.user.mentioned_in(message)
-    is_reply = message.reference is not None
+    is_dm = isinstance(message.channel, discord.DMChannel)
+    is_reply_to_bot = (
+        message.reference is not None and 
+        message.reference.resolved and 
+        message.reference.resolved.author.id == client.user.id
+    )
 
-    if (is_question or is_mention or is_reply) and N8N_WEBHOOK_URL:
+    if (is_mention or is_dm or is_reply_to_bot) and N8N_WEBHOOK_URL:
         payload = {
             "content": message.content,
             "author": message.author.name,

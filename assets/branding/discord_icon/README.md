@@ -16,4 +16,4 @@ To maintain future versions, please store the following files here:
 
 ## Generation Info
 
-The icon was created using Nano Banana Pro.
+The icon was initially created using Nano Banana Pro.
