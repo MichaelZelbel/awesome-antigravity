@@ -84,10 +84,10 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "RAEscX2JIdjcYo50",
+          "value": "ZeroGGatekeeperID",
           "mode": "list",
-          "cachedResultUrl": "/workflow/RAEscX2JIdjcYo50",
-          "cachedResultName": "ZeroG Core"
+          "cachedResultUrl": "/workflow/ZeroGGatekeeperID",
+          "cachedResultName": "ZeroG Gatekeeper"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -148,7 +148,7 @@
         112
       ],
       "id": "99245f73-8c41-497b-ae62-9c7064034b2c",
-      "name": "Execute ZeroG Core"
+      "name": "Execute ZeroG Gatekeeper"
     },
     {
       "parameters": {
