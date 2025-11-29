@@ -29,16 +29,9 @@ async def on_message(message):
     # if message.channel.id not in allowed_channels:
     #     return
 
-    # 3. Heuristic: Is this a mention, a DM, or a reply to the bot?
-    is_mention = client.user.mentioned_in(message)
-    is_dm = isinstance(message.channel, discord.DMChannel)
-    is_reply_to_bot = (
-        message.reference is not None and 
-        message.reference.resolved and 
-        message.reference.resolved.author.id == client.user.id
-    )
-
-    if (is_mention or is_dm or is_reply_to_bot) and N8N_WEBHOOK_URL:
+    # 3. Gatekeeper Mode: Send EVERYTHING to n8n (except bot messages)
+    # The "ZeroG Gatekeeper" workflow will decide whether to respond.
+    if N8N_WEBHOOK_URL:
         payload = {
             "content": message.content,
             "author": message.author.name,
