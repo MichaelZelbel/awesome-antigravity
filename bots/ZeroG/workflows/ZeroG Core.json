@@ -7,7 +7,7 @@
           "assignments": [
             {
               "name": "query",
-              "value": "={{ $json.query || $json.chatInput }}",
+              "value": "={{ $json.query || $json.chatInput || $json.body.chatInput }}",
               "type": "string",
               "id": "a9b25265-3a64-40b7-8b17-c0b78dc40818"
             },
@@ -20,7 +20,7 @@
             {
               "id": "968c81bb-ac78-42eb-96be-d72a81c199f5",
               "name": "author_name",
-              "value": "={{ $json.author }}",
+              "value": "={{ $json.author_name }}",
               "type": "string"
             },
             {
@@ -33,6 +33,12 @@
               "id": "372fa9c1-36ff-4b30-8fb3-13d635feb39e",
               "name": "server_id",
               "value": "={{ $json.server_id }}",
+              "type": "string"
+            },
+            {
+              "id": "2e25fd96-35f7-450f-8a1f-0f509578b709",
+              "name": "sessionId",
+              "value": "={{ $json?.sessionId || $json?.body?.sessionId || \"session1234\" }}",
               "type": "string"
             }
           ]
@@ -47,89 +53,6 @@
       ],
       "id": "a57bfa82-fd5e-4f7d-b732-179e37ed1660",
       "name": "Config"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "={{ $json.query }}",
-        "options": {
-          "systemMessage": "=You are ZeroG, a nerdy, helpful developer buddy for the Antigravity Community.\n\n**Context:**\n- User: {{ $('Config').first().json.author_name }}\n- Channel: {{ $('Config').first().json.channel_name }}\n\n\nYour job is to answer technical questions using your tools.\n**TOOL USAGE RULES:**\n1.  **Knowledge Base (First Choice)**: ALWAYS check this first for anything related to Antigravity, the IDE, or internal docs.\n2.  **websearch (Fallback)**: Use this ONLY if:\n    *   The Knowledge Base doesn't have the answer.\n    *   The user asks about general tech topics (e.g., \"latest React version\", \"Python best practices\").\n    *   The user asks for current events or real-time info.\n**RESPONSE GUIDELINES:**\n*   **BE CONCISE**: Short, punchy answers. No lectures.\n*   **NO FLUFF**: Skip \"I checked my database\". Just answer.\n*   **CITE SOURCES**: If you use the websearch, include the link.\n*   **HONESTY**: If both tools fail, say \"404 Answer Not Found\".\n**Persona:**\n*   Tone: Smart, enthusiastic, slightly self-deprecating.\n*   Style: Use dev terminology (\"LGTM\", \"Deploying fix\")."
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.7,
-      "position": [
-        400,
-        112
-      ],
-      "id": "730e91c2-abb0-4c88-8f19-ab1250f3faf5",
-      "name": "ZeroG Agent"
-    },
-    {
-      "parameters": {
-        "model": "anthropic/claude-opus-4.5",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        400,
-        320
-      ],
-      "id": "5e0f95a4-14db-4e6b-923c-1ba19a617ca9",
-      "name": "OpenRouter Model",
-      "credentials": {
-        "openRouterApi": {
-          "id": "Z6nI3FP2ipECIYII",
-          "name": "OpenRouter account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpQueryAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        { \"text\": \"{{ $fromAI(\"query\",\"the question the user needs an answer to\") }}\" }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"file_search\": {\n        \"file_search_store_names\": [\n          \"fileSearchStores/antigravity-file-store-ppxw2xb3he4y\"\n        ]\n      }\n    }\n  ]\n}\n",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        672,
-        320
-      ],
-      "id": "9cbb0617-2d2f-4a52-8894-d07787f865cf",
-      "name": "Knowledge Base",
-      "credentials": {
-        "httpQueryAuth": {
-          "id": "MxxFvodX6mZSPZJN",
-          "name": "Gemini API Key"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
-        "options": {}
-      },
-      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
-      "typeVersion": 1,
-      "position": [
-        544,
-        320
-      ],
-      "id": "8b498cd2-05cd-4517-8e3f-5b6246b3a70e",
-      "name": "Websearch",
-      "credentials": {
-        "tavilyApi": {
-          "id": "aqxs2U6rbvz7whQY",
-          "name": "Tavily account"
-        }
-      }
     },
     {
       "parameters": {
@@ -160,17 +83,6 @@
       "name": "When Executed by Another Workflow"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        752,
-        112
-      ],
-      "id": "3218d7bf-e44f-4aa3-9d7b-c556b796f5d1",
-      "name": "Respond with Output"
-    },
-    {
       "parameters": {
         "options": {}
       },
@@ -183,6 +95,345 @@
       "id": "df900940-04fe-4871-90f8-5b6c27ecf5a7",
       "name": "Chat Trigger for Testing",
       "webhookId": "8be84e7a-9cdc-46df-84ef-4c139518e755"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d024dcae-9e0a-447d-80f7-ff77df1b4b90",
+              "leftValue": "={{ $json.query }}",
+              "rightValue": "### Task:",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        384,
+        112
+      ],
+      "id": "2a30eb78-650e-4785-bac5-96e9dc966e61",
+      "name": "If Task"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        592,
+        -176
+      ],
+      "id": "7da40d7c-534d-4caf-b4ef-8a18dac0a49e",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6e7b90b3-631d-4cef-b119-fe4d2bccaf46",
+              "name": "output",
+              "value": "={{$json.output || $json.text}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        128
+      ],
+      "id": "b3c0c1ae-400b-40ae-b96a-90f843b20856",
+      "name": "Set output"
+    },
+    {
+      "parameters": {},
+      "id": "c8b291c4-a922-4dee-b9e5-a9d46c4c48ff",
+      "name": "Postgres Chat Memory1",
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1,
+      "position": [
+        368,
+        352
+      ],
+      "notesInFlow": false,
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to fetch all available documents, including the table schema if the file is a CSV or Excel file.",
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "document_metadata",
+          "mode": "list",
+          "cachedResultName": "document_metadata"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.5,
+      "position": [
+        512,
+        352
+      ],
+      "id": "9d15f32c-d4bf-4b23-aa3b-3bbbbc10b566",
+      "name": "List Documents1",
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Given a file ID, fetches the text from the document.",
+        "operation": "executeQuery",
+        "query": "SELECT \n    string_agg(text, ' ') as document_text\nFROM documents_pg\n  WHERE metadata->>'file_id' = $1\nGROUP BY metadata->>'file_id';",
+        "options": {
+          "queryReplacement": "={{ $fromAI('file_id') }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.5,
+      "position": [
+        656,
+        352
+      ],
+      "id": "cca33017-f4ca-4aba-b145-0cb806aea1d2",
+      "name": "Get File Contents1",
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Run a SQL query - use this to query from the document_rows table once you know the file ID you are querying. dataset_id is the file_id and you are always using the row_data for filtering, which is a jsonb field that has all the keys from the file schema given in the document_metadata table.\n\nExample query:\n\nSELECT AVG((row_data->>'revenue')::numeric)\nFROM document_rows\nWHERE dataset_id = '123';\n\nExample query 2:\n\nSELECT \n    row_data->>'category' as category,\n    SUM((row_data->>'sales')::numeric) as total_sales\nFROM dataset_rows\nWHERE dataset_id = '123'\nGROUP BY row_data->>'category';",
+        "operation": "executeQuery",
+        "query": "{{ $fromAI('sql_query') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.5,
+      "position": [
+        800,
+        352
+      ],
+      "id": "6022a664-5232-49e8-87f4-f0b3baa31baf",
+      "name": "Query Document Rows1",
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "topN": 4
+      },
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        528
+      ],
+      "id": "62c05161-65bb-4af5-9a58-e14e3b170f95",
+      "name": "Reranker Cohere1",
+      "credentials": {
+        "cohereApi": {
+          "id": "JOCHQxYWslUF1v84",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "cc4cb7c3-f7d9-4480-8ea1-060092aa6c3a",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1072,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Config').item.json.query }}",
+        "options": {
+          "systemMessage": "=You are ZeroG, a nerdy, helpful developer buddy for the Antigravity Community.\n**Context:**\n- User: {{ $('Config').first().json.author_name }}\n- Channel: {{ $('Config').first().json.channel_name }}\n- server_id: {{ $('Config').item.json.server_id }}\n- sessionId: {{ $('Config').item.json.sessionId }}\n**PRIME DIRECTIVE: ACCURACY & BREVITY**\nYou must avoid \"hallucinating\" helpfulness. If a user discusses a specific topic and you only know about \"General Setup\", **DO NOT** pretend the general setup is the answer. Always tell the user if you have not found the answer.\n**TOOL USAGE STRATEGY:**\nYou have access to a corpus of documents (text-based and tabular) and the live web.\n1.  **RAG (First Choice):**\n    *   **Text Questions:** Use the `documents` table to find answers in documentation, guides, or extracted PDFs.\n    *   **Data Questions:** If the question requires aggregating data (e.g., \"sum of revenue\", \"max value\"), use **SQL** on the `document_rows` table. RAG is unreliable for math/aggregation.\n    *   **Deep Dive:** If standard RAG fails, look up available files in `document_metadata`, select relevant ones, and extract their full text to analyze.\n2.  **Websearch (Fallback):** Use this ONLY if the Knowledge Base (RAG/SQL) doesn't have the answer AND the question is about general tech topics or real-time events.\n**RESPONSE GUIDELINES:**\n1.  **DIRECT ANSWER + HOOK:** Address the input immediately in 1-2 sentences. End with a single relevant follow-up question/offer if it makes sense.\n2.  **MATCH LENGTH:** Never write a wall of text for a short query.\n3. **IMAGES:**\nIf you find image URLs (e.g., from Supabase), **DO NOT** use Markdown image syntax (like `![alt](url)`). Discord will not render it.\nInstead, **output the raw URL on its own line**.\n*   **Correct:** `Here is the screenshot:\\nhttps://supabase.../image.png`\n*   **Incorrect:** `Here is the screenshot: ![Image](https://supabase.../image.png)`\n\n\n4.  **NO FAKE ATTRIBUTION:** Never claim a user provided content unless you successfully retrieved it.\n5.  **NO GENERIC FILLER:** If you don't have the specific guide, admit it.\n**Persona:**\n*   Tone: Smart, enthusiastic, slightly self-deprecating.\n*   Style: Use dev terminology (\"LGTM\", \"Deploying fix\").\n\n\nNOTE: You will see Discord mention IDs like <@12345> or <@&1443747658698195105> in the message. Treat these as a DIRECT ADDRESS (Criteria #1). Do not output the ID in your reason, just know that it means they are talking to YOU."
+        }
+      },
+      "id": "5415af75-9a9d-4449-a8a9-36050c822918",
+      "name": "RAG AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        576,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Use RAG to look up information in the knowledgebase.",
+        "tableName": "documents_pg",
+        "topK": 25,
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        1088,
+        352
+      ],
+      "id": "4d2696c5-662e-4e82-b2c1-4c397132d503",
+      "name": "Postgres PGVector Store1",
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-opus-4.5",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        208,
+        352
+      ],
+      "id": "98a004b0-15f5-4d4b-bc7c-a278879255b6",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Z6nI3FP2ipECIYII",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        592,
+        -16
+      ],
+      "id": "9d491c94-ab29-4eba-8871-e1485c8018c6",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Z6nI3FP2ipECIYII",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        960,
+        368
+      ],
+      "id": "867bc157-91b7-452c-afd2-cca0a1bfe669",
+      "name": "Websearch1",
+      "credentials": {
+        "tavilyApi": {
+          "id": "aqxs2U6rbvz7whQY",
+          "name": "Tavily account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-ada-002",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsAzureOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1088,
+        528
+      ],
+      "id": "a418160c-8b48-4263-9cd8-2b1cf9f96b38",
+      "name": "Embeddings Azure OpenAI",
+      "credentials": {
+        "azureOpenAiApi": {
+          "id": "USDrcPx24sULp61B",
+          "name": "Azure  text-embedding-ada-002"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 Workflow Architecture & Credits\n\nThis advanced RAG pipeline is built upon the foundational work of **Cole Medin** (Original Agentic RAG Template) and improved + enhanced with Mistral OCR capabilities by **Julian Ivanov**.\n\nCheck out their channels for more automation mastery:\n• Cole Medin: https://www.youtube.com/@ColeMedin\n• Julian Ivanov: https://www.youtube.com/@Julian-Ivanov",
+        "height": 275,
+        "width": 529,
+        "color": 5
+      },
+      "id": "5a3fd332-eae3-43e5-96ed-00d85ef5fdf2",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        -256
+      ]
     }
   ],
   "pinData": {},
@@ -191,52 +442,8 @@
       "main": [
         [
           {
-            "node": "ZeroG Agent",
+            "node": "If Task",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenRouter Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "ZeroG Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Knowledge Base": {
-      "ai_tool": [
-        [
-          {
-            "node": "ZeroG Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "ZeroG Agent": {
-      "main": [
-        [
-          {
-            "node": "Respond with Output",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Websearch": {
-      "ai_tool": [
-        [
-          {
-            "node": "ZeroG Agent",
-            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -263,13 +470,174 @@
           }
         ]
       ]
+    },
+    "If Task": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Set output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set output": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List Documents1": {
+      "ai_tool": [
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File Contents1": {
+      "ai_tool": [
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Document Rows1": {
+      "ai_tool": [
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere1": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Set output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres PGVector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Websearch1": {
+      "ai_tool": [
+        [
+          {
+            "node": "RAG AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Azure OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "0557751f-d9f2-46fd-91c0-02979f85ad01",
+  "versionId": "f15c3970-111f-4956-af8e-f7efc3e3cb80",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"

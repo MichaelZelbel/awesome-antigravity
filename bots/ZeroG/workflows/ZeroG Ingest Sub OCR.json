@@ -1,0 +1,644 @@
+{
+  "name": "ZeroG Ingest Sub OCR",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "image_base64",
+        "options": {
+          "fileName": "={{ $('Set Data').item.json.file_name }}"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -1456,
+        -48
+      ],
+      "id": "d51a1ff1-193b-4b24-9306-2611f628ded7",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c924511e-e51f-4c17-9ff7-a16a4829435a",
+              "name": "file_name",
+              "value": "={{ Date.now() + '_' + Math.random().toString(36).substr(2, 6) + '.jpg' }}",
+              "type": "string"
+            },
+            {
+              "id": "90f2b563-d59e-447e-9d04-cac7c2c81a7c",
+              "name": "original_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "a4add66b-5046-40c4-8d26-d2563b8e4d7b",
+              "name": "image_annotation",
+              "value": "={{ $json.image_annotation }}",
+              "type": "string"
+            },
+            {
+              "id": "c9ff9dcd-4c57-4e34-873d-ea98f2bfe2cb",
+              "name": "image_base64",
+              "value": "={{ $('Split Out Images').item.json.image_base64.split(',')[1]; }}",
+              "type": "string"
+            },
+            {
+              "id": "4816e9c4-3e84-4b00-86ed-4256243beac6",
+              "name": "supabase_bucket_url",
+              "value": "=https://supabase-antigravity.agentpool.cloud/storage/v1/object/images",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1616,
+        -48
+      ],
+      "id": "b398b90c-a461-4564-b238-062fd64bbe14",
+      "name": "Set Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b2e5abd-8e4e-42b2-bd57-00c5f70ded68",
+              "name": "images",
+              "value": "={{ $json.images }}",
+              "type": "array"
+            },
+            {
+              "id": "ed10912c-7a5d-4ce4-9a34-852ee8027e4f",
+              "name": "pages",
+              "value": "={{ $('Get OCR Results').item.json.pages }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -816,
+        -48
+      ],
+      "id": "e87c8665-af5b-41ff-86e0-7e6bba00c7cc",
+      "name": "Final Set"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -1792,
+        -48
+      ],
+      "id": "ebabc55d-74e9-4154-aaf8-05ccc447b840",
+      "name": "Split Out Images",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -2176,
+        -32
+      ],
+      "id": "7c7bdafe-e415-4c00-98e7-2fa387672488",
+      "name": "Split Out Pages",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "purpose",
+              "value": "ocr"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2640,
+        -32
+      ],
+      "id": "6cc437f4-2cf3-4cd6-be02-9ce838067612",
+      "name": "Upload Document",
+      "retryOnFail": true,
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "R7CnlYqXfik6Qg4H",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mistral.ai/v1/files/{{ $json.id }}/url",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "expiry",
+              "value": "24"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2480,
+        -32
+      ],
+      "id": "2bb8bbe6-99b6-4389-b9dd-21ccac4794b8",
+      "name": "Get Signed URL",
+      "retryOnFail": true,
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "R7CnlYqXfik6Qg4H",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/ocr",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mistralCloudApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"mistral-ocr-latest\",\n  \"document\": {\n    \"type\": \"document_url\",\n    \"document_url\": \"{{ $json.url }}\"\n  },\n  \"include_image_base64\": true,\n  \"bbox_annotation_format\": {\n    \"type\": \"text\",\n    \"json_schema\": {\n      \"name\": \"visual_descriptions_only\",\n      \"description\": \"Erzeuge prägnante, natürlichsprachliche Beschreibungen für jedes einzelne visuelle Element (Bild, Diagramm, Tabelle, Schaubild usw.) auf der Seite. Konzentriere dich darauf, zusammenzufassen, was jedes visuelle Element enthält oder vermittelt.\",\n      \"schema\": {\n        \"type\": \"array\",\n        \"items\": {\n          \"type\": \"string\",\n          \"description\": \"Eine prägnante Beschreibung eines einzelnen visuellen Elements.\"\n        }\n      },\n      \"strict\": false\n    }\n  }\n}\n",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          },
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2336,
+        -32
+      ],
+      "id": "3b55b7ed-8b75-4d65-b43e-39db1eb65359",
+      "name": "Get OCR Results",
+      "retryOnFail": true,
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "R7CnlYqXfik6Qg4H",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$('Set Data').item.json.supabase_bucket_url}}/{{ $('Set Data').item.json.file_name }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1296,
+        -48
+      ],
+      "id": "9b6c2b1f-739c-41ba-afa3-5ec093e0bbac",
+      "name": "Image Upload Supabase",
+      "credentials": {
+        "supabaseApi": {
+          "id": "81Eq6yh2hU4SWyoG",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c924511e-e51f-4c17-9ff7-a16a4829435a",
+              "name": "file_name",
+              "value": "={{ $('Set Data').item.json.file_name }}",
+              "type": "string"
+            },
+            {
+              "id": "90f2b563-d59e-447e-9d04-cac7c2c81a7c",
+              "name": "original_id",
+              "value": "={{ $('Set Data').item.json.original_id }}",
+              "type": "string"
+            },
+            {
+              "id": "a4add66b-5046-40c4-8d26-d2563b8e4d7b",
+              "name": "image_annotation",
+              "value": "={{ $('Set Data').item.json.image_annotation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1120,
+        -48
+      ],
+      "id": "10b0abeb-be84-48b4-b6ec-f5fb8c7332e1",
+      "name": "Set Data again"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        -48
+      ],
+      "id": "bdc8a4ac-638e-461f-ae84-ca5b9a089961",
+      "name": "Split Out Pages again"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Configuration\nconst SUPABASE_BASE_URL = $('Set Data').first().json.supabase_bucket_url;\n\n// Get data\nconst uploadedImages = $('Final Set').item.json.images || [];\nlet { markdown } = $json;\n\n// Process image replacements\nconst processedMarkdown = uploadedImages.reduce((md, image) => {\n  const { original_id, file_name, image_annotation = '' } = image;\n  const localPattern = `![${original_id}](${original_id})`;\n  const hostedReplacement = `![${original_id}](${SUPABASE_BASE_URL}/${file_name})\\n\\n${image_annotation}`;\n  \n  return md.replaceAll(localPattern, hostedReplacement);\n}, markdown);\n\nreturn {\n  json: {\n    ...$json,\n    markdown: processedMarkdown\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -464,
+        -48
+      ],
+      "id": "6efa46e9-7866-4950-b5dd-ab8170bd88a1",
+      "name": "Exchange Image URLs"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "images",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        -48
+      ],
+      "id": "0eedd098-1a2b-4ed5-bb24-c650b01df46c",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "content": "### Supabase Image Bucket\n",
+        "height": 256,
+        "width": 176
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1664,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "fc39365f-83ae-40c5-82c6-16fdb91bfa75",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "f6f20c95-b550-40b5-821b-53286267c8b9",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -2816,
+        -32
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "788c6a73-aa11-4bb9-ac1c-a4c7cf1bd620",
+              "leftValue": "={{ $json.images }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2000,
+        -32
+      ],
+      "id": "5dd0c4cd-da5f-4728-9823-5a83286085db",
+      "name": "Contains images?"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -1792,
+        240
+      ],
+      "id": "f0a84bd0-467c-451e-b9d8-80524a55be70",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -208,
+        224
+      ],
+      "id": "a134946b-22c2-497b-8ec4-21a4690f71a9",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 Workflow Architecture & Credits\n\nThis advanced OCR pipeline is built upon the work of **Julian Ivanov**.\n\n• Julian Ivanov: https://www.youtube.com/@Julian-Ivanov",
+        "height": 275,
+        "width": 529,
+        "color": 5
+      },
+      "id": "b124736a-ae34-49c5-80fd-b10e4f74d986",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2816,
+        -416
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Image Upload Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final Set": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages again",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Images": {
+      "main": [
+        [
+          {
+            "node": "Set Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages": {
+      "main": [
+        [
+          {
+            "node": "Contains images?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Document": {
+      "main": [
+        [
+          {
+            "node": "Get Signed URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Signed URL": {
+      "main": [
+        [
+          {
+            "node": "Get OCR Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get OCR Results": {
+      "main": [
+        [
+          {
+            "node": "Split Out Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Upload Supabase": {
+      "main": [
+        [
+          {
+            "node": "Set Data again",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data again": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Pages again": {
+      "main": [
+        [
+          {
+            "node": "Exchange Image URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Final Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Upload Document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contains images?": {
+      "main": [
+        [
+          {
+            "node": "Split Out Images",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exchange Image URLs": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Operation, do nothing": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1e4b0f27-042f-4ff8-80fb-781f2d37c259",
+  "meta": {
+    "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
+  },
+  "id": "wna7UozcR4WqSTQG",
+  "tags": []
+}

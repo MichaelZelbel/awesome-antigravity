@@ -54,3 +54,8 @@ Before deploying, you need to set the secrets.
     -   Check Coolify logs: Is the python script running? Did it say "Logged in as..."?
     -   Check Discord Developer Portal: Did you enable **MESSAGE CONTENT INTENT**?
     -   Check n8n: Is the workflow active? Is the webhook URL correct?
+-   **NameResolutionError / DNS Issues?**
+    -   If you see `Failed to resolve '...'`, your Docker container cannot see the public internet domain of your n8n instance.
+    -   **Fix:** Use the internal Docker Gateway IP instead of the domain.
+    -   Change `N8N_WEBHOOK_URL` to: `http://172.17.0.1:[N8N_PORT]/webhook/zerog`
+    -   *(Check your n8n service in Coolify to find the public mapped port, usually 5678).*

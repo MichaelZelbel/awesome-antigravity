@@ -1,0 +1,113 @@
+{
+  "name": "ZeroG Admin DB Setup",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 🧠 Workflow Architecture & Credits\n\nThis advanced RAG pipeline is built upon the foundational work of **Cole Medin** (Original Agentic RAG Template) and improved + enhanced with Mistral OCR capabilities by **Julian Ivanov**.\n\nCheck out their channels for more automation mastery:\n• Cole Medin: https://www.youtube.com/@ColeMedin\n• Julian Ivanov: https://www.youtube.com/@Julian-Ivanov",
+        "height": 275,
+        "width": 529,
+        "color": 5
+      },
+      "id": "c15b3cdd-c489-43b4-a349-0d685c261096",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Run Each Node Once to Set Up Database Tables",
+        "height": 300,
+        "width": 680,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -96,
+        528
+      ],
+      "typeVersion": 1,
+      "id": "2e23eee9-3909-4709-882f-07170e3bb5bb",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE document_metadata (\n    id TEXT PRIMARY KEY,\n    title TEXT,\n    url TEXT,\n    created_at TIMESTAMP DEFAULT NOW(),\n    schema TEXT\n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -16,
+        624
+      ],
+      "id": "a86e35d9-e6da-45d6-9a93-40300cf51e9b",
+      "name": "Create Document Metadata Table",
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE document_rows (\n    id SERIAL PRIMARY KEY,\n    dataset_id TEXT REFERENCES document_metadata(id),\n    row_data JSONB  -- Store the actual row data\n);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        192,
+        624
+      ],
+      "id": "5dee0763-9ea9-41d4-a805-469282dc94e3",
+      "name": "Create Document Rows Table (for Tabular Data)",
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Enable the pgvector extension to work with embedding vectors\ncreate extension if not exists vector;\n\n-- Create a table to store your documents\ncreate table documents_pg (\n  id bigserial primary key,\n  text text, -- corresponds to Document.pagetext\n  metadata jsonb, -- corresponds to Document.metadata\n  embedding vector(1536) -- Hier den Wert ändern\n);\n\n-- Create a function to search for documents\ncreate function match_documents (\n  query_embedding vector(1536), -- Und hier auch den Wert ändern\n  match_count int default null,\n  filter jsonb DEFAULT '{}'\n) returns table (\n  id bigint,\n  text text,\n  metadata jsonb,\n  similarity float\n)\nlanguage plpgsql\nas $$\n#variable_conflict use_column\nbegin\n  return query\n  select\n    id,\n    text,\n    metadata,\n    1 - (documents.embedding <=> query_embedding) as similarity\n  from documents\n  where metadata @> filter\n  order by documents.embedding <=> query_embedding\n  limit match_count;\nend;\n$$;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        400,
+        624
+      ],
+      "id": "33dfff3f-3535-411f-b9a2-8e2049b34703",
+      "name": "Enable Vector Store",
+      "credentials": {
+        "postgres": {
+          "id": "tRiPU4yrURPN2tAc",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3167358f-04be-45c9-8472-a4e4f622be2a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
+  },
+  "id": "vt6wyZjlTgm68EZ3",
+  "tags": []
+}

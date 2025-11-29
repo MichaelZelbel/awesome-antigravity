@@ -68,27 +68,6 @@
         },
         {
             "parameters": {
-                "conditions": {
-                    "boolean": [
-                        {
-                            "value1": "={{ $json.should_respond }}",
-                            "value2": true
-                        }
-                    ]
-                },
-                "options": {}
-            },
-            "type": "n8n-nodes-base.if",
-            "typeVersion": 2,
-            "position": [
-                -256,
-                -16
-            ],
-            "id": "d6bd9b29-30be-48bd-9ccc-53ac2606df5f",
-            "name": "Should Respond?"
-        },
-        {
-            "parameters": {
                 "workflowId": {
                     "__rl": true,
                     "value": "RAEscX2JIdjcYo50",
@@ -164,12 +143,14 @@
                         {
                             "name": "output",
                             "value": "",
-                            "type": "string"
+                            "type": "string",
+                            "id": "21765b92-496b-4531-ab3c-3babca7f6505"
                         },
                         {
                             "name": "reason",
-                            "value": "={{ $('Gatekeeper Analysis').first().json.reason }}",
-                            "type": "string"
+                            "value": "={{ $('Gatekeeper Agent').item.json.output.reason }}",
+                            "type": "string",
+                            "id": "9c1d67f6-3c95-414e-84e7-696510093e15"
                         }
                     ]
                 },
@@ -187,7 +168,7 @@
         {
             "parameters": {
                 "promptType": "define",
-                "text": "=You are the subconscious Gatekeeper for ZeroG, a helpful developer bot for the Antigravity Community.\nYour ONLY job is to analyze the incoming message and decide if ZeroG should respond.\n**CONTEXT:**\n- User: {{ $('Config').first().json.author_name }}\n- Channel: {{ $('Config').first().json.channel_name }}\n- Message: {{ $('Config').first().json.query }}\n**DECISION CRITERIA:**\n**RESPOND (should_respond: true) IF:**\n1.  **Direct Address:** The user is talking to \"ZeroG\", \"@ZeroG\", \"our bot\", \"our community bot\", or \"our Community AI\" (even without a mention). Only when talking TO you, not when they are just talking ABOUT you.\n2.  **Technical Question:** The user is asking for help with Antigravity, code, n8n, or development. But only if you have the chance to provide a useful answer.\n3.  **Vibe Check:** The user is making a joke or comment that invites a witty retort (e.g., \"AI will take our jobs\").\n4.  **Greeting or thanking you:**  e.g., \"Hi ZeroG!\" or \"Thank you, ZeroG\").\n5.  **Toxicity:** The user is being negative or toxic (respond to diffuse).\n\n**IGNORE (should_respond: false) IF:**\n1.  **Irrelevant:** The user is talking to another human about non-tech topics (e.g., \"What did you eat for lunch?\").\n2.  **Noise:** Short, low-value messages like \"lol\", \"ok\", \"cool\" (unless replying to the bot).\n3.  **System Messages:** Join messages, pins, etc.\n**OUTPUT FORMAT:**\nYou must return a valid JSON object matching this schema:\n{\n  \"should_respond\": boolean,\n  \"reason\": \"string (short explanation)\"\n}",
+                "text": "=You are the subconscious Gatekeeper for ZeroG, a helpful developer bot for the Antigravity Community.\nYour ONLY job is to analyze the incoming message and decide if ZeroG should respond.\n**CONTEXT:**\n- User: {{ $('Config').first().json.author_name }}\n- Channel: {{ $('Config').first().json.channel_name }}\n- Message: {{ $('Config').first().json.query }}\n**DECISION CRITERIA:**\n**RESPOND (should_respond: true) IF:**\n1.  **Direct Address:** The user is talking to \"ZeroG\", \"@ZeroG\", \"Zero\", \"<@&1443747658698195105>\", \"our bot\", \"our community bot\", or \"our Community AI\" (even without a mention). Only when talking TO you, not when they are just talking ABOUT you.\n2.  **Technical Question:** The user is asking for help with Antigravity, code, n8n, or development. But only if you have the chance to provide a useful answer.\n3.  **Vibe Check:** The user is making a joke or comment that invites a witty retort (e.g., \"AI will take our jobs\").\n4.  **Greeting or thanking you:**  e.g., \"Hi ZeroG!\" or \"Thank you, ZeroG\").\n5.  **Toxicity:** The user is being negative or toxic (respond to diffuse).\n\nNOTE: You will see Discord mention IDs like <@12345> or <@&1443747658698195105> in the message. Treat these as a DIRECT ADDRESS, just like someone would say \"@ZeroG\". Do not output the ID in your reason, just know that it means they are talking to YOU.\n\n**IGNORE (should_respond: false) IF:**\n1.  **Irrelevant:** The user is talking to another human about non-tech topics (e.g., \"What did you eat for lunch?\").\n2.  **Noise:** Short, low-value messages like \"lol\", \"ok\", \"cool\" (unless replying to the bot).\n3.  **System Messages:** Join messages, pins, etc.\n**OUTPUT FORMAT:**\nYou must return a valid JSON object matching this schema:\n{\n  \"should_respond\": boolean,\n  \"reason\": \"string (short explanation)\"\n}",
                 "hasOutputParser": true,
                 "options": {}
             },
@@ -252,6 +233,40 @@
             ],
             "id": "2ddf2b12-2058-4d46-9961-5dd855674bbd",
             "name": "Structured Output Parser1"
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict",
+                        "version": 2
+                    },
+                    "conditions": [
+                        {
+                            "id": "997f1503-edf5-414b-916b-7961dca238bd",
+                            "leftValue": "={{ $json.output.should_respond }}",
+                            "rightValue": "",
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "true",
+                                "singleValue": true
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2.2,
+            "position": [
+                -240,
+                -16
+            ],
+            "id": "2b57c634-12b5-4e16-847d-609d1cc0df80",
+            "name": "Should Respond?"
         }
     ],
     "pinData": {},
@@ -272,24 +287,6 @@
                 [
                     {
                         "node": "Gatekeeper Agent",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Should Respond?": {
-            "main": [
-                [
-                    {
-                        "node": "Execute ZeroG Core",
-                        "type": "main",
-                        "index": 0
-                    }
-                ],
-                [
-                    {
-                        "node": "Set Ignore",
                         "type": "main",
                         "index": 0
                     }
@@ -339,13 +336,31 @@
                     }
                 ]
             ]
+        },
+        "Should Respond?": {
+            "main": [
+                [
+                    {
+                        "node": "Execute ZeroG Core",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Set Ignore",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
         }
     },
     "active": false,
     "settings": {
         "executionOrder": "v1"
     },
-    "versionId": "8dd7c789-c5e4-4040-abc4-d2be949490a1",
+    "versionId": "1434cc1e-12c2-4b34-b37c-d9fd197f5da9",
     "meta": {
         "templateCredsSetupCompleted": true,
         "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
