@@ -32,6 +32,7 @@ async def on_message(message):
     # 3. Gatekeeper Mode: Send EVERYTHING to n8n (except bot messages)
     # The "ZeroG Gatekeeper" workflow will decide whether to respond.
     if N8N_WEBHOOK_URL:
+        print(f"DEBUG: Processing message from {message.author}: {message.content}")
         payload = {
             "content": message.content,
             "author": message.author.name,
@@ -42,6 +43,7 @@ async def on_message(message):
         }
         # Send to n8n and wait for the bot's response
         try:
+            print(f"DEBUG: Sending payload to {N8N_WEBHOOK_URL}...")
             response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=30)
             if response.status_code == 200:
                 # Extract the bot's answer from n8n response
