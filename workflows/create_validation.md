@@ -6,7 +6,7 @@ description: Analyze the codebase and generate a comprehensive validation workfl
 
 **Attribution:** This workflow is based on the "Ultimate Validation Command" concept by [Cole Medin](https://github.com/coleam00/context-engineering-intro).
 
-This workflow instructs the agent to analyze the current codebase and generate a tailored `validate.md` workflow that ensures the project is production-ready.
+This workflow instructs the agent to analyze **any** current codebase (Python, Node, etc.) and generate a tailored `validate.md` workflow that ensures the project is production-ready. It adapts to the tools found (e.g., n8n, Discord, Pytest, Jest).
 
 ## Steps
 
