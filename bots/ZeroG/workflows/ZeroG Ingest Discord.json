@@ -1,0 +1,136 @@
+{
+    "name": "ZeroG Ingest Discord",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "zerog-ingest-discord",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                -380,
+                240
+            ],
+            "id": "webhook",
+            "name": "Webhook"
+        },
+        {
+            "parameters": {
+                "fieldToSplitOut": "messages",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.splitOut",
+            "typeVersion": 1,
+            "position": [
+                -160,
+                240
+            ],
+            "id": "split-messages",
+            "name": "Split Batches"
+        },
+        {
+            "parameters": {
+                "jsonProperties": "={{ JSON.stringify({ pageContent: $json.content, metadata: $json.metadata }) }}",
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+            "typeVersion": 1,
+            "position": [
+                -20,
+                240
+            ],
+            "id": "document-loader",
+            "name": "Default Data Loader"
+        },
+        {
+            "parameters": {
+                "mode": "insert",
+                "calculator": "cosine",
+                "table": "documents",
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+            "typeVersion": 1,
+            "position": [
+                240,
+                240
+            ],
+            "id": "supabase-vector-store",
+            "name": "Supabase Vector Store",
+            "credentials": {
+                "supabaseApi": {
+                    "id": "81Eq6yh2hU4SWyoG",
+                    "name": "Supabase account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "model": "text-embedding-ada-002",
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.embeddingsAzureOpenAi",
+            "typeVersion": 1,
+            "position": [
+                240,
+                460
+            ],
+            "id": "azure-embeddings",
+            "name": "Azure OpenAI Embeddings",
+            "credentials": {
+                "azureOpenAiApi": {
+                    "id": "YOUR_AZURE_CREDENTIAL_ID",
+                    "name": "Azure OpenAI account"
+                }
+            }
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Split Batches",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Split Batches": {
+            "main": [
+                [
+                    {
+                        "node": "Default Data Loader",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Default Data Loader": {
+            "ai_document": [
+                [
+                    {
+                        "node": "Supabase Vector Store",
+                        "type": "ai_document",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Azure OpenAI Embeddings": {
+            "ai_embedding": [
+                [
+                    {
+                        "node": "Supabase Vector Store",
+                        "type": "ai_embedding",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

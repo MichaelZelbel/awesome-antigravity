@@ -1,6 +1,7 @@
+import os
+import sys
 import discord
 import requests
-import os
 
 # Your n8n Webhook URL (The "Ear" of your flow)
 # REPLACE THIS with your actual n8n webhook URL
@@ -14,12 +15,14 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
+    """Called when the bot is ready."""
     print(f'Logged in as {client.user}')
     if not N8N_WEBHOOK_URL:
         print("WARNING: N8N_WEBHOOK_URL environment variable is not set!")
 
 @client.event
 async def on_message(message):
+    """Called when a message is received."""
     # 1. Don't listen to yourself or other bots (avoids infinite loops)
     if message.author.bot:
         return
@@ -29,10 +32,16 @@ async def on_message(message):
     # if message.channel.id not in allowed_channels:
     #     return
 
-    # 3. Gatekeeper Mode: Send EVERYTHING to n8n (except bot messages)
-    # The "ZeroG Gatekeeper" workflow will decide whether to respond.
-    if N8N_WEBHOOK_URL:
-        print(f"DEBUG: Processing message from {message.author}: {message.content}")
+    # 3. Heuristic: Is this a mention, a DM, or a reply to the bot?
+    is_mention = client.user.mentioned_in(message)
+    is_dm = isinstance(message.channel, discord.DMChannel)
+    is_reply_to_bot = (
+        message.reference is not None and
+        message.reference.resolved and
+        message.reference.resolved.author.id == client.user.id
+    )
+
+    if (is_mention or is_dm or is_reply_to_bot) and N8N_WEBHOOK_URL:
         payload = {
             "content": message.content,
             "author": message.author.name,
@@ -43,7 +52,6 @@ async def on_message(message):
         }
         # Send to n8n and wait for the bot's response
         try:
-            print(f"DEBUG: Sending payload to {N8N_WEBHOOK_URL}...")
             response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=30)
             if response.status_code == 200:
                 # Extract the bot's answer from n8n response
@@ -52,7 +60,12 @@ async def on_message(message):
                 await message.channel.send(bot_answer)
             else:
                 print(f"n8n returned status {response.status_code}: {response.text}")
-        except Exception as e:
+        except requests.RequestException as e:
             print(f"Failed to communicate with n8n: {e}")
 
-client.run(os.getenv('DISCORD_TOKEN'))
+if __name__ == "__main__":
+    TOKEN = os.getenv('DISCORD_TOKEN')
+    if not TOKEN:
+        print("Error: DISCORD_TOKEN environment variable is not set.")
+        sys.exit(1)
+    client.run(TOKEN)

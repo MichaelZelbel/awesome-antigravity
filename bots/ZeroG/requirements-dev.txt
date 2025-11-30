@@ -1,0 +1,6 @@
+pytest
+pytest-asyncio
+pylint
+mypy
+types-requests
+python-dotenv
