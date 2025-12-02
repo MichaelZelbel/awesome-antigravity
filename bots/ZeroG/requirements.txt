@@ -1,2 +1,6 @@
 discord.py
 requests
+aiohttp
+
+# Optional but recommended:
+python-dotenv

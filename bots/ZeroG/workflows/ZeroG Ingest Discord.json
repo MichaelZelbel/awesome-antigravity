@@ -18,13 +18,36 @@
         },
         {
             "parameters": {
-                "fieldToSplitOut": "messages",
+                "operation": "executeQuery",
+                "query": "DELETE FROM documents_pg WHERE metadata->>'source' = 'discord' AND metadata->>'server_id' = $1;",
+                "options": {
+                    "queryReplacement": "={{ $json.body.server_id }}"
+                }
+            },
+            "type": "n8n-nodes-base.postgres",
+            "typeVersion": 2.6,
+            "position": [
+                -160,
+                80
+            ],
+            "id": "delete-old-discord",
+            "name": "Delete Old Discord Messages",
+            "credentials": {
+                "postgres": {
+                    "id": "tRiPU4yrURPN2tAc",
+                    "name": "Postgres account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "fieldToSplitOut": "body.messages",
                 "options": {}
             },
             "type": "n8n-nodes-base.splitOut",
             "typeVersion": 1,
             "position": [
-                -160,
+                40,
                 240
             ],
             "id": "split-messages",
@@ -32,37 +55,87 @@
         },
         {
             "parameters": {
-                "jsonProperties": "={{ JSON.stringify({ pageContent: $json.content, metadata: $json.metadata }) }}",
-                "options": {}
+                "jsonMode": "expressionData",
+                "jsonData": "={{ $json.content }}",
+                "options": {
+                    "metadata": {
+                        "metadataValues": [
+                            {
+                                "name": "source",
+                                "value": "discord"
+                            },
+                            {
+                                "name": "author",
+                                "value": "={{ $json.metadata.author }}"
+                            },
+                            {
+                                "name": "author_id",
+                                "value": "={{ $json.metadata.author_id }}"
+                            },
+                            {
+                                "name": "channel",
+                                "value": "={{ $json.metadata.channel }}"
+                            },
+                            {
+                                "name": "channel_id",
+                                "value": "={{ $json.metadata.channel_id }}"
+                            },
+                            {
+                                "name": "server_id",
+                                "value": "={{ $json.metadata.server_id }}"
+                            },
+                            {
+                                "name": "timestamp",
+                                "value": "={{ $json.metadata.timestamp }}"
+                            },
+                            {
+                                "name": "url",
+                                "value": "={{ $json.metadata.url }}"
+                            }
+                        ]
+                    }
+                }
             },
+            "id": "document-loader",
+            "name": "Default Data Loader",
             "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
             "typeVersion": 1,
             "position": [
-                -20,
-                240
+                240,
+                460
+            ]
+        },
+        {
+            "parameters": {
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+            "typeVersion": 1,
+            "position": [
+                240,
+                680
             ],
-            "id": "document-loader",
-            "name": "Default Data Loader"
+            "id": "text-splitter",
+            "name": "Recursive Character Text Splitter"
         },
         {
             "parameters": {
                 "mode": "insert",
-                "calculator": "cosine",
-                "table": "documents",
+                "tableName": "documents_pg",
                 "options": {}
             },
-            "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
-            "typeVersion": 1,
+            "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+            "typeVersion": 1.3,
             "position": [
-                240,
+                440,
                 240
             ],
-            "id": "supabase-vector-store",
-            "name": "Supabase Vector Store",
+            "id": "vector-store",
+            "name": "Postgres PGVector Store",
             "credentials": {
-                "supabaseApi": {
-                    "id": "81Eq6yh2hU4SWyoG",
-                    "name": "Supabase account"
+                "postgres": {
+                    "id": "tRiPU4yrURPN2tAc",
+                    "name": "Postgres account"
                 }
             }
         },
@@ -74,21 +147,32 @@
             "type": "@n8n/n8n-nodes-langchain.embeddingsAzureOpenAi",
             "typeVersion": 1,
             "position": [
-                240,
+                440,
                 460
             ],
             "id": "azure-embeddings",
-            "name": "Azure OpenAI Embeddings",
+            "name": "Embeddings Azure OpenAI",
             "credentials": {
                 "azureOpenAiApi": {
-                    "id": "YOUR_AZURE_CREDENTIAL_ID",
-                    "name": "Azure OpenAI account"
+                    "id": "USDrcPx24sULp61B",
+                    "name": "Azure text-embedding-ada-002"
                 }
             }
         }
     ],
     "connections": {
         "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Delete Old Discord Messages",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Delete Old Discord Messages": {
             "main": [
                 [
                     {
@@ -103,7 +187,7 @@
             "main": [
                 [
                     {
-                        "node": "Default Data Loader",
+                        "node": "Postgres PGVector Store",
                         "type": "main",
                         "index": 0
                     }
@@ -114,18 +198,29 @@
             "ai_document": [
                 [
                     {
-                        "node": "Supabase Vector Store",
+                        "node": "Postgres PGVector Store",
                         "type": "ai_document",
                         "index": 0
                     }
                 ]
             ]
         },
-        "Azure OpenAI Embeddings": {
+        "Recursive Character Text Splitter": {
+            "ai_textSplitter": [
+                [
+                    {
+                        "node": "Default Data Loader",
+                        "type": "ai_textSplitter",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Embeddings Azure OpenAI": {
             "ai_embedding": [
                 [
                     {
-                        "node": "Supabase Vector Store",
+                        "node": "Postgres PGVector Store",
                         "type": "ai_embedding",
                         "index": 0
                     }
