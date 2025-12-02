@@ -2,33 +2,39 @@ import os
 import sys
 import json
 import logging
+import asyncio
 import discord
 import requests
-import aiohttp  # NEW: async HTTP client for Gravilo sync
 
 # Your n8n Webhook URL (The "Ear" of your flow)
 N8N_WEBHOOK_URL = os.getenv('N8N_WEBHOOK_URL')
 
 # Gravilo SaaS sync configuration
-GRAVILO_BASE_URL = os.getenv("GRAVILO_BASE_URL")  # e.g. https://gravilo.ai
+GRAVILO_BASE_URL = os.getenv("GRAVILO_BASE_URL")
 DISCORD_BOT_SYNC_SECRET = os.getenv("DISCORD_BOT_SYNC_SECRET")
 
 # Basic config
 intents = discord.Intents.default()
-intents.message_content = True
-intents.guilds = True  # NEW: ensure guild join/remove events work
+intents.message_content = True   # needed for on_message
+intents.guilds = True            # needed for guild join/remove
 client = discord.Client(intents=intents)
 
+# Make sure logging goes to stdout with INFO level
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s %(message)s",
+    stream=sys.stdout,
+)
+logger = logging.getLogger("bridge")
 
-async def gravilo_sync(path: str, payload: dict):
+
+def gravilo_sync_request(path: str, payload: dict):
     """
-    Send a JSON payload to the Gravilo SaaS backend for server sync.
-
-    path: "server-sync" or "server-disconnected"
-    payload: dict containing discord_server_id and other metadata
+    Synchronous HTTP call to Gravilo SaaS for server sync.
+    This is run in a background thread so it does not block the event loop.
     """
     if not GRAVILO_BASE_URL or not DISCORD_BOT_SYNC_SECRET:
-        logging.warning(
+        logger.warning(
             "[Gravilo Sync] Missing GRAVILO_BASE_URL or DISCORD_BOT_SYNC_SECRET — skipping sync"
         )
         return
@@ -40,63 +46,83 @@ async def gravilo_sync(path: str, payload: dict):
     }
 
     try:
-        async with aiohttp.ClientSession() as session:
-            async with session.post(url, headers=headers, data=json.dumps(payload)) as resp:
-                if 200 <= resp.status < 300:
-                    logging.info(
-                        f"[Gravilo Sync] {path} succeeded for guild {payload.get('discord_server_id')} "
-                        f"(status {resp.status})"
-                    )
-                else:
-                    body = await resp.text()
-                    logging.warning(
-                        f"[Gravilo Sync] {path} FAILED for guild {payload.get('discord_server_id')}: "
-                        f"status {resp.status}, body: {body}"
-                    )
+        resp = requests.post(url, headers=headers, data=json.dumps(payload), timeout=10)
+        if 200 <= resp.status_code < 300:
+            logger.info(
+                "[Gravilo Sync] %s succeeded for guild %s (status %s)",
+                path,
+                payload.get("discord_server_id"),
+                resp.status_code,
+            )
+        else:
+            logger.warning(
+                "[Gravilo Sync] %s FAILED for guild %s: status %s, body: %s",
+                path,
+                payload.get("discord_server_id"),
+                resp.status_code,
+                resp.text,
+            )
     except Exception as e:
-        logging.error(
-            f"[Gravilo Sync] Exception during {path} for guild {payload.get('discord_server_id')}: {e}"
+        logger.error(
+            "[Gravilo Sync] Exception during %s for guild %s: %s",
+            path,
+            payload.get("discord_server_id"),
+            e,
         )
+
+
+async def gravilo_sync(path: str, payload: dict):
+    """
+    Async wrapper that runs gravilo_sync_request() in a thread executor.
+    """
+    loop = asyncio.get_running_loop()
+    await loop.run_in_executor(None, gravilo_sync_request, path, payload)
 
 
 @client.event
 async def on_ready():
     """Called when the bot is ready."""
-    print(f'Logged in as {client.user}')
+    logger.info("Logged in as %s", client.user)
     if not N8N_WEBHOOK_URL:
-        print("WARNING: N8N_WEBHOOK_URL environment variable is not set!")
-
+        logger.warning("N8N_WEBHOOK_URL environment variable is not set!")
     if not GRAVILO_BASE_URL or not DISCORD_BOT_SYNC_SECRET:
-        print("WARNING: Gravilo sync disabled, missing GRAVILO_BASE_URL or DISCORD_BOT_SYNC_SECRET")
-
-    # Optionally sync all guilds on startup
-    for guild in client.guilds:
-        payload = {
-            "discord_server_id": str(guild.id),
-            "name": guild.name,
-            "icon_url": guild.icon.url if guild.icon else None,
-            "owner_discord_id": str(getattr(guild, "owner_id", None)) or None,
-        }
-        client.loop.create_task(gravilo_sync("server-sync", payload))
+        logger.warning("Gravilo sync disabled, missing GRAVILO_BASE_URL or DISCORD_BOT_SYNC_SECRET")
 
 
 @client.event
 async def on_guild_join(guild: discord.Guild):
     """Called when the bot joins a new guild."""
+    # Safely derive icon_url across discord.py versions
+    icon_url = None
+    icon_attr = getattr(guild, "icon", None)
+    if icon_attr is not None:
+        icon_url = getattr(icon_attr, "url", None) or str(icon_attr)
+    else:
+        legacy_icon = getattr(guild, "icon_url", None)
+        if legacy_icon:
+            icon_url = str(legacy_icon)
+
+    owner_id = getattr(guild, "owner_id", None)
+
     payload = {
         "discord_server_id": str(guild.id),
         "name": guild.name,
-        "icon_url": guild.icon.url if guild.icon else None,
-        "owner_discord_id": str(getattr(guild, "owner_id", None)) or None,
+        "icon_url": icon_url,
+        "owner_discord_id": str(owner_id) if owner_id is not None else None,
     }
-    client.loop.create_task(gravilo_sync("server-sync", payload))
+
+    logger.info("[Discord] Joined guild %s (%s)", guild.name, guild.id)
+    asyncio.create_task(gravilo_sync("server-sync", payload))
 
 
 @client.event
 async def on_guild_remove(guild: discord.Guild):
     """Called when the bot is removed from a guild."""
-    payload = {"discord_server_id": str(guild.id)}
-    client.loop.create_task(gravilo_sync("server-disconnected", payload))
+    payload = {
+        "discord_server_id": str(guild.id),
+    }
+    logger.info("[Discord] Removed from guild %s (%s)", guild.name, guild.id)
+    asyncio.create_task(gravilo_sync("server-disconnected", payload))
 
 
 @client.event
@@ -106,32 +132,46 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    # 2. Forward everything else to n8n (if configured)
-    if N8N_WEBHOOK_URL:
-        payload = {
-            "content": message.content,
-            "author": message.author.name,
-            "author_id": str(message.author.id),
-            "channel_id": str(message.channel.id),
-            "channel_name": message.channel.name,
-            "server_id": str(message.guild.id) if message.guild else None,
-        }
+    channel_name = getattr(message.channel, "name", "DM")
+    guild_id = getattr(message.guild, "id", None)
 
-        try:
-            response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=30)
-            if response.status_code == 200:
-                bot_answer = response.text
-                await message.channel.send(bot_answer)
-            else:
-                print(f"n8n returned status {response.status_code}: {response.text}")
-        except requests.RequestException as e:
-            print(f"Failed to communicate with n8n: {e}")
+    # DEBUG: show that we see messages at all
+    logger.info(
+        "[bridge] Incoming message from %s in #%s (guild=%s): %r",
+        message.author,
+        channel_name,
+        guild_id,
+        message.content,
+    )
+
+    if not N8N_WEBHOOK_URL:
+        logger.warning("N8N_WEBHOOK_URL is not set, skipping message.")
+        return
+
+    # 2. Forward EVERY non-bot message to n8n
+    payload = {
+        "content": message.content,
+        "author": message.author.name,
+        "author_id": str(message.author.id),
+        "channel_id": str(message.channel.id),
+        "channel_name": channel_name,
+        "server_id": str(message.guild.id) if message.guild else None,
+    }
+
+    try:
+        response = requests.post(N8N_WEBHOOK_URL, json=payload, timeout=30)
+        if response.status_code == 200:
+            bot_answer = response.text
+            await message.channel.send(bot_answer)
+        else:
+            logger.warning("n8n returned status %s: %s", response.status_code, response.text)
+    except requests.RequestException as e:
+        logger.error("Failed to communicate with n8n: %s", e)
 
 
 if __name__ == "__main__":
     TOKEN = os.getenv('DISCORD_TOKEN')
     if not TOKEN:
-        print("Error: DISCORD_TOKEN environment variable is not set.")
+        logger.error("DISCORD_TOKEN environment variable is not set.")
         sys.exit(1)
-
     client.run(TOKEN)
