@@ -106,16 +106,8 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    # 2. Heuristic: mention, DM, or reply
-    is_mention = client.user.mentioned_in(message)
-    is_dm = isinstance(message.channel, discord.DMChannel)
-    is_reply_to_bot = (
-        message.reference is not None and
-        message.reference.resolved and
-        message.reference.resolved.author.id == client.user.id
-    )
-
-    if (is_mention or is_dm or is_reply_to_bot) and N8N_WEBHOOK_URL:
+    # 2. Forward everything else to n8n (if configured)
+    if N8N_WEBHOOK_URL:
         payload = {
             "content": message.content,
             "author": message.author.name,
