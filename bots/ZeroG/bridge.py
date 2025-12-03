@@ -7,13 +7,15 @@ import discord
 import requests
 
 # n8n webhook for message handling
-N8N_WEBHOOK_URL = os.getenv('N8N_WEBHOOK_URL')
+N8N_WEBHOOK_URL = os.getenv("N8N_WEBHOOK_URL")
 
 # Guild sync config (Supabase Edge Function)
 DISCORD_GUILD_SYNC_URL = os.getenv("DISCORD_GUILD_SYNC_URL")
 DISCORD_BOT_SYNC_SECRET = os.getenv("DISCORD_BOT_SYNC_SECRET")
 
-# Usage tracking config
+# Usage tracking config (Supabase Edge Function)
+# Example:
+# SERVER_USAGE_INCREMENT_URL=https://sohyviltwgpuslbjzqzh.supabase.co/functions/v1/discord-message-usage
 SERVER_USAGE_INCREMENT_URL = os.getenv("SERVER_USAGE_INCREMENT_URL")
 N8N_USAGE_SECRET = os.getenv("N8N_USAGE_SECRET")
 
@@ -110,15 +112,18 @@ async def guild_sync(guild: discord.Guild):
 
 async def increment_usage(server_id, amount=1):
     """
-    Async helper to increment usage in the Gravilo SaaS.
+    Async helper to increment usage via Supabase Edge Function.
+    Expects the discord-message-usage function with:
+      - Header: x-bot-secret
+      - Body: { "discord_guild_id": "...", "messages": <int> }
     """
     if not SERVER_USAGE_INCREMENT_URL or not N8N_USAGE_SECRET:
         logger.warning("[Usage] Missing SERVER_USAGE_INCREMENT_URL or N8N_USAGE_SECRET")
         return
 
     payload = {
-        "discord_server_id": str(server_id),
-        "amount": amount,
+        "discord_guild_id": str(server_id),
+        "messages": int(amount),
     }
 
     headers = {
@@ -128,13 +133,17 @@ async def increment_usage(server_id, amount=1):
 
     try:
         resp = requests.post(
-            SERVER_USAGE_INCREMENT_URL, json=payload, headers=headers, timeout=10
+            SERVER_USAGE_INCREMENT_URL,
+            json=payload,
+            headers=headers,
+            timeout=10,
         )
         logger.info(
-            "[Usage] Incremented %s by %s (status %s)",
+            "[Usage] Incremented guild %s by %s (status %s, body=%r)",
             server_id,
             amount,
             resp.status_code,
+            resp.text,
         )
     except Exception as e:
         logger.error("[Usage] Error incrementing usage: %s", e)
@@ -212,7 +221,7 @@ async def on_message(message):
 
 
 if __name__ == "__main__":
-    TOKEN = os.getenv('DISCORD_TOKEN')
+    TOKEN = os.getenv("DISCORD_TOKEN")
     if not TOKEN:
         logger.error("DISCORD_TOKEN environment variable is not set.")
         sys.exit(1)
