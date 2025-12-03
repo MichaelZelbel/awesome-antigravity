@@ -164,6 +164,7 @@ async def on_message(message):
         if response.status_code == 200:
             bot_answer = response.text
             await message.channel.send(bot_answer)
+            await increment_usage(server_id=message.guild.id, amount=1)
         else:
             logger.warning(
                 "n8n returned status %s: %s", response.status_code, response.text
@@ -178,3 +179,27 @@ if __name__ == "__main__":
         logger.error("DISCORD_TOKEN environment variable is not set.")
         sys.exit(1)
     client.run(TOKEN)
+
+async def increment_usage(server_id, amount=1):
+    url = os.getenv("SERVER_USAGE_INCREMENT_URL")
+    secret = os.getenv("N8N_USAGE_SECRET")
+
+    if not url or not secret:
+        logger.warning("[Usage] Missing SERVER_USAGE_INCREMENT_URL or N8N_USAGE_SECRET")
+        return
+
+    payload = {
+        "discord_server_id": str(server_id),
+        "amount": amount
+    }
+
+    headers = {
+        "Content-Type": "application/json",
+        "x-bot-secret": secret
+    }
+
+    try:
+        resp = requests.post(url, json=payload, headers=headers, timeout=10)
+        logger.info("[Usage] Incremented %s by %s (status %s)", server_id, amount, resp.status_code)
+    except Exception as e:
+        logger.error("[Usage] Error incrementing usage: %s", e)
