@@ -1,370 +1,372 @@
 {
-    "name": "ZeroG Gatekeeper",
-    "nodes": [
-        {
-            "parameters": {
-                "workflowInputs": {
-                    "values": [
-                        {
-                            "name": "query"
-                        },
-                        {
-                            "name": "author_name"
-                        },
-                        {
-                            "name": "channel_name"
-                        },
-                        {
-                            "name": "server_id"
-                        }
-                    ]
-                }
+  "name": "Gravilo Gatekeeper",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
             },
-            "type": "n8n-nodes-base.executeWorkflowTrigger",
-            "typeVersion": 1.1,
-            "position": [
-                -1088,
-                -16
-            ],
-            "id": "6eda25be-5390-4cba-9c19-e013b5837baa",
-            "name": "When Executed by Another Workflow"
-        },
-        {
-            "parameters": {
-                "assignments": {
-                    "assignments": [
-                        {
-                            "name": "query",
-                            "value": "={{ $json.query }}",
-                            "type": "string"
-                        },
-                        {
-                            "name": "author_name",
-                            "value": "={{ $json.author_name }}",
-                            "type": "string"
-                        },
-                        {
-                            "name": "channel_name",
-                            "value": "={{ $json.channel_name }}",
-                            "type": "string"
-                        },
-                        {
-                            "name": "server_id",
-                            "value": "={{ $json.server_id }}",
-                            "type": "string"
-                        }
-                    ]
-                },
-                "options": {}
+            {
+              "name": "author_name"
             },
-            "type": "n8n-nodes-base.set",
-            "typeVersion": 3.4,
-            "position": [
-                -864,
-                -16
-            ],
-            "id": "21acba02-cd48-4972-8db5-7732d35ba74c",
-            "name": "Config"
-        },
-        {
-            "parameters": {
-                "workflowId": {
-                    "__rl": true,
-                    "value": "RAEscX2JIdjcYo50",
-                    "mode": "list",
-                    "cachedResultUrl": "/workflow/RAEscX2JIdjcYo50",
-                    "cachedResultName": "ZeroG Core"
-                },
-                "workflowInputs": {
-                    "mappingMode": "defineBelow",
-                    "value": {
-                        "query": "={{ $('Config').first().json.query }}",
-                        "author_name": "={{ $('Config').first().json.author_name }}",
-                        "channel_name": "={{ $('Config').first().json.channel_name }}",
-                        "server_id": "={{ $('Config').first().json.server_id }}"
-                    },
-                    "matchingColumns": [],
-                    "schema": [
-                        {
-                            "id": "query",
-                            "displayName": "query",
-                            "required": false,
-                            "defaultMatch": false,
-                            "display": true,
-                            "canBeUsedToMatch": true,
-                            "type": "string"
-                        },
-                        {
-                            "id": "author_name",
-                            "displayName": "author_name",
-                            "required": false,
-                            "defaultMatch": false,
-                            "display": true,
-                            "canBeUsedToMatch": true,
-                            "type": "string"
-                        },
-                        {
-                            "id": "channel_name",
-                            "displayName": "channel_name",
-                            "required": false,
-                            "defaultMatch": false,
-                            "display": true,
-                            "canBeUsedToMatch": true,
-                            "type": "string"
-                        },
-                        {
-                            "id": "server_id",
-                            "displayName": "server_id",
-                            "required": false,
-                            "defaultMatch": false,
-                            "display": true,
-                            "canBeUsedToMatch": true,
-                            "type": "string"
-                        }
-                    ],
-                    "attemptToConvertTypes": false,
-                    "convertFieldsToString": true
-                },
-                "options": {}
+            {
+              "name": "channel_name"
             },
-            "type": "n8n-nodes-base.executeWorkflow",
-            "typeVersion": 1.3,
-            "position": [
-                0,
-                -32
-            ],
-            "id": "a37ac51f-7951-4b08-a170-c0e63af231dd",
-            "name": "Execute ZeroG Core"
-        },
-        {
-            "parameters": {
-                "assignments": {
-                    "assignments": [
-                        {
-                            "name": "output",
-                            "value": "",
-                            "type": "string",
-                            "id": "21765b92-496b-4531-ab3c-3babca7f6505"
-                        },
-                        {
-                            "name": "reason",
-                            "value": "={{ $('Gatekeeper Agent').item.json.output.reason }}",
-                            "type": "string",
-                            "id": "9c1d67f6-3c95-414e-84e7-696510093e15"
-                        }
-                    ]
-                },
-                "options": {}
-            },
-            "type": "n8n-nodes-base.set",
-            "typeVersion": 3.4,
-            "position": [
-                0,
-                192
-            ],
-            "id": "84884c57-f72a-4487-b6cb-7e91e24a9355",
-            "name": "Set Ignore"
-        },
-        {
-            "parameters": {
-                "promptType": "define",
-                "text": "=You are the subconscious Gatekeeper for ZeroG, a helpful developer bot for the Antigravity Community.\nYour ONLY job is to analyze the incoming message and decide if ZeroG should respond.\n**CONTEXT:**\n- User: {{ $('Config').first().json.author_name }}\n- Channel: {{ $('Config').first().json.channel_name }}\n- Message: {{ $('Config').first().json.query }}\n**DECISION CRITERIA:**\n**RESPOND (should_respond: true) IF:**\n1.  **Direct Address:** The user is talking to \"ZeroG\", \"@ZeroG\", \"Zero\", \"<@&1443747658698195105>\", \"our bot\", \"our community bot\", or \"our Community AI\" (even without a mention). Only when talking TO you, not when they are just talking ABOUT you.\n2.  **Technical Question:** The user is asking for help with Antigravity, code, n8n, or development. But only if you have the chance to provide a useful answer.\n3.  **Vibe Check:** The user is making a joke or comment that invites a witty retort (e.g., \"AI will take our jobs\").\n4.  **Greeting or thanking you:**  e.g., \"Hi ZeroG!\" or \"Thank you, ZeroG\").\n5.  **Toxicity:** The user is being negative or toxic (respond to diffuse).\n\nNOTE: You will see Discord mention IDs like <@12345> or <@&1443747658698195105> in the message. Treat these as a DIRECT ADDRESS, just like someone would say \"@ZeroG\". Do not output the ID in your reason, just know that it means they are talking to YOU.\n\n**IGNORE (should_respond: false) IF:**\n1.  **Irrelevant:** The user is talking to another human about non-tech topics (e.g., \"What did you eat for lunch?\").\n2.  **Noise:** Short, low-value messages like \"lol\", \"ok\", \"cool\" (unless replying to the bot).\n3.  **System Messages:** Join messages, pins, etc.\n**OUTPUT FORMAT:**\nYou must return a valid JSON object matching this schema:\n{\n  \"should_respond\": boolean,\n  \"reason\": \"string (short explanation)\"\n}",
-                "hasOutputParser": true,
-                "options": {}
-            },
-            "type": "@n8n/n8n-nodes-langchain.agent",
-            "typeVersion": 3,
-            "position": [
-                -608,
-                -16
-            ],
-            "id": "9c4fb65a-e426-4e9f-9b30-5bfe0705bc41",
-            "name": "Gatekeeper Agent"
-        },
-        {
-            "parameters": {
-                "model": "openai/gpt-4o-mini",
-                "options": {}
-            },
-            "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-            "typeVersion": 1,
-            "position": [
-                -656,
-                176
-            ],
-            "id": "51d7716b-5848-4b67-ba23-d5c458c56ac7",
-            "name": "OpenRouter Chat Model",
-            "credentials": {
-                "openRouterApi": {
-                    "id": "Z6nI3FP2ipECIYII",
-                    "name": "OpenRouter account"
-                }
+            {
+              "name": "server_id"
             }
-        },
-        {
-            "parameters": {
-                "options": {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1088,
+        -16
+      ],
+      "id": "6eda25be-5390-4cba-9c19-e013b5837baa",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "query",
+              "value": "={{ $json.query }}",
+              "type": "string"
             },
-            "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-            "typeVersion": 1,
-            "position": [
-                -480,
-                336
-            ],
-            "id": "16d12bf2-e515-4d5d-a02c-46848e737f93",
-            "name": "Parser LLM",
-            "credentials": {
-                "openRouterApi": {
-                    "id": "Z6nI3FP2ipECIYII",
-                    "name": "OpenRouter account"
-                }
+            {
+              "name": "author_name",
+              "value": "={{ $json.author_name }}",
+              "type": "string"
+            },
+            {
+              "name": "channel_name",
+              "value": "={{ $json.channel_name }}",
+              "type": "string"
+            },
+            {
+              "name": "server_id",
+              "value": "={{ $json.server_id }}",
+              "type": "string"
             }
+          ]
         },
-        {
-            "parameters": {
-                "jsonSchemaExample": "{\n  \"should_respond\": true,\n  \"reason\": \"The user asked a direct technical question.\"\n}",
-                "autoFix": true
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -864,
+        -16
+      ],
+      "id": "21acba02-cd48-4972-8db5-7732d35ba74c",
+      "name": "Config"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "output",
+              "value": "",
+              "type": "string",
+              "id": "21765b92-496b-4531-ab3c-3babca7f6505"
             },
-            "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-            "typeVersion": 1.3,
-            "position": [
-                -480,
-                176
-            ],
-            "id": "2ddf2b12-2058-4d46-9961-5dd855674bbd",
-            "name": "Structured Output Parser1"
+            {
+              "name": "reason",
+              "value": "={{ $('Gatekeeper Agent').item.json.output.reason }}",
+              "type": "string",
+              "id": "9c1d67f6-3c95-414e-84e7-696510093e15"
+            }
+          ]
         },
-        {
-            "parameters": {
-                "conditions": {
-                    "options": {
-                        "caseSensitive": true,
-                        "leftValue": "",
-                        "typeValidation": "strict",
-                        "version": 2
-                    },
-                    "conditions": [
-                        {
-                            "id": "997f1503-edf5-414b-916b-7961dca238bd",
-                            "leftValue": "={{ $json.output.should_respond }}",
-                            "rightValue": "",
-                            "operator": {
-                                "type": "boolean",
-                                "operation": "true",
-                                "singleValue": true
-                            }
-                        }
-                    ],
-                    "combinator": "and"
-                },
-                "options": {}
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        192
+      ],
+      "id": "84884c57-f72a-4487-b6cb-7e91e24a9355",
+      "name": "Set Ignore"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the subconscious Gatekeeper for Gravilo, a helpful developer bot for the Antigravity Community.\nYour ONLY job is to analyze the incoming message and decide if Gravilo should respond.\n**CONTEXT:**\n- User: {{ $('Config').first().json.author_name }}\n- Channel: {{ $('Config').first().json.channel_name }}\n- Message: {{ $('Config').first().json.query }}\n**DECISION CRITERIA:**\n**RESPOND (should_respond: true) IF:**\n1.  **Direct Address:** The user is talking to \"Gravilo\", \"@gravilo\", \"Gravi\", \"<@&1443747658698195105>\", \"our bot\", \"our community bot\", or \"our Community AI\" (even without a mention). Only when talking TO you, not when they are just talking ABOUT you.\n2.  **Technical Question:** The user is asking for help with Antigravity, code, n8n, or development. But only if you have the chance to provide a useful answer.\n3.  **Vibe Check:** The user is making a joke or comment that invites a witty retort (e.g., \"AI will take our jobs\").\n4.  **Greeting or thanking you:**  e.g., \"Hi ZeroG!\" or \"Thank you, ZeroG\").\n5.  **Toxicity:** The user is being negative or toxic (respond to diffuse).\n\nNOTE: You will see Discord mention IDs like <@12345> or <@&1443747658698195105> in the message. Treat these as a DIRECT ADDRESS, just like someone would say \"@ZeroG\". Do not output the ID in your reason, just know that it means they are talking to YOU.\n\n**IGNORE (should_respond: false) IF:**\n1.  **Irrelevant:** The user is talking to another human about non-tech topics (e.g., \"What did you eat for lunch?\").\n2.  **Noise:** Short, low-value messages like \"lol\", \"ok\", \"cool\" (unless replying to the bot).\n3.  **Information:** The user just provided some information, which does not require any reply, e.g. he added new workflow to the community.\n4.  **System Messages:** Join messages, pins, etc.\n**OUTPUT FORMAT:**\nYou must return a valid JSON object matching this schema:\n{\n  \"should_respond\": boolean,\n  \"reason\": \"string (short explanation)\"\n}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -608,
+        -16
+      ],
+      "id": "9c4fb65a-e426-4e9f-9b30-5bfe0705bc41",
+      "name": "Gatekeeper Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        176
+      ],
+      "id": "51d7716b-5848-4b67-ba23-d5c458c56ac7",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Z6nI3FP2ipECIYII",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        336
+      ],
+      "id": "16d12bf2-e515-4d5d-a02c-46848e737f93",
+      "name": "Parser LLM",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Z6nI3FP2ipECIYII",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"should_respond\": true,\n  \"reason\": \"The user asked a direct technical question.\"\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -480,
+        176
+      ],
+      "id": "2ddf2b12-2058-4d46-9961-5dd855674bbd",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "997f1503-edf5-414b-916b-7961dca238bd",
+              "leftValue": "={{ $json.output.should_respond }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -240,
+        -16
+      ],
+      "id": "2b57c634-12b5-4e16-847d-609d1cc0df80",
+      "name": "Should Respond?"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "RAEscX2JIdjcYo50",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/RAEscX2JIdjcYo50",
+          "cachedResultName": "Gravilo Core"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ $('Config').first().json.query }}",
+            "author_name": "={{ $('Config').first().json.author_name }}",
+            "channel_name": "={{ $('Config').first().json.channel_name }}",
+            "server_id": "={{ $('Config').first().json.server_id }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
             },
-            "type": "n8n-nodes-base.if",
-            "typeVersion": 2.2,
-            "position": [
-                -240,
-                -16
-            ],
-            "id": "2b57c634-12b5-4e16-847d-609d1cc0df80",
-            "name": "Should Respond?"
-        }
-    ],
-    "pinData": {},
-    "connections": {
-        "When Executed by Another Workflow": {
-            "main": [
-                [
-                    {
-                        "node": "Config",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
+            {
+              "id": "author_name",
+              "displayName": "author_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "channel_name",
+              "displayName": "channel_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "server_id",
+              "displayName": "server_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
         },
-        "Config": {
-            "main": [
-                [
-                    {
-                        "node": "Gatekeeper Agent",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "OpenRouter Chat Model": {
-            "ai_languageModel": [
-                [
-                    {
-                        "node": "Gatekeeper Agent",
-                        "type": "ai_languageModel",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Parser LLM": {
-            "ai_languageModel": [
-                [
-                    {
-                        "node": "Structured Output Parser1",
-                        "type": "ai_languageModel",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Structured Output Parser1": {
-            "ai_outputParser": [
-                [
-                    {
-                        "node": "Gatekeeper Agent",
-                        "type": "ai_outputParser",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Gatekeeper Agent": {
-            "main": [
-                [
-                    {
-                        "node": "Should Respond?",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Should Respond?": {
-            "main": [
-                [
-                    {
-                        "node": "Execute ZeroG Core",
-                        "type": "main",
-                        "index": 0
-                    }
-                ],
-                [
-                    {
-                        "node": "Set Ignore",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        }
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        -32
+      ],
+      "id": "a37ac51f-7951-4b08-a170-c0e63af231dd",
+      "name": "Execute Gravilo Core"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
-    "active": false,
-    "settings": {
-        "executionOrder": "v1"
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Gatekeeper Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
-    "versionId": "1434cc1e-12c2-4b34-b37c-d9fd197f5da9",
-    "meta": {
-        "templateCredsSetupCompleted": true,
-        "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Gatekeeper Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     },
-    "id": "pAfcgapVhvX7r0EQ",
-    "tags": []
+    "Parser LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Gatekeeper Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gatekeeper Agent": {
+      "main": [
+        [
+          {
+            "node": "Should Respond?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Should Respond?": {
+      "main": [
+        [
+          {
+            "node": "Execute Gravilo Core",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set Ignore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "a07a6f0f-2636-4e30-bd22-c9546067545f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
+  },
+  "id": "pAfcgapVhvX7r0EQ",
+  "tags": []
 }

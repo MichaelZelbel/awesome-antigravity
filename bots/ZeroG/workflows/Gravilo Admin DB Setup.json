@@ -1,10 +1,10 @@
 {
-  "name": "ZeroG Admin DB Setup",
+  "name": "Gravilo Admin DB Setup",
   "nodes": [
     {
       "parameters": {
         "content": "## 🧠 Workflow Architecture & Credits\n\nThis advanced RAG pipeline is built upon the foundational work of **Cole Medin** (Original Agentic RAG Template) and improved + enhanced with Mistral OCR capabilities by **Julian Ivanov**.\n\nCheck out their channels for more automation mastery:\n• Cole Medin: https://www.youtube.com/@ColeMedin\n• Julian Ivanov: https://www.youtube.com/@Julian-Ivanov",
-        "height": 275,
+        "height": 291,
         "width": 529,
         "color": 5
       },
@@ -103,7 +103,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "3167358f-04be-45c9-8472-a4e4f622be2a",
+  "versionId": "f29c0f66-1985-484a-8b1e-a30d9c3bf004",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"

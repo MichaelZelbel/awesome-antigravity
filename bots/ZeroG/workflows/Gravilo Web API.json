@@ -1,5 +1,5 @@
 {
-  "name": "Gravilo Discord API",
+  "name": "Gravilo Web API",
   "nodes": [
     {
       "parameters": {
@@ -12,15 +12,9 @@
               "id": "a9b25265-3a64-40b7-8b17-c0b78dc40818"
             },
             {
-              "name": "file_store_name",
-              "value": "fileSearchStores/antigravity-file-store-ppxw2xb3he4y ",
-              "type": "string",
-              "id": "fc563d61-5025-428a-adc3-f979633bea08"
-            },
-            {
               "id": "968c81bb-ac78-42eb-96be-d72a81c199f5",
-              "name": "author_name",
-              "value": "={{ $json.body.author }}",
+              "name": "supabase_user_id",
+              "value": "={{ $json.body.supabase_user_id }}",
               "type": "string"
             },
             {
@@ -45,13 +39,13 @@
         64,
         112
       ],
-      "id": "f9f49892-5bf5-4b27-9f42-1b053c547d89",
+      "id": "79bbaa39-ecff-4eef-abaf-3a75b939c3df",
       "name": "Config"
     },
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "gravilo",
+        "path": "graviloweb",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -61,9 +55,9 @@
         -176,
         112
       ],
-      "id": "ac9d89f8-1566-4e29-857a-67ca1b41cdcf",
+      "id": "49f25748-dde1-46ae-ab37-23b17c48df05",
       "name": "Webhook",
-      "webhookId": "be02d832-25fe-4d0a-87a9-aee9ac34e784"
+      "webhookId": "a2749422-4cdb-4991-8de1-1f9b06d64576"
     },
     {
       "parameters": {
@@ -77,7 +71,7 @@
         480,
         112
       ],
-      "id": "aeccb663-f13e-4271-ad0e-f0e120e4f62d",
+      "id": "5ab08551-6844-432d-8fc9-d1265fd793c3",
       "name": "Respond to Webhook"
     },
     {
@@ -90,24 +84,65 @@
         -176,
         304
       ],
-      "id": "adddc2ee-f308-4fd2-87d7-1815de6d8cd4",
+      "id": "e5bb1fe5-22e0-4c10-a19f-58ed248dcb6b",
       "name": "Chat Trigger for Testing",
-      "webhookId": "zerog-chat-trigger"
+      "webhookId": "526e6f77-6d48-4200-b944-90ddd4686de8"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sohyviltwgpuslbjzqzh.supabase.co/functions/v1/discord-message-usage",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "x-bot-secret",
+              "value": "44b83d6fb97efa6eaf3e8e9e316ea0b8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "discord_guild_id",
+              "value": "={{ $node['Config'].json.server_id }}"
+            },
+            {
+              "name": "messages",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        688,
+        112
+      ],
+      "id": "aa9843a4-2502-4264-bab4-bcf538ddb220",
+      "name": "Increment Usage"
     },
     {
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "pAfcgapVhvX7r0EQ",
+          "value": "RAEscX2JIdjcYo50",
           "mode": "list",
-          "cachedResultUrl": "/workflow/pAfcgapVhvX7r0EQ",
-          "cachedResultName": "Gravilo Gatekeeper"
+          "cachedResultUrl": "/workflow/RAEscX2JIdjcYo50",
+          "cachedResultName": "Gravilo Core"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
             "query": "={{ $json.query }}",
-            "author_name": "={{ $json.author_name }}",
+            "author_name": "={{ $json.supabase_user_id }}",
             "channel_name": "={{ $json.channel_name }}",
             "server_id": "={{ $json.server_id }}"
           },
@@ -161,8 +196,8 @@
         272,
         112
       ],
-      "id": "99245f73-8c41-497b-ae62-9c7064034b2c",
-      "name": "Execute Gravilo Gatekeeper"
+      "id": "20f14ed9-6bbb-4782-8fa1-aedf3fad0b13",
+      "name": "Execute Gravilo Core"
     }
   ],
   "pinData": {},
@@ -182,7 +217,7 @@
       "main": [
         [
           {
-            "node": "Execute Gravilo Gatekeeper",
+            "node": "Execute Gravilo Core",
             "type": "main",
             "index": 0
           }
@@ -200,7 +235,18 @@
         ]
       ]
     },
-    "Execute Gravilo Gatekeeper": {
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Increment Usage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Gravilo Core": {
       "main": [
         [
           {
@@ -218,11 +264,11 @@
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": false
   },
-  "versionId": "fba89046-845d-499d-9710-d75c22bf2ea1",
+  "versionId": "c5f99512-2a56-4d4f-9974-6064b52e5cc2",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
   },
-  "id": "OOIV3LUCHb7mDjJj",
+  "id": "aJbI3biMhSq5VTDI",
   "tags": []
 }
