@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 # Configuration
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
-# New Webhook for Ingestion (Create this in n8n: ZeroG_Ingest_Discord)
+# New Webhook for Ingestion (Create this in n8n: Gravilo_Ingest_Discord)
 N8N_INGEST_WEBHOOK_URL = os.getenv('N8N_INGEST_WEBHOOK_URL') 
 DAYS_TO_INDEX = 30  # How far back to go?
 BATCH_SIZE = 50     # Messages per n8n request

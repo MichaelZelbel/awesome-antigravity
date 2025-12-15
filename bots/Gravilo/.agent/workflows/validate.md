@@ -4,7 +4,7 @@ description: Run the comprehensive validation suite (Lint, Type Check, Test, Con
 
 # Ultimate Validation Suite
 
-This workflow validates the ZeroG bot codebase, configuration, and behavior using a multi-layered approach.
+This workflow validates the Gravilo bot codebase, configuration, and behavior using a multi-layered approach.
 
 ## Phases
 
@@ -55,7 +55,7 @@ This workflow validates the ZeroG bot codebase, configuration, and behavior usin
         *   Navigate to `https://discord.com/login`.
         *   Log in with the test credentials.
         *   Navigate to the `DISCORD_TEST_SERVER_URL`.
-        *   Send a test message (e.g., "Hello ZeroG").
+        *   Send a test message (e.g., "Hello Gravilo").
         *   Wait and verify that the bot replies.
     
     *Note: This step requires the `browser_subagent` tool.*

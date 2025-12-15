@@ -8,7 +8,7 @@ Discord's native tools for server cloning are unreliable:
 
 ## The Solution
 
-We built a custom Python script that actually works: [`clone_server.py`](file:///c:/Dev/AntigravityCommunity/bots/ZeroG/clone_server.py)
+We built a custom Python script that actually works: [`clone_server.py`](file:///c:/Dev/AntigravityCommunity/bots/Gravilo/clone_server.py)
 
 This script uses the Discord API directly to:
 - ✅ Clone all roles with exact permissions and hierarchy
@@ -22,7 +22,7 @@ This script uses the Discord API directly to:
 ### 1. Install Dependencies
 
 ```powershell
-cd c:\Dev\AntigravityCommunity\bots\ZeroG
+cd c:\Dev\AntigravityCommunity\bots\Gravilo
 pip install discord.py
 ```
 
@@ -56,14 +56,14 @@ python clone_server.py 123456789012345678 987654321098765432
 
 ### 5. Re-invite Bots
 
-After cloning, manually re-invite ZeroG using the permanent invite URL:
+After cloning, manually re-invite Gravilo using the permanent invite URL:
 
-**ZeroG Permanent Invite URL:**
+**Gravilo Permanent Invite URL:**
 ```
 https://discord.com/api/oauth2/authorize?client_id=1442892578264715385&permissions=534723947584&scope=bot
 ```
 
-See [`ZEROG_INVITE.md`](file:///c:/Dev/AntigravityCommunity/bots/ZeroG/ZEROG_INVITE.md) for full details and troubleshooting.
+See [`ZEROG_INVITE.md`](file:///c:/Dev/AntigravityCommunity/bots/Gravilo/ZEROG_INVITE.md) for full details and troubleshooting.
 
 ## What Gets Cloned
 
@@ -98,7 +98,7 @@ See [`ZEROG_INVITE.md`](file:///c:/Dev/AntigravityCommunity/bots/ZeroG/ZEROG_INV
 
 The script:
 
-1. **Connects** to Discord using ZeroG's bot token
+1. **Connects** to Discord using Gravilo's bot token
 2. **Deletes** existing roles/channels in target server (clean slate)
 3. **Creates roles** in reverse hierarchy order (top roles first)
 4. **Creates categories** with cloned permission overwrites
@@ -108,7 +108,7 @@ The script:
 ## Troubleshooting
 
 **"Bot is not in source/target server"**
-- Make sure ZeroG bot is invited to BOTH servers
+- Make sure Gravilo bot is invited to BOTH servers
 - Use the permanent invite URL from `ZEROG_INVITE.md`
 
 **"Permission denied" errors**
@@ -135,6 +135,6 @@ This is useful if you update the production server and want to refresh the test 
 
 ## Files in This Solution
 
-- [`clone_server.py`](file:///c:/Dev/AntigravityCommunity/bots/ZeroG/clone_server.py) - Main cloning script
-- [`ZEROG_INVITE.md`](file:///c:/Dev/AntigravityCommunity/bots/ZeroG/ZEROG_INVITE.md) - Permanent bot invite URL and permissions
+- [`clone_server.py`](file:///c:/Dev/AntigravityCommunity/bots/Gravilo/clone_server.py) - Main cloning script
+- [`ZEROG_INVITE.md`](file:///c:/Dev/AntigravityCommunity/bots/Gravilo/ZEROG_INVITE.md) - Permanent bot invite URL and permissions
 - `CLONE_README.md` - This file

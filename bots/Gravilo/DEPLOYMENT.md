@@ -1,6 +1,6 @@
-# 🚀 ZeroG Bridge - Coolify Deployment Guide
+# 🚀 Gravilo Bridge - Coolify Deployment Guide
 
-This guide will help you deploy the **ZeroG Bridge** (the "Ears" of your bot) to your **Coolify** instance.
+This guide will help you deploy the **Gravilo Bridge** (the "Ears" of your bot) to your **Coolify** instance.
 
 ## Prerequisites
 -   Access to your Coolify Dashboard.
@@ -11,9 +11,9 @@ This guide will help you deploy the **ZeroG Bridge** (the "Ears" of your bot) to
 
 ## Step 1: Prepare your Repository
 Ensure your GitHub repository (`awesome-antigravity`) is synced with the latest changes, including:
--   `bots/ZeroG/bridge.py`
--   `bots/ZeroG/Dockerfile`
--   `bots/ZeroG/requirements.txt`
+-   `bots/Gravilo/bridge.py`
+-   `bots/Gravilo/Dockerfile`
+-   `bots/Gravilo/requirements.txt`
 
 ## Step 2: Create a New Resource in Coolify
 1.  Go to your **Coolify Dashboard**.
@@ -26,7 +26,7 @@ Ensure your GitHub repository (`awesome-antigravity`) is synced with the latest 
 ## Step 3: Configure the Service
 1.  **Branch**: `main` (or your working branch).
 2.  **Build Pack**: Select **Dockerfile**.
-3.  **Base Directory**: `/bots/ZeroG` (This is crucial! It tells Coolify where to find the Dockerfile).
+3.  **Base Directory**: `/bots/Gravilo` (This is crucial! It tells Coolify where to find the Dockerfile).
 4.  Click **Continue**.
 
 ## Step 4: Environment Variables
@@ -45,7 +45,7 @@ Before deploying, you need to set the secrets.
 1.  Go to your Discord Server.
 2.  Type a question (e.g., "How do I use the file search?").
 3.  Check your **n8n Executions** list. You should see a new execution for `Discord_Handler`.
-4.  ZeroG should reply!
+4.  Gravilo should reply!
 
 ---
 

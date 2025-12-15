@@ -1,16 +1,16 @@
-# ZeroG Bot - Permanent Invite URL
+# Gravilo Bot - Permanent Invite URL
 
 ## Current Permissions Required
 
-Based on ZeroG's n8n workflow functionality, the bot needs:
+Based on Gravilo's n8n workflow functionality, the bot needs:
 
 ### Required Permissions
 - **Read Messages/View Channels** - See channels and messages
 - **Send Messages** - Respond to user queries  
 - **Read Message History** - Access conversation context
-- **Mention Everyone** - (if ZeroG needs to @mention users/roles)
-- **Add Reactions** - (if ZeroG provides reactions)
-- **Attach Files** - (if ZeroG shares images/documents)
+- **Mention Everyone** - (if Gravilo needs to @mention users/roles)
+- **Add Reactions** - (if Gravilo provides reactions)
+- **Attach Files** - (if Gravilo shares images/documents)
 - **Embed Links** - Display rich embeds in responses
 
 ### Permission Integer
@@ -31,13 +31,13 @@ This URL includes:
 
 ### How to Use This URL
 
-1. **To invite ZeroG to a new server:**
+1. **To invite Gravilo to a new server:**
    - Copy the URL above
    - Paste it into your browser
    - Select the target server from dropdown
    - Click "Authorize"
 
-2. **To update ZeroG's permissions on an existing server:**
+2. **To update Gravilo's permissions on an existing server:**
    - Use the same URL
    - Re-authorize on the server
    - Discord will update the bot's permissions
@@ -63,10 +63,10 @@ If you need different permissions in the future:
 
 ## Testing
 
-After inviting ZeroG to "Antigravity Test" with this URL:
+After inviting Gravilo to "Antigravity Test" with this URL:
 
 1. Verify bot appears online
-2. Send: `@ZeroG test message`
+2. Send: `@Gravilo test message`
 3. Check n8n webhook receives the message
 4. Verify bot can respond
 

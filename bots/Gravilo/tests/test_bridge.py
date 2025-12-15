@@ -22,7 +22,7 @@ def mock_client():
 def mock_message():
     message = AsyncMock(spec=discord.Message)
     message.author.bot = False
-    message.content = "Hello ZeroG"
+    message.content = "Hello Gravilo"
     message.channel = AsyncMock(spec=discord.TextChannel) # Use AsyncMock for channel
     message.channel.id = 123456789
     message.channel.name = "general"

@@ -1,5 +1,5 @@
 {
-  "name": "Gravilo Ingest DriveLoader",
+  "name": "Gravilo Ingest SupabaseLoader",
   "nodes": [
     {
       "parameters": {
@@ -20,7 +20,7 @@
           }
         }
       },
-      "id": "a05be1be-6966-4120-8b6e-d7e84f662aef",
+      "id": "bf19589d-0eeb-41eb-a0f0-2b182ee44c4d",
       "name": "Default Data Loader",
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
@@ -36,7 +36,7 @@
         "width": 529,
         "color": 5
       },
-      "id": "6378d858-7ef6-4fc5-92a6-32300ddca31c",
+      "id": "76b565a7-3a08-4995-b186-1b3403d3268c",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -61,7 +61,7 @@
           }
         }
       },
-      "id": "b29b7475-8892-4aa1-a71a-40113cb37563",
+      "id": "1219c80d-91c8-4af8-9404-9fd6266b845a",
       "name": "Download File",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
@@ -97,7 +97,7 @@
         "event": "fileCreated",
         "options": {}
       },
-      "id": "290bf2eb-3d3c-4e8f-9941-22af16f94a44",
+      "id": "5782e7c7-e1af-4f23-baa4-015b5b06e116",
       "name": "File Created",
       "type": "n8n-nodes-base.googleDriveTrigger",
       "typeVersion": 1,
@@ -132,7 +132,7 @@
         "event": "fileUpdated",
         "options": {}
       },
-      "id": "b5c1ada7-44e5-47d2-90a0-93aa19e80cb2",
+      "id": "493fb556-fb74-4fce-83f5-8b06386852f1",
       "name": "File Updated",
       "type": "n8n-nodes-base.googleDriveTrigger",
       "typeVersion": 1,
@@ -179,7 +179,7 @@
         },
         "options": {}
       },
-      "id": "3a300b52-c2f8-4dc4-8918-7c0418b5dd9e",
+      "id": "204f4aff-4776-4563-baa9-e6bd409f184c",
       "name": "Set File ID",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -193,7 +193,7 @@
         "aggregate": "aggregateAllItemData",
         "options": {}
       },
-      "id": "a8e31c51-5c0d-4494-b360-08ed88f0b57a",
+      "id": "a0eb0684-2c25-4b53-990c-a077b6c83449",
       "name": "Aggregate",
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
@@ -214,7 +214,7 @@
         },
         "options": {}
       },
-      "id": "ec8d3cc3-978b-4921-9d3f-dfbbb749b197",
+      "id": "0ed1e08a-7e72-453a-a898-9a381c0e03a3",
       "name": "Summarize",
       "type": "n8n-nodes-base.summarize",
       "typeVersion": 1,
@@ -283,7 +283,7 @@
           "fallbackOutput": "extra"
         }
       },
-      "id": "45004803-024f-448a-9868-8b84b6a306cd",
+      "id": "2898c685-7cf5-4dd6-a48c-50278e4769bf",
       "name": "Switch",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
@@ -297,7 +297,7 @@
         "operation": "xlsx",
         "options": {}
       },
-      "id": "71dee6fd-a9a6-4a3e-8b91-3a0276ff4dbf",
+      "id": "3473bd9b-73ac-418c-bda9-fa6be16a38ed",
       "name": "Extract from Excel",
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
@@ -332,7 +332,7 @@
         1792,
         784
       ],
-      "id": "fb18e04e-591c-4e9f-89ae-91d9f40c35d9",
+      "id": "2fe8ddc6-1ae7-4f58-a691-fa463b6d17da",
       "name": "Set Schema"
     },
     {
@@ -345,7 +345,7 @@
         1088,
         1040
       ],
-      "id": "015a19b2-fa7b-41c3-8bc3-1fe31c0302d2",
+      "id": "4da0257f-72cd-499a-a1ef-1d76109a390a",
       "name": "Extract from CSV"
     },
     {
@@ -360,7 +360,7 @@
         -464,
         896
       ],
-      "id": "04d6a133-e57c-4e7b-abad-cab684dd5f81",
+      "id": "11208cdb-b911-415f-ae07-7feb52893e9f",
       "name": "Loop Over Items"
     },
     {
@@ -448,7 +448,7 @@
         224,
         912
       ],
-      "id": "5d9e7d97-a8c8-4bec-965d-dfe8830e9301",
+      "id": "c5b36dca-8419-43c6-86f1-3ece1e52430b",
       "name": "Insert Document Metadata",
       "executeOnce": true,
       "credentials": {
@@ -521,7 +521,7 @@
         1296,
         1040
       ],
-      "id": "b038fa4a-f089-44e1-b2eb-4ccaf715c8ce",
+      "id": "f85e3fc6-b87f-4916-8d10-4e3325820df8",
       "name": "Insert Table Rows",
       "credentials": {
         "postgres": {
@@ -615,7 +615,7 @@
         1984,
         784
       ],
-      "id": "419d6d41-83e0-4a2c-a332-f26c77f30391",
+      "id": "e3b04fa3-5f84-4476-a74b-e03d1c94d4e9",
       "name": "Update Schema for Document Metadata",
       "credentials": {
         "postgres": {
@@ -638,7 +638,7 @@
         -112,
         912
       ],
-      "id": "f4548811-df82-41e6-af5a-a938d8ff232c",
+      "id": "a2f91937-9bc8-47c3-a299-57dac94b9c23",
       "name": "Delete Old Data Rows",
       "credentials": {
         "postgres": {
@@ -661,7 +661,7 @@
         64,
         1072
       ],
-      "id": "c0365cd0-f9fb-45fb-98d0-0e40f7bb33b7",
+      "id": "278918ec-f186-4c77-a401-e594e68e8a3d",
       "name": "Delete Old Doc Rows",
       "credentials": {
         "postgres": {
@@ -680,7 +680,7 @@
         2032,
         1424
       ],
-      "id": "17a2ba1f-c186-4a93-819c-4af70c89d230",
+      "id": "88d6737b-0be7-4432-933c-b2440ebccb66",
       "name": "Recursive Character Text Splitter"
     },
     {
@@ -717,7 +717,7 @@
         1536,
         1312
       ],
-      "id": "3b044d89-1f3c-4630-814f-715a60c2aed4",
+      "id": "b18594b4-1605-4b2f-943f-096407f10892",
       "name": "LangChain Code"
     },
     {
@@ -737,7 +737,7 @@
         1296,
         1312
       ],
-      "id": "dcc6740c-aac8-47b4-9161-51e7c1e19161",
+      "id": "0295498b-56cc-49f0-aed8-ef82beb10c18",
       "name": "Aggregate2"
     },
     {
@@ -747,7 +747,7 @@
           "value": "wna7UozcR4WqSTQG",
           "mode": "list",
           "cachedResultUrl": "/workflow/wna7UozcR4WqSTQG",
-          "cachedResultName": "ZeroG Ingest Sub OCR"
+          "cachedResultName": "Gravilo Ingest Sub OCR"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -766,7 +766,7 @@
         1312
       ],
       "name": "Call Mistral OCR for Documents",
-      "id": "fe06835e-e431-4e84-8644-e5ad1f4914c8"
+      "id": "1aa6b9e5-ac5c-4083-ad59-3d414d5dc302"
     },
     {
       "parameters": {
@@ -780,7 +780,7 @@
         1936,
         1056
       ],
-      "id": "49634c71-edd5-4c60-8a4b-2e3e62e83244",
+      "id": "a03dcaf2-0209-4547-a38b-ade55c3b1ae6",
       "name": "Postgres PGVector Store",
       "credentials": {
         "postgres": {
@@ -799,7 +799,7 @@
         1536,
         1488
       ],
-      "id": "313fac21-40a2-4fb2-ac50-6db8f414a65a",
+      "id": "4d6401fc-9df4-4f62-9d2c-6b561ac8f09c",
       "name": "OpenRouter Chat Model2",
       "credentials": {
         "openRouterApi": {
@@ -819,7 +819,7 @@
         1856,
         1328
       ],
-      "id": "f059f078-4ca8-4fff-b197-f1281083cd71",
+      "id": "f1005347-f582-4fef-8829-a4afe8ef98a0",
       "name": "Embeddings Azure OpenAI",
       "credentials": {
         "azureOpenAiApi": {
@@ -1104,15 +1104,15 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "1fb0fa30-884d-457c-9c64-659328bad6a3",
+  "versionId": "0522a5b8-213c-49a3-97d2-0d0f5ef51d10",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "ae71872d21c0fe87f43ce4dadc860ccbf43293dcb12e1b15d8cdfd6633dde4dd"
   },
-  "id": "AhHYhVaJpo5M0dpQ",
+  "id": "ve1aSBOCJ1KcAfwR",
   "tags": []
 }

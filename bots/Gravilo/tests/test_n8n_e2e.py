@@ -28,7 +28,7 @@ def test_workflow_trigger():
     NOTE: This is a template. You should replace 'YOUR_WORKFLOW_ID' 
     with a real ID from your n8n instance to make this test meaningful.
     """
-    # TODO: Replace with a real workflow ID from your ZeroG project
+    # TODO: Replace with a real workflow ID from your Gravilo project
     workflow_id = "test-workflow-id" 
     
     # If we don't have a real ID yet, we skip this part but keep the structure

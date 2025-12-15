@@ -1,6 +1,6 @@
-# ZeroG 🤖
+# Gravilo 🤖
 
-**ZeroG** is the official AI-powered Discord bot for the Antigravity Community. He's your nerdy developer buddy, here to help with technical questions and share a laugh.
+**Gravilo** is the official AI-powered Discord bot for the Antigravity Community. He's your nerdy developer buddy, here to help with technical questions and share a laugh.
 
 ## 📂 Structure
 
@@ -24,6 +24,6 @@ This bot is built using **n8n** workflows.
 
 ## 🧠 Persona
 
--   **Name**: ZeroG
+-   **Name**: Gravilo
 -   **Vibe**: Nerdy, helpful, intelligent humor.
 -   **Catchphrases**: "Compiling...", "Deploying fix...", "In the pipe, five by five."
