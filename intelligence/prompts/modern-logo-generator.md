@@ -1,6 +1,6 @@
 ---
 id: e4b4d6ff-8552-410f-a073-2209ac5bcbf9
-title: Interactive Modern Logo Generator
+title: Modern Logo Generator
 description: A guided, step-by-step prompt that turns an LLM into a professional logo designer. It interviews the user, collects all necessary brand inputs.
 
 Works well with image generators like NanoBanana
@@ -10,10 +10,10 @@ is_public: false
 rating_avg: 0
 rating_count: 0
 created_at: "2026-01-22T23:19:19.42083+00:00"
-updated_at: "2026-01-22T23:19:19.42083+00:00"
+updated_at: "2026-01-22T23:29:50.470869+00:00"
 ---
 
-# Interactive Modern Logo Generator
+# Modern Logo Generator
 
 A guided, step-by-step prompt that turns an LLM into a professional logo designer. It interviews the user, collects all necessary brand inputs.
 
