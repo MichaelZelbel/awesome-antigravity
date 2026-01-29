@@ -1,6 +1,6 @@
 ---
 id: f4c4ef6c-3628-441f-a01c-4be34e88fc1b
-title: N8N Workflow Vibe Coding Skill
+title: N8N Vibe Coding Skill
 description: Instructs on creating n8n workflows with AI, emphasizing best practices for structure, node usage, error handling, and testing.
 category: education
 tags: ["n8n", "workflow", "automation", "ai", "best-practices"]
@@ -8,10 +8,10 @@ published: false
 rating_avg: 0
 rating_count: 0
 created_at: "2026-01-22T23:18:53.343093+00:00"
-updated_at: "2026-01-22T23:18:53.343093+00:00"
+updated_at: "2026-01-22T23:36:05.165135+00:00"
 ---
 
-# N8N Workflow Vibe Coding Skill
+# N8N Vibe Coding Skill
 
 Instructs on creating n8n workflows with AI, emphasizing best practices for structure, node usage, error handling, and testing.
 
