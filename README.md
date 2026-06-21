@@ -34,6 +34,7 @@ The best place to get help, share prompts, and discuss plugin development is our
 *Currently populating... [Submit a PR to add yours!]*
 
 *   **[Community Plugin Template](https://github.com/placeholder)** - A starter repo for building your own Antigravity extensions.
+*   **[Lusha](https://github.com/lusha-oss/lusha-mcp-plugin)** - Find and enrich B2B contacts and companies with verified emails, direct dials, mobile numbers, and real-time buying signals. Bundles 4 prospecting skills plus a remote MCP server with OAuth sign-in. Install: `agy plugin install https://github.com/lusha-oss/lusha-mcp-plugin`
 
 ## 🤖 Agent Workflows & Prompts
 Tips for getting the most out of the built-in AI Agent.
