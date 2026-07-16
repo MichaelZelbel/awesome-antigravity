@@ -54,6 +54,7 @@ Tips for getting the most out of the built-in AI Agent.
 ## 📝 Tutorials & Articles
 *   [Getting Started with Antigravity](https://medium.com/google-developers) - Official kickstart guide.
 *   [Migrating from VS Code](https://dev.to) - Keybinding mapping and workspace setup.
+*   [Antigravity CLI Tips](https://github.com/ykdojo/antigravity-cli-tips) - Practical tips for getting the most out of the Antigravity CLI (`agy`).
 
 ---
 
