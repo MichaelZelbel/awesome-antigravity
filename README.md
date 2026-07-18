@@ -34,6 +34,7 @@ The best place to get help, share prompts, and discuss plugin development is our
 *Currently populating... [Submit a PR to add yours!]*
 
 *   **[Community Plugin Template](https://github.com/placeholder)** - A starter repo for building your own Antigravity extensions.
+*   **[WFD Faro](https://btcwfd.github.io/wfd-faro-site/)** - Companion desktop app (Windows) that surfaces the live health of your Antigravity subagent swarm — active agents, alerts, orchestrator status — right next to the rest of your projects, so you can watch your agents without keeping the monitor window open.
 
 ## 🤖 Agent Workflows & Prompts
 Tips for getting the most out of the built-in AI Agent.
