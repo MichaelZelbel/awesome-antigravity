@@ -31,8 +31,7 @@ The best place to get help, share prompts, and discuss plugin development is our
 *   [Issue Tracker](https://issues.antigravity.google) - Report bugs or request features directly to Google.
 
 ## 🧩 Extensions & Plugins
-*Currently populating... [Submit a PR to add yours!]*
-
+*   **[Antigravity Context Meter](https://github.com/Dunphil692/antigravity-context-meter)** - Real-time 1:1 Cursor-style context token meter and zero-loss session migration for Google Antigravity (Desktop HUD & IDE Extension).
 *   **[Community Plugin Template](https://github.com/placeholder)** - A starter repo for building your own Antigravity extensions.
 
 ## 🤖 Agent Workflows & Prompts
