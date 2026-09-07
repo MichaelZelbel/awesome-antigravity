@@ -34,6 +34,7 @@ The best place to get help, share prompts, and discuss plugin development is our
 *Currently populating... [Submit a PR to add yours!]*
 
 *   **[Community Plugin Template](https://github.com/placeholder)** - A starter repo for building your own Antigravity extensions.
+*   **[antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter)** - Universal skill porter & optimizer that converts Claude Code, Cursor, and generic LLM agent skills into native Google Antigravity plugins with parallel subagents.
 
 ## 🤖 Agent Workflows & Prompts
 Tips for getting the most out of the built-in AI Agent.
