@@ -19,6 +19,7 @@ Every link below was opened and checked in September 2026. Projects that only ex
 - [Safety](#safety)
 - [Running several agents](#running-several-agents)
 - [Fixes and quality of life](#fixes-and-quality-of-life)
+- [Guides and tips](#guides-and-tips)
 - [In this repository](#in-this-repository)
 - [Other lists](#other-lists)
 - [Community](#community)
@@ -49,6 +50,7 @@ Antigravity loads skills from a folder of `SKILL.md` files, so most collections 
 - [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) - Hand-written skills aimed at better agent output, with a code-review flow included.
 - [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang) - Go skills from the author of `lo`.
 - [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) - 73 game development skills for Godot, Unity, Unreal, three.js and more, with a router that picks the right one.
+- [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
 
 ## Single skills worth installing
 
@@ -78,6 +80,7 @@ Antigravity loads skills from a folder of `SKILL.md` files, so most collections 
 
 - [jlcodes99/vscode-antigravity-cockpit](https://github.com/jlcodes99/vscode-antigravity-cockpit) - Extension with a dashboard of your Antigravity model quotas.
 - [wusimpl/AntigravityQuotaWatcher](https://github.com/wusimpl/AntigravityQuotaWatcher) - Extension that watches your Antigravity model quota.
+- [Dunphil692/antigravity-context-meter](https://github.com/Dunphil692/antigravity-context-meter) - Shows how full the context window is, as a macOS floating capsule or an IDE status bar item. Reads the local transcript, so it costs no tokens.
 - [Javis603/token-monitor](https://github.com/Javis603/token-monitor) - Desktop widget for tokens, cost and limits across many coding tools.
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
@@ -93,11 +96,17 @@ Antigravity loads skills from a folder of `SKILL.md` files, so most collections 
 - [awslabs/cli-agent-orchestrator](https://github.com/awslabs/cli-agent-orchestrator) - Coordinates several coding CLIs in separate tmux sessions.
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team.
+- [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
 
 ## Fixes and quality of life
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history.
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+
+## Guides and tips
+
+- [ykdojo/antigravity-cli-tips](https://github.com/ykdojo/antigravity-cli-tips) - Practical tips for the Antigravity CLI (`agy`) by YK Sugi of CS Dojo: aliases, a custom status line, an agent-run development cycle.
+- [The unofficial Antigravity guide](ANTIGRAVITY_GUIDE.md) - Setup, core concepts and working habits. Lives in this repository.
 
 ## In this repository
 
