@@ -1,0 +1,52 @@
+name: Link check
+
+# Opens every link in the list on the first of each month and writes the
+# result to maintenance/link-check.md. It reads pages and commits one file
+# to this repository. It has no right to open issues, comment or touch pull
+# requests, so it cannot notify anyone.
+
+on:
+  schedule:
+    - cron: "17 6 1 * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/link-check.yml"
+      - "scripts/check_links.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: link-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    # On pull requests, run only for branches of this repository, never for forks.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Open every link (dry run on pull requests)
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/check_links.py --no-write
+
+      - name: Open every link and write the log
+        if: github.event_name != 'pull_request'
+        run: python3 scripts/check_links.py
+
+      - name: Commit the log
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add maintenance/link-check.md README.md
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+          else
+            git commit -m "Link check $(date -u +%F)"
+            git push
+          fi
