@@ -120,6 +120,28 @@ Antigravity loads skills from a folder of `SKILL.md` files, so most collections 
 - [ykdojo/antigravity-cli-tips](https://github.com/ykdojo/antigravity-cli-tips) - Practical tips for the Antigravity CLI (`agy`) by YK Sugi of CS Dojo: aliases, a custom status line, an agent-run development cycle.
 - [The unofficial Antigravity guide](ANTIGRAVITY_GUIDE.md) - Setup, core concepts and working habits. Lives in this repository.
 
+### Where do skills, rules, plugins and MCP settings go?
+
+- [Summary: Where does Antigravity look for configurations?](https://atamel.dev/posts/2026/08-21_where_agy_configuration_summary/) - Mete Atamel's one-page map of the folders for skills, MCP servers, rules, workflows, hooks, sidecars, agents and plugins in Antigravity 2.0, the CLI and the IDE.
+- [Where does Antigravity look for Agent Skills?](https://atamel.dev/posts/2026/07-01_where_agy_agent_skills/) - His experiments on which skill folders each of the three products reads, with a recommendation on where to install skills.
+- [Where does Antigravity look for Rules and Workflows?](https://atamel.dev/posts/2026/07-13_where_agy_rules_workflows/) - The workspace and global folders for rules and workflows, and how far each of the three products supports them.
+- [Where does Antigravity look for Plugins?](https://atamel.dev/posts/2026/08-18_where_agy_plugins/) - How a plugin packages agents, skills, MCP servers, rules and hooks, where plugins are stored, and a sample plugin to copy.
+- [kwrkb/agy-plugins](https://github.com/kwrkb/agy-plugins) - MCP plugins for the Antigravity CLI: GitHub, GitLab, ast-grep, gopls and more, plus a kit for writing your own.
+
+### How do I set up MCP servers?
+
+- [Where does Antigravity look for MCP Servers?](https://atamel.dev/posts/2026/07-10_where_agy_mcp_servers/) - The two config file locations, and the cache that keeps a removed server showing up.
+- [Configuring MCP Servers and Skills for Antigravity CLI and IDE](https://dev.to/gde/configuring-mcp-servers-and-skills-for-antigravity-cli-and-ide-2bh0) - Dazbo (Darren Lester) on sharing one MCP and skills setup between the CLI and the IDE.
+- [Google Workspace MCP servers in Antigravity](https://codelabs.developers.google.com/google-workspace-mcp-antigravity) - Google codelab that connects Gmail, Drive, Docs, Sheets, Calendar and Chat to Antigravity 2.0, the IDE or the CLI. Needs a Google Cloud project in the Workspace Developer Preview Program.
+
+### How do I write a skill?
+
+- [Authoring Google Antigravity Skills](https://codelabs.developers.google.com/getting-started-with-antigravity-skills) - Google codelab that explains the skill format and builds several skills, from a Git formatter to tool code scaffolding.
+
+### Does it work under Windows and WSL?
+
+- [Resolving WSL friction with Antigravity 2.0 and the IDE](https://dev.to/gde/resolving-wsl-friction-with-google-antigravity-the-agy-20-and-agy-ide-edition-59im) - Dazbo's fixes for two WSL problems: interactive commands that cannot be run or approved, and a broken browser agent.
+
 ## In this repository
 
 - [The unofficial Antigravity guide](ANTIGRAVITY_GUIDE.md) - Setup, core concepts and working habits.
