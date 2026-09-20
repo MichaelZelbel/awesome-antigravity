@@ -22,6 +22,7 @@ A tag such as `CLI` or `IDE` after an entry names the Antigravity program it wor
 - [Safety](#safety)
 - [Running several agents](#running-several-agents)
 - [Fixes and quality of life](#fixes-and-quality-of-life)
+- [Known CLI problems](#known-cli-problems)
 - [Guides and tips](#guides-and-tips)
 - [In this repository](#in-this-repository)
 - [Other lists](#other-lists)
@@ -116,6 +117,17 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history. `IDE`
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+
+## Known CLI problems
+
+Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tracker for the CLI](https://github.com/google-antigravity/antigravity-cli/issues), which had 662 open issues that day. Nothing here was tested or reproduced by this list. Each line gives the error as reported, its status, and the thread. Google's [troubleshooting page](https://antigravity.google/docs/cli/troubleshooting/) covers four other things: the shell PATH, keyring permissions, clipboard forwarding and the self-updater.
+
+- [#44 "Agent execution terminated due to error"](https://github.com/google-antigravity/antigravity-cli/issues/44) - Open since 2026-05-20. The reporter says it happens every time and that signing in again does not help.
+- [#415 "1.0.9 update breaks authentication"](https://github.com/google-antigravity/antigravity-cli/issues/415) - After the update the CLI stops at "Eligibility check failed". Closed on 2026-09-18 as obsolete. The maintainer asks for a new issue if it still happens on 1.2.6.
+- [#76 `agy --print` drops its output when not run in a terminal](https://github.com/google-antigravity/antigravity-cli/issues/76) - Hits pipes, subprocesses and redirects. Closed. A maintainer names 1.0.15 for the Windows part and 1.1.1 for silent server errors and hangs in scripts.
+- [#34 "Illegal instruction" during install](https://github.com/google-antigravity/antigravity-cli/issues/34) - Closed on 2026-06-24. Users on a Raspberry Pi 4 report it fixed in 1.0.10.
+- [#105 "Subagents Not Registering"](https://github.com/google-antigravity/antigravity-cli/issues/105) - Closed on 2026-07-28. No fixed version is named in the thread. Users share workarounds there.
+- [#103 "User skills aren't picked up from ~/.agents/skills"](https://github.com/google-antigravity/antigravity-cli/issues/103) - Open since 2026-05-21. The docs name `~/.gemini/antigravity-cli/skills/` as the CLI's global skills folder.
 
 ## Guides and tips
 
