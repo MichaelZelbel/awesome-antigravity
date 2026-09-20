@@ -27,7 +27,6 @@ A tag such as `CLI` or `IDE` after an entry names the Antigravity program it wor
 - [Other lists](#other-lists)
 - [Community](#community)
 - [From the maintainer](#from-the-maintainer)
-- [Contributing](#contributing)
 
 ## Common questions
 
@@ -169,8 +168,4 @@ I write about what I build and what broke on [Substack](https://michaelzelbel.su
 
 ## Contributing
 
-1. Fork this repository.
-2. Add your link to the section where it fits, one line, saying what it does and not how great it is.
-3. Open a pull request.
-
-Please follow the [Contributor Covenant](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
+The rules for new entries are in [contributing.md](contributing.md), and the pull request form shows them as a short checklist.
