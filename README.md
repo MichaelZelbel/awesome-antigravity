@@ -70,6 +70,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) - Design knowledge for building interfaces that do not look generated.
 - [Nanako0129/sepia](https://github.com/Nanako0129/sepia) - Rewrites prose so it stops reading as machine-written. Has a native Antigravity plugin. `CLI`
 - [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) - Hand a task to a second coding agent, review its diff, land the commit yourself. `CLI`
+- [strip-ai-tells](https://github.com/MichaelZelbel/teach-it-once-kit/blob/main/skills/strip-ai-tells.md) - Edits prose so it stops sounding machine-written and hands back the edited text, not a report. By the maintainer of this list. A folder ready to copy into `.agents/skills/` (Antigravity, Codex) or `.claude/skills/` (Claude Code) is [in this repository](intelligence/skills/strip-ai-tells).
 - [n8n vibe coding skill](intelligence/skills/n8n-vibe-coding-skill.md) - Build n8n workflows from inside the agent. Lives in this repository.
 
 ## Spec-driven development
