@@ -33,8 +33,7 @@ SENTENCE = re.compile(r"(Every link below was opened and checked in )([A-Z][a-z]
 def links_in(path):
     text = open(path, encoding="utf-8").read()
     text = re.sub(r"```.*?```", "", text, flags=re.S)
-    text = re.sub(r"`[^`
-]*`", "", text)  # examples in inline code are not links
+    text = re.sub(r"`[^`\n]*`", "", text)  # examples in inline code are not links
     found = re.findall(r"\]\(\s*<?([^)\s>]+)>?[^)]*\)", text)
     found += re.findall(r"<(https?://[^>\s]+)>", text)
     return found
