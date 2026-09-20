@@ -3,9 +3,11 @@
 [![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white)](https://discord.gg/X3um7vxX8J)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> A curated list of skills, tools and resources for **[Google Antigravity](https://antigravity.google)**, Google's agent-first IDE.
+> A curated list of skills, tools and resources for **[Google Antigravity](https://antigravity.google)**, Google's agentic development platform. It comes as three programs: [Antigravity 2.0](https://antigravity.google/docs/overview/), a desktop app for running agents, the [Antigravity CLI](https://antigravity.google/docs/cli/overview/) (`agy`) for the terminal, and the [Antigravity IDE](https://antigravity.google/docs/ide/overview/), plus [extensions](https://antigravity.google/docs/ide/extensions/) for VS Code, Visual Studio, JetBrains, Zed and Xcode.
 
 Every link below was opened and checked in September 2026. Projects that only exist to share accounts, dodge quotas or get around regional limits are left out on purpose. If something here is dead or missing, open a pull request.
+
+A tag such as `CLI` or `IDE` after an entry names the Antigravity program it works in, as stated by the project. No tag means the project does not say.
 
 ## Contents
 
@@ -49,16 +51,16 @@ Questions people asked in the Antigravity forums in September 2026, each with th
 
 ## Skill collections
 
-Antigravity loads skills from a folder of `SKILL.md` files, so most collections written for other agents work here too.
+Antigravity loads skills from `.agents/skills/` in your workspace, one folder with a `SKILL.md` file per skill, so most collections written for other agents work here too. The global folder differs by program: [skill locations in the docs](https://antigravity.google/docs/skills/#skills-by-surface).
 
 - [rmyndharis/antigravity-skills](https://github.com/rmyndharis/antigravity-skills) - A curated set put together for Antigravity first.
-- [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) - Engineering skills by Addy Osmani: reviews, testing, performance, shipping.
+- [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) - Engineering skills by Addy Osmani: reviews, testing, performance, shipping. `CLI`
 - [tech-leads-club/agent-skills](https://github.com/tech-leads-club/agent-skills) - A registry where every skill is validated and security-checked before it is listed.
-- [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) - Over two thousand skills with a CLI and a local MCP server to search them.
-- [wshobson/agents](https://github.com/wshobson/agents) - Plugin marketplace that installs into Antigravity, Claude Code, Codex, Cursor and others.
+- [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) - Over two thousand skills with a CLI and a local MCP server to search them. `CLI` `IDE`
+- [wshobson/agents](https://github.com/wshobson/agents) - Plugin marketplace that installs into Antigravity, Claude Code, Codex, Cursor and others. `CLI`
 - [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) - Google Labs skills for working with the Stitch design MCP server.
 - [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) - 165 skills for research work: biology, chemistry, medicine, scientific databases.
-- [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) - Hand-written skills aimed at better agent output, with a code-review flow included.
+- [NeoLabHQ/context-engineering-kit](https://github.com/NeoLabHQ/context-engineering-kit) - Hand-written skills aimed at better agent output, with a code-review flow included. `CLI`
 - [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang) - Go skills from the author of `lo`.
 - [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) - 73 game development skills for Godot, Unity, Unreal, three.js and more, with a router that picks the right one.
 - [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
@@ -66,33 +68,33 @@ Antigravity loads skills from a folder of `SKILL.md` files, so most collections 
 ## Single skills worth installing
 
 - [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) - Design knowledge for building interfaces that do not look generated.
-- [Nanako0129/sepia](https://github.com/Nanako0129/sepia) - Rewrites prose so it stops reading as machine-written. Has a native Antigravity plugin.
-- [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) - Hand a task to a second coding agent, review its diff, land the commit yourself.
+- [Nanako0129/sepia](https://github.com/Nanako0129/sepia) - Rewrites prose so it stops reading as machine-written. Has a native Antigravity plugin. `CLI`
+- [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) - Hand a task to a second coding agent, review its diff, land the commit yourself. `CLI`
 - [n8n vibe coding skill](intelligence/skills/n8n-vibe-coding-skill.md) - Build n8n workflows from inside the agent. Lives in this repository.
 
 ## Spec-driven development
 
-- [gemini-cli-extensions/conductor](https://github.com/gemini-cli-extensions/conductor) - Specify, plan, then implement. Works in Antigravity and Claude Code.
+- [gemini-cli-extensions/conductor](https://github.com/gemini-cli-extensions/conductor) - Specify, plan, then implement. Works in Antigravity and Claude Code. `CLI`
 - [gotalab/cc-sdd](https://github.com/gotalab/cc-sdd) - A small harness that turns an approved spec into a long autonomous run.
 
 ## Memory and context
 
 - [CaviraOSS/LongMemory](https://github.com/CaviraOSS/LongMemory) - Local memory store your agent keeps between sessions.
-- [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory.
+- [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory. `CLI` `IDE`
 - [ctxrs/ctx](https://github.com/ctxrs/ctx) - Search the agent sessions already on your machine. Git blame for agent history.
 - [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
 
 ## Code intelligence
 
-- [colbymchenry/codegraph](https://github.com/colbymchenry/codegraph) - A local, pre-indexed graph of your code so the agent needs fewer tool calls.
+- [colbymchenry/codegraph](https://github.com/colbymchenry/codegraph) - A local, pre-indexed graph of your code so the agent needs fewer tool calls. `IDE`
 - [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) - Turns a codebase with its docs, schemas and PDFs into a knowledge graph you can query.
 - [zzet/gortex](https://github.com/zzet/gortex) - Code-intelligence engine over CLI, MCP and API for 257 languages and several repositories at once.
 
 ## Quota and usage monitors
 
 - [jlcodes99/vscode-antigravity-cockpit](https://github.com/jlcodes99/vscode-antigravity-cockpit) - Extension with a dashboard of your Antigravity model quotas.
-- [wusimpl/AntigravityQuotaWatcher](https://github.com/wusimpl/AntigravityQuotaWatcher) - Extension that watches your Antigravity model quota.
-- [Dunphil692/antigravity-context-meter](https://github.com/Dunphil692/antigravity-context-meter) - Shows how full the context window is, as a macOS floating capsule or an IDE status bar item. Reads the local transcript, so it costs no tokens.
+- [wusimpl/AntigravityQuotaWatcher](https://github.com/wusimpl/AntigravityQuotaWatcher) - Extension that watches your Antigravity model quota. `IDE`
+- [Dunphil692/antigravity-context-meter](https://github.com/Dunphil692/antigravity-context-meter) - Shows how full the context window is, as a macOS floating capsule or an IDE status bar item. Reads the local transcript, so it costs no tokens. `IDE`
 - [Javis603/token-monitor](https://github.com/Javis603/token-monitor) - Desktop widget for tokens, cost and limits across many coding tools.
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
@@ -100,19 +102,19 @@ Antigravity loads skills from a folder of `SKILL.md` files, so most collections 
 
 ## Safety
 
-- [kenryu42/cc-safety-net](https://github.com/kenryu42/cc-safety-net) - Blocks destructive git and file commands before the agent runs them. Supports Antigravity CLI.
+- [kenryu42/cc-safety-net](https://github.com/kenryu42/cc-safety-net) - Blocks destructive git and file commands before the agent runs them. Supports Antigravity CLI. `CLI`
 - [google/mantis](https://github.com/google/mantis) - Google's toolkit for agents that find, reproduce and patch vulnerabilities.
 
 ## Running several agents
 
-- [awslabs/cli-agent-orchestrator](https://github.com/awslabs/cli-agent-orchestrator) - Coordinates several coding CLIs in separate tmux sessions.
+- [awslabs/cli-agent-orchestrator](https://github.com/awslabs/cli-agent-orchestrator) - Coordinates several coding CLIs in separate tmux sessions. `CLI`
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
-- [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team.
+- [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team. `CLI`
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
 
 ## Fixes and quality of life
 
-- [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history.
+- [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history. `IDE`
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
 
 ## Guides and tips
