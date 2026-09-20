@@ -9,6 +9,7 @@ Every link below was opened and checked in September 2026. Projects that only ex
 
 ## Contents
 
+- [Common questions](#common-questions)
 - [Official](#official)
 - [Skill collections](#skill-collections)
 - [Single skills worth installing](#single-skills-worth-installing)
@@ -25,6 +26,16 @@ Every link below was opened and checked in September 2026. Projects that only ex
 - [Community](#community)
 - [From the maintainer](#from-the-maintainer)
 - [Contributing](#contributing)
+
+## Common questions
+
+Questions people asked in the Antigravity forums in September 2026, each with the place that answers it.
+
+- **How do I keep memory between conversations?** See [Memory and context](#memory-and-context). To carry one long session into a fresh one, the handoff skill listed there writes it up as a file the next agent reads.
+- **How do I see how much quota I have left?** In the CLI, type [`/usage`](https://antigravity.google/docs/cli/commands/usage/). For a view that stays on screen, see [Quota and usage monitors](#quota-and-usage-monitors).
+- **How do I fork or copy a conversation?** In the CLI, [`/fork`](https://antigravity.google/docs/cli/conversations/) clones the conversation up to the current turn into a new session. It copies the thread, not your files.
+- **Which rules and workflows do people use?** See [Guides and tips](#guides-and-tips).
+- **How do I switch between several accounts?** Tools that swap or share accounts are left out of this list on purpose.
 
 ## Official
 
@@ -69,6 +80,7 @@ Antigravity loads skills from a folder of `SKILL.md` files, so most collections 
 - [CaviraOSS/LongMemory](https://github.com/CaviraOSS/LongMemory) - Local memory store your agent keeps between sessions.
 - [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory.
 - [ctxrs/ctx](https://github.com/ctxrs/ctx) - Search the agent sessions already on your machine. Git blame for agent history.
+- [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
 
 ## Code intelligence
 
