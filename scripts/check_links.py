@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """Open every link in the Markdown files at the top of this repository.
 
-Writes maintenance/link-check.md with the date and the result. When every
-link answers, it also sets the month in the README sentence "Every link
-below was opened and checked in <month> <year>".
+Writes maintenance/link-check.md with the date and the result. When no link
+is dead and no linked file is missing, it also sets the month in the README
+sentence "Every link below was opened and checked in <month> <year>".
+
+Some sites refuse requests from GitHub's servers while they open fine in a
+person's browser (Substack answered 403 to the first run on GitHub). Such a
+link is not dead. It is listed by name in the log so it can be opened by
+hand, and it does not hold the month back.
 
 It only reads pages and writes files in this repository. It opens no
 issues, posts no comments and sends nothing to anyone. It always exits 0
@@ -101,9 +106,13 @@ def main():
            "- Dead or not answering: %d" % len(dead),
            "- Refused the machine, needs a look by a person: %d" % len(unsure),
            "- Links to files in this repository that do not exist: %d" % len(local), ""]
-    for title, rows in (("Dead or not answering", dead), ("Refused the machine", unsure)):
-        if rows:
-            out += ["## " + title, ""] + ["- <%s> %s (in %s)" % r for r in rows] + [""]
+    if dead:
+        out += ["## Dead or not answering", ""] + ["- <%s> %s (in %s)" % r for r in dead] + [""]
+    if unsure:
+        out += ["## Refused the machine", "",
+                "These sites answered the machine with a refusal. That usually means they block "
+                "automated requests, not that the page is gone. They are opened by hand after each run.", ""]
+        out += ["- <%s> %s (in %s)" % r for r in unsure] + [""]
     if local:
         out += ["## Missing files", ""] + ["- `%s` (in %s)" % r for r in local] + [""]
     report = "\n".join(out)
@@ -113,7 +122,7 @@ def main():
         os.makedirs(os.path.dirname(LOG), exist_ok=True)
         with open(LOG, "w", encoding="utf-8", newline="\n") as fh:
             fh.write(report)
-        if not dead and not unsure and not local:
+        if not dead and not local:
             readme = os.path.join(ROOT, "README.md")
             text = open(readme, encoding="utf-8").read()
             month = today.strftime("%B %Y")
