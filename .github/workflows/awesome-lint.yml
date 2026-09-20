@@ -1,0 +1,29 @@
+name: Awesome lint
+
+# Runs the checker behind the Awesome badge on changes that come from
+# branches of this repository. It does not run for forks, and it can only
+# read, so it cannot comment, open issues or notify anyone else.
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npx --yes awesome-lint@2 README.md
+        env:
+          github_token: ${{ github.token }}
