@@ -42,3 +42,8 @@ This workflow instructs the agent to analyze **any** current codebase (Python, N
 3.  **Verify the Workflow**
     *   **Goal:** Ensure the new validation tool works.
     *   **Action:** Run the newly created `validate.md` workflow.
+
+---
+
+More like this: I write about what I build and what broke on Substack. New skills and
+workflows show up there first: https://michaelzelbel.substack.com

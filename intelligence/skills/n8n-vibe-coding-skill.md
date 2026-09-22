@@ -2533,3 +2533,8 @@ Before finalizing any n8n workflow JSON:
 22. **Validate imports** - Test in clean instance before production
 23. **Monitor and iterate** - Start simple, add complexity incrementally
 24. **Version control** - Track workflow changes in Git
+
+---
+
+More like this: I write about what I build and what broke on Substack. New skills and
+workflows show up there first: https://michaelzelbel.substack.com
