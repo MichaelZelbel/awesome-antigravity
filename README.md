@@ -6,6 +6,8 @@
 
 > A curated list of skills, tools and resources for **Google Antigravity**, Google's agentic development platform. It comes as three programs: [Antigravity 2.0](https://antigravity.google/docs/overview/), a desktop app for running agents, the [Antigravity CLI](https://antigravity.google/docs/cli/overview/) (`agy`) for the terminal, and the [Antigravity IDE](https://antigravity.google/docs/ide/overview/), plus [extensions](https://antigravity.google/docs/ide/extensions/) for VS Code, Visual Studio, JetBrains, Zed and Xcode.
 
+If this list saved you some searching, you can buy me a coffee on [Ko-fi](https://ko-fi.com/michaelc0de).
+
 Every link below was opened and checked in September 2026 ([check log](maintenance/link-check.md)). Projects that only exist to share accounts, dodge quotas or get around regional limits are left out on purpose. If something here is dead or missing, open a pull request.
 
 A tag such as `CLI` or `IDE` at the end of an entry names the Antigravity program it works in, as stated by the project. No tag means the project does not say.
