@@ -38,6 +38,8 @@ Questions people asked in the Antigravity forums in September 2026, each with th
 
 **How do I keep memory between conversations?** See the section Memory and context. To carry one long session into a fresh one, the handoff skill listed there writes it up as a file the next agent reads.
 
+**How do I install a skill I found on GitHub?** Put it into the project you are working in: the skill's folder goes into `.agents/skills/` in that project, and all three Antigravity programs read it there. To have it in every project, copy the folder into the global folder of the program you use, listed on Google's [skills page](https://antigravity.google/docs/skills/#skills-by-surface). One trap: the "global" option of some popular installers writes to `~/.agents/skills/`, which Antigravity does not read today ([CLI issue #103](https://github.com/google-antigravity/antigravity-cli/issues/103), [installer fix #1483](https://github.com/vercel-labs/skills/pull/1483), both still open on 2026-09-30). If a skill you installed does not show up, look in which folder it landed.
+
 **How do I see how much quota I have left?** In the CLI, type [`/usage`](https://antigravity.google/docs/cli/commands/usage/). For a view that stays on screen, see the section Quota and usage monitors.
 
 **How do I fork or copy a conversation?** In the CLI, [`/fork`](https://antigravity.google/docs/cli/conversations/) clones the conversation up to the current turn into a new session. It copies the thread, not your files.
