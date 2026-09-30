@@ -40,6 +40,8 @@ Questions people asked in the Antigravity forums in September 2026, each with th
 
 **How do I install a skill I found on GitHub?** Put it into the project you are working in: the skill's folder goes into `.agents/skills/` in that project, and all three Antigravity programs read it there. To have it in every project, copy the folder into the global folder of the program you use, listed on Google's [skills page](https://antigravity.google/docs/skills/#skills-by-surface). One trap: the "global" option of some popular installers writes to `~/.agents/skills/`, which Antigravity does not read today ([CLI issue #103](https://github.com/google-antigravity/antigravity-cli/issues/103), [installer fix #1483](https://github.com/vercel-labs/skills/pull/1483), both still open on 2026-09-30). If a skill you installed does not show up, look in which folder it landed.
 
+**My workflows stop working on 1 November. What do I do?** Google retires workflows on 1 November 2026; after that, workflow folders are no longer read. Type [`/migrate-workflows`](https://antigravity.google/docs/migration/workflows-to-skills/) to turn them into skills. It looks in `.agents/workflows/` in your workspace and in `~/.gemini/config/workflows/`, and keeps your old files as `.bak`.
+
 **How do I see how much quota I have left?** In the CLI, type [`/usage`](https://antigravity.google/docs/cli/commands/usage/). For a view that stays on screen, see the section Quota and usage monitors.
 
 **How do I fork or copy a conversation?** In the CLI, [`/fork`](https://antigravity.google/docs/cli/conversations/) clones the conversation up to the current turn into a new session. It copies the thread, not your files.
@@ -168,7 +170,7 @@ Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tr
 ## In this repository
 
 - [Prompts](https://github.com/MichaelZelbel/awesome-antigravity/tree/main/intelligence/prompts) - Mission briefs for coding agents, a bug investigation brief, a code review assistant, a test-first policy.
-- [Workflows](https://github.com/MichaelZelbel/awesome-antigravity/tree/main/intelligence/workflows) - Reusable Antigravity workflows, starting with validation.
+- [Workflows](https://github.com/MichaelZelbel/awesome-antigravity/tree/main/intelligence/workflows) - Reusable Antigravity workflows, starting with validation. Google retires workflows on 1 November 2026, see the common questions above.
 - [Gravilo](https://github.com/MichaelZelbel/awesome-antigravity/tree/main/bots/Gravilo) - The Discord bot that answers questions in our community, built with n8n and Supabase. Full source and deployment notes.
 
 ## Other lists
