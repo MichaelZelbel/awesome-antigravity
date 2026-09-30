@@ -187,7 +187,7 @@ The [Antigravity Community Discord](https://discord.gg/X3um7vxX8J) is where we t
 
 I'm Michael Zelbel. Apart from this list I build a personal AI that runs on my own machines: it remembers what I tell it, does the small repeated jobs on its own and messages me first when something needs me. It is called Godspeed Mission Control, and the whole thing is free and open: [godspeed-mission-control](https://github.com/MichaelZelbel/godspeed-mission-control).
 
-I write on [Substack](https://michaelzelbel.substack.com/subscribe) about the personal AI I run on my own machines: what I build, what broke, and the free files that come out of it.
+I write about what I build and what broke on [Substack](https://michaelzelbel.substack.com). New skills show up there first.
 
 ## Contributing
 
