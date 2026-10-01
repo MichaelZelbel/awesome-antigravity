@@ -8,7 +8,7 @@
 
 If this list saved you some searching, you can buy me a coffee on [Ko-fi](https://ko-fi.com/michaelc0de).
 
-Every link below was opened and checked in September 2026 ([check log](maintenance/link-check.md)). Projects that only exist to share accounts, dodge quotas or get around regional limits are left out on purpose. If something here is dead or missing, open a pull request.
+Every link below was opened and checked in October 2026 ([check log](maintenance/link-check.md)). Projects that only exist to share accounts, dodge quotas or get around regional limits are left out on purpose. If something here is dead or missing, open a pull request.
 
 A tag such as `CLI` or `IDE` at the end of an entry names the Antigravity program it works in, as stated by the project. No tag means the project does not say.
 
