@@ -8,6 +8,8 @@
 
 If this list saved you some searching, you can buy me a coffee on [Ko-fi](https://ko-fi.com/michaelc0de).
 
+I also write about building with AI agents, what works and what broke, in a free newsletter: [subscribe on Substack](https://michaelzelbel.substack.com/subscribe).
+
 Every link below was opened and checked in October 2026 ([check log](maintenance/link-check.md)). Projects that only exist to share accounts, dodge quotas or get around regional limits are left out on purpose. If something here is dead or missing, open a pull request.
 
 A tag such as `CLI` or `IDE` at the end of an entry names the Antigravity program it works in, as stated by the project. No tag means the project does not say.
@@ -187,7 +189,7 @@ The [Antigravity Community Discord](https://discord.gg/X3um7vxX8J) is where we t
 
 I'm Michael Zelbel. Apart from this list I build a personal AI that runs on my own machines: it remembers what I tell it, does the small repeated jobs on its own and messages me first when something needs me. It is called Godspeed Mission Control, and the whole thing is free and open: [godspeed-mission-control](https://github.com/MichaelZelbel/godspeed-mission-control).
 
-I write about what I build and what broke on [Substack](https://michaelzelbel.substack.com). New skills show up there first.
+I write about what I build and what broke on [Substack](https://michaelzelbel.substack.com/subscribe).
 
 ## Contributing
 
