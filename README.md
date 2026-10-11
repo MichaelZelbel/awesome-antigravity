@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [clipboard-file-paste](https://github.com/tycefaus181-tech/clipboard-file-paste) - Paste files and folders copied in Windows File Explorer (`Ctrl+C`) directly into the Antigravity chat input box (`Ctrl+V`) as native `@file` context pills, with a sidecar UI panel and `PreInvocation` hook. `Antigravity 2.0` `IDE`
 
 ## Known CLI problems
 
