@@ -96,6 +96,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [CaviraOSS/LongMemory](https://github.com/CaviraOSS/LongMemory) - Local memory store your agent keeps between sessions.
 - [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory (`CLI` `IDE`).
 - [ctxrs/ctx](https://github.com/ctxrs/ctx) - Search the agent sessions already on your machine. Git blame for agent history.
+- [JayPokale/Chisle](https://github.com/JayPokale/Chisle) - Always-on rule that makes the agent answer in fewer words and read less: grep before opening files, read slices, no re-reads. `npx chisle` writes it to `.agents/rules/`.
 - [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
 
 ## Code intelligence
