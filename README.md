@@ -90,6 +90,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [gemini-cli-extensions/conductor](https://github.com/gemini-cli-extensions/conductor) - Specify, plan, then implement. Works in Antigravity and Claude Code (`CLI`).
 - [gotalab/cc-sdd](https://github.com/gotalab/cc-sdd) - A small harness that turns an approved spec into a long autonomous run.
+- [LitGravity](https://github.com/wjgoarxiv/litgravity) - Adds lit to the Antigravity CLI so a request is planned, built with tests and recorded checks, reviewed, and closed with a handoff note (`CLI`).
 
 ## Memory and context
 
