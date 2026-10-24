@@ -189,6 +189,8 @@ The [Antigravity Community Discord](https://discord.gg/X3um7vxX8J) is where we t
 
 I'm Michael Zelbel. Apart from this list I build a personal AI that runs on my own machines: it remembers what I tell it, does the small repeated jobs on its own and messages me first when something needs me. It is called Godspeed Mission Control, and the whole thing is free and open: [godspeed-mission-control](https://github.com/MichaelZelbel/godspeed-mission-control).
 
+If you run an AI agent on your own server (Hermes, OpenClaw or Paperclip), my free DevOps kits add a second agent that watches the server and the first agent and repairs what breaks: [Hermes](https://ko-fi.com/s/29efd32495), [OpenClaw](https://ko-fi.com/s/8752f1ccc7), [Paperclip](https://ko-fi.com/s/bd74ce8ee4). Free to take.
+
 I write about what I build and what broke on [Substack](https://michaelzelbel.substack.com).
 
 ## Contributing
