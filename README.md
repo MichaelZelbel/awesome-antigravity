@@ -113,6 +113,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
 - [tddworks/ClaudeBar](https://github.com/tddworks/ClaudeBar) - macOS menu bar monitor for Claude, Codex, Antigravity and Gemini.
+- [wassim-azi/agy-powerline](https://github.com/wassim-azi/agy-powerline) - Fast, configurable statusline with live Gemini 5h/7d quota meters, pace markers, and TUI editor (`CLI`).
 
 ## Safety
 
