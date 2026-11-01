@@ -97,6 +97,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory (`CLI` `IDE`).
 - [ctxrs/ctx](https://github.com/ctxrs/ctx) - Search the agent sessions already on your machine. Git blame for agent history.
 - [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
+- [cerredz/vidbyte-memory](https://github.com/cerredz/vidbyte-memory) - Turns corrections into facts the agent loads, pytest tests where a check can be written, and git commits (`CLI`).
 
 ## Code intelligence
 
