@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [ibsorn/ultragravity](https://github.com/ibsorn/ultragravity) - Plugin that won't let the agent end a deep task until a verification actually ran, routes bugs to a root-cause protocol and UI work to a render-and-look check, and adds a goal engine that refuses "done" without evidence.
 
 ## Known CLI problems
 
