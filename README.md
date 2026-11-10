@@ -106,6 +106,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 ## Quota and usage monitors
 
+- [brien9/antigravity-context-ring](https://github.com/brien9/antigravity-context-ring) - Native 19px inline context telemetry ring for Google Antigravity with Connect-RPC ground truth and 256K auto-compaction defense (`IDE`).
 - [jlcodes99/vscode-antigravity-cockpit](https://github.com/jlcodes99/vscode-antigravity-cockpit) - Extension with a dashboard of your Antigravity model quotas.
 - [wusimpl/AntigravityQuotaWatcher](https://github.com/wusimpl/AntigravityQuotaWatcher) - Extension that watches your Antigravity model quota (`IDE`).
 - [Dunphil692/antigravity-context-meter](https://github.com/Dunphil692/antigravity-context-meter) - Shows how full the context window is, as a macOS floating capsule or an IDE status bar item. Reads the local transcript, so it costs no tokens (`IDE`).
