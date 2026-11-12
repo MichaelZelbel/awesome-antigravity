@@ -147,6 +147,8 @@ Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tr
 - [ykdojo/antigravity-cli-tips](https://github.com/ykdojo/antigravity-cli-tips) - Practical tips for the Antigravity CLI (`agy`) by YK Sugi of CS Dojo: aliases, a custom status line, an agent-run development cycle.
 - [The unofficial Antigravity guide](https://github.com/MichaelZelbel/awesome-antigravity/blob/main/ANTIGRAVITY_GUIDE.md) - Setup, core concepts and working habits. Lives in this repository.
 
+- [Hands-on Gemini 4 Carbon review (Russian)](https://youtu.be/4-6_gY6_Rg4) - A 36-minute Antigravity session on a landing-page brief and result, quota consumption, and agent access limits; recorded on 2026-11-10.
+
 ### Where skills, rules, plugins and MCP settings go
 
 - [Summary: Where does Antigravity look for configurations?](https://atamel.dev/posts/2026/08-21_where_agy_configuration_summary/) - Mete Atamel's one-page map of the folders for skills, MCP servers, rules, workflows, hooks, sidecars, agents and plugins in Antigravity 2.0, the CLI and the IDE.
