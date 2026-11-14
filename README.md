@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [agy-meme](https://github.com/jiangnanquan/agy-meme) - Bidirectional Neko reaction stickers, inline composer picker, and Desktop-isolated MCP plugin for Antigravity Desktop.
 
 ## Known CLI problems
 
