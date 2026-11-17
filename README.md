@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [wllzhang/antigravity-junction-skill-fix](https://github.com/wllzhang/antigravity-junction-skill-fix) - Zero-copy NTFS hardlink bridge resolving Go language server discovery failures for Windows directory junctions and symlinks (`CLI`, `IDE`).
 
 ## Known CLI problems
 
@@ -179,6 +180,7 @@ Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tr
 
 - [ZhangYu-zjut/awesome-Antigravity](https://github.com/ZhangYu-zjut/awesome-Antigravity) - A guide-style list with a focus on tuning agents and rate limits.
 - [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) - Written for Claude, but most of these skills load in Antigravity unchanged.
+- [wllzhang/awesome-antigravity-tools](https://github.com/wllzhang/awesome-antigravity-tools) - Curated developer tools, IDE extensions, platform fixes, MCP servers and utilities for Antigravity.
 
 ## Community
 
