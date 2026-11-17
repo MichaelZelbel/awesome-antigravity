@@ -129,6 +129,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 ## Fixes and quality of life
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
+- [HeshamNoaman/vscode-antigravity-backend-fix](https://github.com/HeshamNoaman/vscode-antigravity-backend-fix) - Fixes repeated ~202 MB backend download loop in the VS Code extension caused by Windows Defender timeouts (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
 - [wllzhang/antigravity-junction-skill-fix](https://github.com/wllzhang/antigravity-junction-skill-fix) - Zero-copy NTFS hardlink bridge resolving Go language server discovery failures for Windows directory junctions and symlinks (`CLI`, `IDE`).
 
