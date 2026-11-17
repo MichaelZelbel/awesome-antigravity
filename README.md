@@ -145,6 +145,7 @@ Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tr
 ## Guides and tips
 
 - [ykdojo/antigravity-cli-tips](https://github.com/ykdojo/antigravity-cli-tips) - Practical tips for the Antigravity CLI (`agy`) by YK Sugi of CS Dojo: aliases, a custom status line, an agent-run development cycle.
+- [Antigravity CLI cheat sheet with tested notes](https://toolsbase.dev/en/reference/antigravity-cli-commands?utm_source=github&utm_medium=referral&utm_campaign=awesome-antigravity) - Searchable web page listing 154 `agy` commands, flags, slash commands and settings, with notes from running 1.5.5 on macOS: what the installer adds to shell profiles, how headless mode auto-denies file writes, and how `-c` and `--conversation` choose a conversation. Closed source, free (`CLI`).
 - [The unofficial Antigravity guide](https://github.com/MichaelZelbel/awesome-antigravity/blob/main/ANTIGRAVITY_GUIDE.md) - Setup, core concepts and working habits. Lives in this repository.
 
 ### Where skills, rules, plugins and MCP settings go
