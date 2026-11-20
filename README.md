@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [jiangnanquan/agy-desktop-exo](https://github.com/jiangnanquan/agy-desktop-exo) - Adds a compact wide-layout toggle, inline Office/EPUB sidebar preview, and Simplified Chinese localization for Antigravity Desktop.
 
 ## Known CLI problems
 
