@@ -125,6 +125,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team (`CLI`).
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: Git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
+- [Codex Direct Relay](https://github.com/TardisBooo/antigravity-codex-orchestrator) - Send an engineering task from Antigravity to the Codex CLI, with read-only mode by default and a summary of changes and checks. `CLI`
 
 ## Fixes and quality of life
 
