@@ -113,6 +113,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
 - [tddworks/ClaudeBar](https://github.com/tddworks/ClaudeBar) - macOS menu bar monitor for Claude, Codex, Antigravity and Gemini.
+- [vladsboev-web/chat_tokens](https://github.com/vladsboev-web/chat_tokens) - Antigravity 2.0 plugin with a live Sidecar Context Monitor side panel (thresholds, compaction detection, one-click HANDOFF prompt) and a zero-token `/ctx` PreInvocation hook reading local `transcript.jsonl`.
 
 ## Safety
 
