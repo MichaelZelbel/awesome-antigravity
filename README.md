@@ -80,6 +80,8 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 ## Single skills worth installing
 
+- [Kling AI for Google Antigravity](https://github.com/klingai-dev/antigravity-plugin) - Official Kling plugin with a hosted MCP server and skills for image and video generation, installable with `agy plugin install` (`CLI`).
+
 - [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) - Design knowledge for building interfaces that do not look generated.
 - [Nanako0129/sepia](https://github.com/Nanako0129/sepia) - Rewrites prose so it stops reading as machine-written. Has a native Antigravity plugin (`CLI`).
 - [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) - Hand a task to a second coding agent, review its diff, land the commit yourself (`CLI`).
