@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [INK-Q/agy-fast](https://github.com/INK-Q/agy-fast) - Local MCP plugin and SessionStart snapshot hook that batches searches, 15-language symbol outlines, multi-file edits with inline verification, and parallel build/test checks to reduce turns and token usage (`CLI` `IDE`).
 
 ## Known CLI problems
 
