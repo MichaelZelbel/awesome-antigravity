@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [Antigravity Pet](https://github.com/Wlaeg/antigravity-pet) - A native pixel desktop pet for Windows and macOS that mirrors your agent's live status; click it to jump back to the matching conversation. (`IDE`)
 
 ## Known CLI problems
 
