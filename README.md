@@ -77,6 +77,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang) - Go skills from the author of `lo`.
 - [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) - 73 game development skills for Godot, Unity, Unreal, three.js and more, with a router that picks the right one.
 - [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
+- [zColdWater/omniforge-skills](https://github.com/zColdWater/omniforge-skills) - 50 read-only pre-launch audit skills covering web/Supabase/Next.js security, SPF/DKIM/DMARC email DNS, 78-TLD domain and USPTO checks, and `/llms.txt` visibility (`CLI`).
 
 ## Single skills worth installing
 
