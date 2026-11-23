@@ -97,6 +97,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory (`CLI` `IDE`).
 - [ctxrs/ctx](https://github.com/ctxrs/ctx) - Search the agent sessions already on your machine. Git blame for agent history.
 - [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
+- [AncientiCe/palace-rs](https://github.com/AncientiCe/palace-rs) - Local-first memory for coding agents: one Rust binary and one SQLite file, local embeddings, hybrid BM25 plus vector search. Install with `palace install --client antigravity`, which writes MCP config to `~/.gemini/config/mcp_config.json` and an always-on rule to `~/.gemini/config/rules/palace.md`. LongMemEval s_cleaned retrieval recall R@5 0.987. Not associated in any way with the popular mempalace python. (`IDE`)
 
 ## Code intelligence
 
