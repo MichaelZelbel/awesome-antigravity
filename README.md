@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [lukeinx/agy-remote-wecom](https://github.com/lukeinx/agy-remote-wecom) - Control local Antigravity terminal and background `agy acp` sessions from WeCom on your phone over an outbound WebSocket connection, with session resume, attachments, model/mode switching, and tool-approval cards; macOS, Chinese UI (`CLI`).
 
 ## Known CLI problems
 
