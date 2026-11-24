@@ -123,6 +123,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [awslabs/cli-agent-orchestrator](https://github.com/awslabs/cli-agent-orchestrator) - Coordinates several coding CLIs in separate tmux sessions (`CLI`).
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
+- [todd866/antigravity-mission-control](https://github.com/todd866/antigravity-mission-control) - Live pictorial Mission Control cockpit (MCP App), turn-aware AI briefings, cross-Mac relay, and Flash/Carbon/Neon AI Commander for Antigravity.
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team (`CLI`).
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: Git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
 
