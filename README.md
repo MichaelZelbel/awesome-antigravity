@@ -113,6 +113,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
 - [tddworks/ClaudeBar](https://github.com/tddworks/ClaudeBar) - macOS menu bar monitor for Claude, Codex, Antigravity and Gemini.
+- [Staaaying/ag-vario](https://github.com/Staaaying/ag-vario) - Read-only macOS HUD for Antigravity Desktop showing per-pane session tokens, context breakdown, subagents, quota rings, and a 30-day usage heatmap.
 
 ## Safety
 
