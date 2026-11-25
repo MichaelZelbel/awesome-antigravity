@@ -8,6 +8,7 @@
 
 If this list saved you some searching, my book [Teach It Once](https://leanpub.com/teachitonce) shows how to take what your AI knows about you into files you own and teach it your work and your rules once. The first chapters are a free sample.
 
+<!--lint ignore double-link-->
 I also write about building with AI agents, what works and what broke, in a free newsletter: [subscribe on Substack](https://michaelzelbel.substack.com/subscribe).
 
 Every link below was opened and checked in October 2026 ([check log](maintenance/link-check.md)). Projects that only exist to share accounts, dodge quotas or get around regional limits are left out on purpose. If something here is dead or missing, open a pull request.
@@ -40,8 +41,10 @@ Questions people asked in the Antigravity forums in September 2026, each with th
 
 **How do I keep memory between conversations?** See the section Memory and context. To carry one long session into a fresh one, the handoff skill listed there writes it up as a file the next agent reads.
 
+<!--lint ignore double-link-->
 **How do I install a skill I found on GitHub?** Put it into the project you are working in: the skill's folder goes into `.agents/skills/` in that project, and all three Antigravity programs read it there. To have it in every project, copy the folder into the global folder of the program you use, listed on Google's [skills page](https://antigravity.google/docs/skills/#skills-by-surface). One trap: the "global" option of some popular installers writes to `~/.agents/skills/`, which Antigravity does not read today ([CLI issue #103](https://github.com/google-antigravity/antigravity-cli/issues/103), [installer fix #1483](https://github.com/vercel-labs/skills/pull/1483), both still open on 2026-09-30). If a skill you installed does not show up, look in which folder it landed.
 
+<!--lint ignore double-link-->
 **My workflows stop working on 1 November. What do I do?** Google retires workflows on 1 November 2026; after that, workflow folders are no longer read. Type [`/migrate-workflows`](https://antigravity.google/docs/migration/workflows-to-skills/) to turn them into skills. It looks in `.agents/workflows/` in your workspace and in `~/.gemini/config/workflows/`, and keeps your old files as `.bak`. Google changes Antigravity often; my free newsletter sends one short email when Google changes something that breaks a setup, with the fix: [subscribe on Substack](https://michaelzelbel.substack.com/subscribe).
 
 **How do I see how much quota I have left?** In the CLI, type [`/usage`](https://antigravity.google/docs/cli/commands/usage/). For a view that stays on screen, see the section Quota and usage monitors.
@@ -64,6 +67,7 @@ Questions people asked in the Antigravity forums in September 2026, each with th
 
 ## Skill collections
 
+<!--lint ignore double-link-->
 Antigravity loads skills from `.agents/skills/` in your workspace, one folder with a `SKILL.md` file per skill, so most collections written for other agents work here too. The global folder differs by program: [skill locations in the docs](https://antigravity.google/docs/skills/#skills-by-surface).
 
 - [rmyndharis/antigravity-skills](https://github.com/rmyndharis/antigravity-skills) - A curated set put together for Antigravity first.
@@ -164,6 +168,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tracker for the CLI](https://github.com/google-antigravity/antigravity-cli/issues), which had 662 open issues that day. Nothing here was tested or reproduced by this list. Each line gives the error as reported, its status, and the thread. Google's [troubleshooting page](https://antigravity.google/docs/cli/troubleshooting/) covers four other things: the shell PATH, keyring permissions, clipboard forwarding and the self-updater.
 
+<!--lint ignore double-link-->
 - [#44 "Agent execution terminated due to error"](https://github.com/google-antigravity/antigravity-cli/issues/44) - Open since 2026-05-20. The reporter says it happens every time and that signing in again does not help.
 - [#415 "1.0.9 update breaks authentication"](https://github.com/google-antigravity/antigravity-cli/issues/415) - After the update the CLI stops at "Eligibility check failed". Closed on 2026-09-18 as obsolete. The maintainer asks for a new issue if it still happens on 1.2.6.
 - [#76 `agy --print` drops its output when not run in a terminal](https://github.com/google-antigravity/antigravity-cli/issues/76) - Hits pipes, subprocesses and redirects. Closed. A maintainer names 1.0.15 for the Windows part and 1.1.1 for silent server errors and hangs in scripts.
