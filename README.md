@@ -87,6 +87,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [strip-ai-tells](https://github.com/MichaelZelbel/teach-it-once-kit/blob/main/skills/strip-ai-tells.md) - Edits prose so it stops sounding machine-written and hands back the edited text, not a report. By the maintainer of this list. A folder ready to copy into `.agents/skills/` (Antigravity, Codex) or `.claude/skills/` (Claude Code) is [in this repository](intelligence/skills/strip-ai-tells).
 - [n8n vibe coding skill](https://github.com/MichaelZelbel/awesome-antigravity/blob/main/intelligence/skills/n8n-vibe-coding-skill.md) - Build n8n workflows from inside the agent. Lives in this repository.
 - [ParkerHwang/OpenSocrates](https://github.com/ParkerHwang/OpenSocrates) - Reasoning procedures for checking assumptions, comparing options and evaluating evidence; installs a rule and skill.
+- [krutytskyi/kissmypost-gemini](https://github.com/krutytskyi/kissmypost-gemini) - Reddit audience data for the agent over a remote MCP server: subreddit finder, best time to post, brand mentions.
 
 ## Spec-driven development
 
