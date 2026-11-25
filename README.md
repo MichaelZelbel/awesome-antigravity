@@ -118,6 +118,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [jlcodes99/vscode-antigravity-cockpit](https://github.com/jlcodes99/vscode-antigravity-cockpit) - Extension with a dashboard of your Antigravity model quotas.
 - [wusimpl/AntigravityQuotaWatcher](https://github.com/wusimpl/AntigravityQuotaWatcher) - Extension that watches your Antigravity model quota (`IDE`).
 - [Dunphil692/antigravity-context-meter](https://github.com/Dunphil692/antigravity-context-meter) - Shows how full the context window is, as a macOS floating capsule or an IDE status bar item. Reads the local transcript, so it costs no tokens (`IDE`).
+- [vladsboev-web/ContextRing](https://github.com/vladsboev-web/ContextRing) - Native macOS floating context ring and menu bar monitor for Antigravity 2.0 with local breakdown, Orchestrator scopes, and 24h/7d stats (`IDE`).
 - [Javis603/token-monitor](https://github.com/Javis603/token-monitor) - Desktop widget for tokens, cost and limits across many coding tools.
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
