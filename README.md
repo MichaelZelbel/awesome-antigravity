@@ -138,6 +138,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [awslabs/cli-agent-orchestrator](https://github.com/awslabs/cli-agent-orchestrator) - Coordinates several coding CLIs in separate tmux sessions (`CLI`).
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
+- [todd866/antigravity-mission-control](https://github.com/todd866/antigravity-mission-control) - Live pictorial Mission Control cockpit (MCP App), turn-aware AI briefings, cross-Mac relay, and Flash/Carbon/Neon AI Commander for Antigravity.
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team (`CLI`).
 - [Muzaqil555/gemini-pro-mcp](https://github.com/Muzaqil555/gemini-pro-mcp) - MCP server that lets Claude Code, Codex and other MCP clients ask Gemini, review files and run research through your signed-in Antigravity CLI, and adds itself to the Antigravity CLI too (`CLI`).
 - [Tesseract](https://tesseract.dev) - Desktop app for macOS, Windows and Linux that runs the Antigravity CLI and 13 other coding agent frameworks in one window, a different one in each conversation. Closed source, free (`CLI`).
