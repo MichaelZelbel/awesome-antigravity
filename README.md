@@ -156,6 +156,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [Antigravity Pet](https://github.com/Wlaeg/antigravity-pet) - A native pixel desktop pet for Windows and macOS that mirrors your agent's live status; click it to jump back to the matching conversation. (`IDE`)
 - [INK-Q/agy-fast](https://github.com/INK-Q/agy-fast) - Local MCP plugin and SessionStart snapshot hook that batches searches, 15-language symbol outlines, multi-file edits with inline verification, and parallel build/test checks to reduce turns and token usage (`CLI` `IDE`).
 - [lukeinx/agy-remote-wecom](https://github.com/lukeinx/agy-remote-wecom) - Control local Antigravity terminal and background `agy acp` sessions from WeCom on your phone over an outbound WebSocket connection, with session resume, attachments, model/mode switching, and tool-approval cards; macOS, Chinese UI (`CLI`).
+- [yuanwansi/antigravity-zh-cn](https://github.com/yuanwansi/antigravity-zh-cn) - Simplified Chinese UI patcher and rules plugin for Antigravity 2.0 Desktop: localizes menus, settings and panels, switches languages live with a shortcut, and restores the original archive from a verified backup.
 
 ## Known CLI problems
 
