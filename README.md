@@ -133,6 +133,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team (`CLI`).
 - [Muzaqil555/gemini-pro-mcp](https://github.com/Muzaqil555/gemini-pro-mcp) - MCP server that lets Claude Code, Codex and other MCP clients ask Gemini, review files and run research through your signed-in Antigravity CLI, and adds itself to the Antigravity CLI too (`CLI`).
+- [Tesseract](https://tesseract.dev) - Desktop app for macOS, Windows and Linux that runs the Antigravity CLI and 13 other coding agent frameworks in one window, a different one in each conversation. Closed source, free (`CLI`).
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: Git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
 - [jaon13/agent-plugins](https://github.com/jaon13/agent-plugins) - Antigravity plugins with module-level SQLite WAL locking across parallel sessions and swarms, .NET and Rust build rules, and a sidecar panel.
 
