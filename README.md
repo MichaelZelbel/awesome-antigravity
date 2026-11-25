@@ -77,26 +77,25 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang) - Go skills from the author of `lo`.
 - [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) - 73 game development skills for Godot, Unity, Unreal, three.js and more, with a router that picks the right one.
 - [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
-- [Aident Loadout](https://aident.ai) - Hosted MCP server, CLI and [Agent Skill](https://github.com/Aident-AI/aident-skill) that give an agent 400+ ready-made Skills and the apps you connect once, with API keys kept away from the model and an audit log of each action. Closed source, pay-as-you-go.
-- [zColdWater/omniforge-skills](https://github.com/zColdWater/omniforge-skills) - 50 read-only pre-launch audit skills covering web/Supabase/Next.js security, SPF/DKIM/DMARC email DNS, 78-TLD domain and USPTO checks, and `/llms.txt` visibility (`CLI`).
+- [zColdWater/omniforge-skills](https://github.com/zColdWater/omniforge-skills) - 50 read-only checks to run before a launch: web and Supabase security, email DNS records, domain and trademark lookups (`CLI`).
+- [Aident Loadout](https://aident.ai) - Hosted service that gives an agent 400+ ready-made skills and the apps you connect once, through an MCP server, a CLI or an [Agent Skill](https://github.com/Aident-AI/aident-skill). Closed source, pay-as-you-go.
 
 ## Single skills worth installing
-
-- [Kling AI for Google Antigravity](https://github.com/klingai-dev/antigravity-plugin) - Official Kling plugin with a hosted MCP server and skills for image and video generation, installable with `agy plugin install` (`CLI`).
 
 - [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) - Design knowledge for building interfaces that do not look generated.
 - [Nanako0129/sepia](https://github.com/Nanako0129/sepia) - Rewrites prose so it stops reading as machine-written. Has a native Antigravity plugin (`CLI`).
 - [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) - Hand a task to a second coding agent, review its diff, land the commit yourself (`CLI`).
 - [strip-ai-tells](https://github.com/MichaelZelbel/teach-it-once-kit/blob/main/skills/strip-ai-tells.md) - Edits prose so it stops sounding machine-written and hands back the edited text, not a report. By the maintainer of this list. A folder ready to copy into `.agents/skills/` (Antigravity, Codex) or `.claude/skills/` (Claude Code) is [in this repository](intelligence/skills/strip-ai-tells).
 - [n8n vibe coding skill](https://github.com/MichaelZelbel/awesome-antigravity/blob/main/intelligence/skills/n8n-vibe-coding-skill.md) - Build n8n workflows from inside the agent. Lives in this repository.
-- [ParkerHwang/OpenSocrates](https://github.com/ParkerHwang/OpenSocrates) - Reasoning procedures for checking assumptions, comparing options and evaluating evidence; installs a rule and skill.
-- [krutytskyi/kissmypost-gemini](https://github.com/krutytskyi/kissmypost-gemini) - Reddit audience data for the agent over a remote MCP server: subreddit finder, best time to post, brand mentions.
+- [klingai-dev/antigravity-plugin](https://github.com/klingai-dev/antigravity-plugin) - Kling's own plugin for making images and videos through its hosted MCP server. Needs a Kling account (`CLI`).
+- [ParkerHwang/OpenSocrates](https://github.com/ParkerHwang/OpenSocrates) - Reasoning procedures for checking assumptions, comparing options and weighing evidence. Installs a rule and a skill.
+- [krutytskyi/kissmypost-gemini](https://github.com/krutytskyi/kissmypost-gemini) - Reddit audience data for the agent: which subreddits fit, when to post, where your brand is mentioned. Runs on KissMyPost's hosted server and needs a free account with daily limits.
 
 ## Spec-driven development
 
 - [gemini-cli-extensions/conductor](https://github.com/gemini-cli-extensions/conductor) - Specify, plan, then implement. Works in Antigravity and Claude Code (`CLI`).
 - [gotalab/cc-sdd](https://github.com/gotalab/cc-sdd) - A small harness that turns an approved spec into a long autonomous run.
-- [LitGravity](https://github.com/wjgoarxiv/litgravity) - Adds lit to the Antigravity CLI so a request is planned, built with tests and recorded checks, reviewed, and closed with a handoff note (`CLI`).
+- [wjgoarxiv/litgravity](https://github.com/wjgoarxiv/litgravity) - Start a request with `lit` and the Antigravity CLI plans it, builds it with tests, reviews it and closes it with a handoff note (`CLI`).
 
 ## Memory and context
 
@@ -104,31 +103,32 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory (`CLI` `IDE`).
 - [ctxrs/ctx](https://github.com/ctxrs/ctx) - Search the agent sessions already on your machine. Git blame for agent history.
 - [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
-- [cerredz/vidbyte-memory](https://github.com/cerredz/vidbyte-memory) - Turns corrections into facts the agent loads, pytest tests where a check can be written, and git commits (`CLI`).
-- [minyaozhu/work-plan](https://github.com/minyaozhu/work-plan) - Cuts multi-session token usage by ~60% (2–3× faster) via focused `[WORK PLAN]` turn briefs, structured task handoffs, categorized Memory, and progressive-disclosure OKF / Markdown Knowledge Packs — plus a local SQLite task DAG UI and live same-folder/worktree edit guards for parallel chats (`IDE`).
-- [AncientiCe/palace-rs](https://github.com/AncientiCe/palace-rs) - Local-first memory for coding agents: one Rust binary and one SQLite file, local embeddings, hybrid BM25 plus vector search. Install with `palace install --client antigravity`, which writes MCP config to `~/.gemini/config/mcp_config.json` and an always-on rule to `~/.gemini/config/rules/palace.md`. LongMemEval s_cleaned retrieval recall R@5 0.987. Not associated in any way with the popular mempalace python. (`IDE`)
+- [cerredz/vidbyte-memory](https://github.com/cerredz/vidbyte-memory) - Turns each correction into a fact the agent loads, a test where one can be written, and a Git commit (`CLI`).
+- [minyaozhu/work-plan](https://github.com/minyaozhu/work-plan) - Keeps a task plan, handoffs between chats and project memory in a local database, and warns when two chats edit the same files (`IDE`).
+- [AncientiCe/palace-rs](https://github.com/AncientiCe/palace-rs) - Local memory for coding agents in one program and one SQLite file, with local embeddings and keyword plus vector search (`IDE`).
 
 ## Code intelligence
 
 - [colbymchenry/codegraph](https://github.com/colbymchenry/codegraph) - A local, pre-indexed graph of your code so the agent needs fewer tool calls (`IDE`).
 - [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) - Turns a codebase with its docs, schemas and PDFs into a knowledge graph you can query.
 - [zzet/gortex](https://github.com/zzet/gortex) - Code-intelligence engine over CLI, MCP and API for 257 languages and several repositories at once.
-- [jaon13/code-xray](https://github.com/jaon13/code-xray) - Local SQLite symbol and slice indexer, structural clone detector, grep CLI and MCP server for C#, XAML, Rust, TypeScript, JavaScript, Svelte and Python.
+- [jaon13/code-xray](https://github.com/jaon13/code-xray) - Local symbol index, clone detector and MCP server for C#, XAML, Rust, TypeScript, JavaScript, Svelte and Python.
+- [INK-Q/agy-fast](https://github.com/INK-Q/agy-fast) - Lets the agent batch searches, outline symbols, edit several files and run checks in one step, so a task takes fewer turns and tokens (`CLI` `IDE`).
 
 ## Quota and usage monitors
 
 - [jlcodes99/vscode-antigravity-cockpit](https://github.com/jlcodes99/vscode-antigravity-cockpit) - Extension with a dashboard of your Antigravity model quotas.
 - [wusimpl/AntigravityQuotaWatcher](https://github.com/wusimpl/AntigravityQuotaWatcher) - Extension that watches your Antigravity model quota (`IDE`).
 - [Dunphil692/antigravity-context-meter](https://github.com/Dunphil692/antigravity-context-meter) - Shows how full the context window is, as a macOS floating capsule or an IDE status bar item. Reads the local transcript, so it costs no tokens (`IDE`).
-- [vladsboev-web/ContextRing](https://github.com/vladsboev-web/ContextRing) - Native macOS floating context ring and menu bar monitor for Antigravity 2.0 with local breakdown, Orchestrator scopes, and 24h/7d stats (`IDE`).
 - [Javis603/token-monitor](https://github.com/Javis603/token-monitor) - Desktop widget for tokens, cost and limits across many coding tools.
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
 - [tddworks/ClaudeBar](https://github.com/tddworks/ClaudeBar) - macOS menu bar monitor for Claude, Codex, Antigravity and Gemini.
 - [jungdosa/QuotaDock](https://github.com/jungdosa/QuotaDock) - Windows desktop widget showing Antigravity quotas next to Claude Code and Codex, each with its reset time. Reads the IDE's local language server, so checking costs no quota (`IDE`).
-- [wassim-azi/agy-powerline](https://github.com/wassim-azi/agy-powerline) - Fast, configurable statusline with live Gemini 5h/7d quota meters, pace markers, and TUI and [browser](https://agy-powerline.com/configure/) configurators (`CLI`).
-- [vladsboev-web/chat_tokens](https://github.com/vladsboev-web/chat_tokens) - Antigravity 2.0 plugin with a live Sidecar Context Monitor side panel (thresholds, compaction detection, one-click HANDOFF prompt) and a zero-token `/ctx` PreInvocation hook reading local `transcript.jsonl`.
-- [Staaaying/ag-vario](https://github.com/Staaaying/ag-vario) - Read-only macOS HUD for Antigravity Desktop showing per-pane session tokens, context breakdown, subagents, quota rings, and a 30-day usage heatmap.
+- [wassim-azi/agy-powerline](https://github.com/wassim-azi/agy-powerline) - Status line for the Antigravity CLI with live 5-hour and 7-day quota meters, the model in use, context and Git branch (`CLI`).
+- [vladsboev-web/chat_tokens](https://github.com/vladsboev-web/chat_tokens) - Side panel for Antigravity 2.0 that shows how full the context is and offers a one-click handoff prompt, plus a `/ctx` command that costs no tokens.
+- [vladsboev-web/ContextRing](https://github.com/vladsboev-web/ContextRing) - macOS ring and menu bar monitor for how full the context of Antigravity 2.0 is, with 24-hour and 7-day stats. Reads local files only.
+- [Staaaying/ag-vario](https://github.com/Staaaying/ag-vario) - Read-only macOS overlay for Antigravity 2.0 with tokens, context, subagents and quota for each pane, and a 30-day usage heatmap.
 
 ## Safety
 
@@ -139,27 +139,26 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [awslabs/cli-agent-orchestrator](https://github.com/awslabs/cli-agent-orchestrator) - Coordinates several coding CLIs in separate tmux sessions (`CLI`).
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
-- [todd866/antigravity-mission-control](https://github.com/todd866/antigravity-mission-control) - Live pictorial Mission Control cockpit (MCP App), turn-aware AI briefings, cross-Mac relay, and Flash/Carbon/Neon AI Commander for Antigravity.
-- [maxipavlovic/agent-eye](https://github.com/maxipavlovic/agent-eye) - Local index of your agy sessions next to Claude Code, Codex and OpenCode ones: search, resume, live status and what each session left running (`CLI`).
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team (`CLI`).
-- [Muzaqil555/gemini-pro-mcp](https://github.com/Muzaqil555/gemini-pro-mcp) - MCP server that lets Claude Code, Codex and other MCP clients ask Gemini, review files and run research through your signed-in Antigravity CLI, and adds itself to the Antigravity CLI too (`CLI`).
-- [Tesseract](https://tesseract.dev) - Desktop app for macOS, Windows and Linux that runs the Antigravity CLI and 13 other coding agent frameworks in one window, a different one in each conversation. Closed source, free (`CLI`).
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: Git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
-- [jaon13/agent-plugins](https://github.com/jaon13/agent-plugins) - Antigravity plugins with module-level SQLite WAL locking across parallel sessions and swarms, .NET and Rust build rules, and a sidecar panel.
-- [Codex Direct Relay](https://github.com/TardisBooo/antigravity-codex-orchestrator) - Send an engineering task from Antigravity to the Codex CLI, with read-only mode by default and a summary of changes and checks. `CLI`
+- [todd866/antigravity-mission-control](https://github.com/todd866/antigravity-mission-control) - Dashboard inside Antigravity that shows the state of each project's agents, with AI briefings and next steps, across several Macs.
+- [maxipavlovic/agent-eye](https://github.com/maxipavlovic/agent-eye) - Local index of your Antigravity CLI sessions next to Claude Code, Codex and OpenCode ones: search, resume, live status and what each session left running (`CLI`).
+- [Muzaqil555/gemini-pro-mcp](https://github.com/Muzaqil555/gemini-pro-mcp) - MCP server that lets Claude Code, Codex and other tools ask Gemini, review files and run research through the Antigravity CLI you are signed in to (`CLI`).
+- [Tesseract](https://tesseract.dev) - Desktop app for macOS, Windows and Linux that runs the Antigravity CLI and 13 other coding agent frameworks in one window, a different one in each conversation. Closed source, free (`CLI`).
+- [jaon13/agent-plugins](https://github.com/jaon13/agent-plugins) - Antigravity plugins that lock modules so parallel sessions do not edit the same code, with .NET and Rust build rules and a side panel.
+- [TardisBooo/antigravity-codex-orchestrator](https://github.com/TardisBooo/antigravity-codex-orchestrator) - Codex Direct Relay: hand a coding task from Antigravity to the Codex CLI, read-only by default, and get a summary of the changes back (`CLI`).
 
 ## Fixes and quality of life
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
-- [clipboard-file-paste](https://github.com/tycefaus181-tech/clipboard-file-paste) - Paste files and folders copied in Windows File Explorer (`Ctrl+C`) directly into the Antigravity chat input box (`Ctrl+V`) as native `@file` context pills, with a sidecar UI panel and `PreInvocation` hook. `Antigravity 2.0` `IDE`
-- [agy-meme](https://github.com/jiangnanquan/agy-meme) - Bidirectional Neko reaction stickers, inline composer picker, and Desktop-isolated MCP plugin for Antigravity Desktop.
-- [jiangnanquan/agy-desktop-exo](https://github.com/jiangnanquan/agy-desktop-exo) - Adds a compact wide-layout toggle, inline Office/EPUB sidebar preview, and Simplified Chinese localization for Antigravity Desktop.
-- [Antigravity Pet](https://github.com/Wlaeg/antigravity-pet) - A native pixel desktop pet for Windows and macOS that mirrors your agent's live status; click it to jump back to the matching conversation. (`IDE`)
-- [INK-Q/agy-fast](https://github.com/INK-Q/agy-fast) - Local MCP plugin and SessionStart snapshot hook that batches searches, 15-language symbol outlines, multi-file edits with inline verification, and parallel build/test checks to reduce turns and token usage (`CLI` `IDE`).
-- [lukeinx/agy-remote-wecom](https://github.com/lukeinx/agy-remote-wecom) - Control local Antigravity terminal and background `agy acp` sessions from WeCom on your phone over an outbound WebSocket connection, with session resume, attachments, model/mode switching, and tool-approval cards; macOS, Chinese UI (`CLI`).
-- [yuanwansi/antigravity-zh-cn](https://github.com/yuanwansi/antigravity-zh-cn) - Simplified Chinese UI patcher and rules plugin for Antigravity 2.0 Desktop: localizes menus, settings and panels, switches languages live with a shortcut, and restores the original archive from a verified backup.
-- [GHSaiMo/antigravity-mobile](https://github.com/GHSaiMo/antigravity-mobile) - Multigravity, an MIT open-source native iOS (App Store), Android, and Web PWA mobile companion with a local Go gateway (`mgy`) for monitoring chats and `/swarm`, lock-screen APNs command approvals, Dynamic Island live steps, and 5h/weekly quota and cache-hit dashboards over LAN, Tailscale, Cloudflare Tunnel, or E2EE relay (`CLI`, `IDE`).
+- [tycefaus181-tech/clipboard-file-paste](https://github.com/tycefaus181-tech/clipboard-file-paste) - On Windows, copy files or folders in File Explorer and paste them into the Antigravity chat as `@file` references (`IDE`).
+- [jiangnanquan/agy-meme](https://github.com/jiangnanquan/agy-meme) - Reaction stickers in the Antigravity 2.0 chat, with a picker in the input box.
+- [jiangnanquan/agy-desktop-exo](https://github.com/jiangnanquan/agy-desktop-exo) - Patches Antigravity 2.0 for a wider chat layout, Office and EPUB previews in the sidebar, and a Simplified Chinese interface.
+- [Wlaeg/antigravity-pet](https://github.com/Wlaeg/antigravity-pet) - Pixel pet on your Windows or Mac desktop that shows what the agent is doing. Click it to jump to that conversation (`IDE`).
+- [lukeinx/agy-remote-wecom](https://github.com/lukeinx/agy-remote-wecom) - Control Antigravity CLI sessions on your Mac from WeCom on your phone: resume sessions, send files, approve tool calls. Chinese interface (`CLI`).
+- [yuanwansi/antigravity-zh-cn](https://github.com/yuanwansi/antigravity-zh-cn) - Translates the Antigravity 2.0 interface into Simplified Chinese by patching the app, and restores the original from a backup.
+- [GHSaiMo/antigravity-mobile](https://github.com/GHSaiMo/antigravity-mobile) - Multigravity: watch and approve your Antigravity sessions from an iPhone, an Android phone or a browser, through a small gateway on your computer (`CLI` `IDE`).
 
 ## Known CLI problems
 
