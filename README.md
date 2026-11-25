@@ -8,6 +8,7 @@
 
 If this list saved you some searching, my book [Teach It Once](https://leanpub.com/teachitonce) shows how to take what your AI knows about you into files you own and teach it your work and your rules once. The first chapters are a free sample.
 
+<!--lint ignore double-link-->
 I also write about building with AI agents, what works and what broke, in a free newsletter: [subscribe on Substack](https://michaelzelbel.substack.com/subscribe).
 
 Every link below was opened and checked in October 2026 ([check log](maintenance/link-check.md)). Projects that only exist to share accounts, dodge quotas or get around regional limits are left out on purpose. If something here is dead or missing, open a pull request.
@@ -40,8 +41,10 @@ Questions people asked in the Antigravity forums in September 2026, each with th
 
 **How do I keep memory between conversations?** See the section Memory and context. To carry one long session into a fresh one, the handoff skill listed there writes it up as a file the next agent reads.
 
+<!--lint ignore double-link-->
 **How do I install a skill I found on GitHub?** Put it into the project you are working in: the skill's folder goes into `.agents/skills/` in that project, and all three Antigravity programs read it there. To have it in every project, copy the folder into the global folder of the program you use, listed on Google's [skills page](https://antigravity.google/docs/skills/#skills-by-surface). One trap: the "global" option of some popular installers writes to `~/.agents/skills/`, which Antigravity does not read today ([CLI issue #103](https://github.com/google-antigravity/antigravity-cli/issues/103), [installer fix #1483](https://github.com/vercel-labs/skills/pull/1483), both still open on 2026-09-30). If a skill you installed does not show up, look in which folder it landed.
 
+<!--lint ignore double-link-->
 **My workflows stop working on 1 November. What do I do?** Google retires workflows on 1 November 2026; after that, workflow folders are no longer read. Type [`/migrate-workflows`](https://antigravity.google/docs/migration/workflows-to-skills/) to turn them into skills. It looks in `.agents/workflows/` in your workspace and in `~/.gemini/config/workflows/`, and keeps your old files as `.bak`. Google changes Antigravity often; my free newsletter sends one short email when Google changes something that breaks a setup, with the fix: [subscribe on Substack](https://michaelzelbel.substack.com/subscribe).
 
 **How do I see how much quota I have left?** In the CLI, type [`/usage`](https://antigravity.google/docs/cli/commands/usage/). For a view that stays on screen, see the section Quota and usage monitors.
@@ -64,6 +67,7 @@ Questions people asked in the Antigravity forums in September 2026, each with th
 
 ## Skill collections
 
+<!--lint ignore double-link-->
 Antigravity loads skills from `.agents/skills/` in your workspace, one folder with a `SKILL.md` file per skill, so most collections written for other agents work here too. The global folder differs by program: [skill locations in the docs](https://antigravity.google/docs/skills/#skills-by-surface).
 
 - [rmyndharis/antigravity-skills](https://github.com/rmyndharis/antigravity-skills) - A curated set put together for Antigravity first.
@@ -77,6 +81,8 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang) - Go skills from the author of `lo`.
 - [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) - 73 game development skills for Godot, Unity, Unreal, three.js and more, with a router that picks the right one.
 - [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
+- [zColdWater/omniforge-skills](https://github.com/zColdWater/omniforge-skills) - 50 read-only checks to run before a launch: web and Supabase security, email DNS records, domain and trademark lookups (`CLI`).
+- [Aident Loadout](https://aident.ai) - Hosted service that gives an agent 400+ ready-made skills and the apps you connect once, through an MCP server, a CLI or an [Agent Skill](https://github.com/Aident-AI/aident-skill). Closed source, pay-as-you-go.
 
 ## Single skills worth installing
 
@@ -85,11 +91,15 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [amElnagdy/delegate-skills](https://github.com/amElnagdy/delegate-skills) - Hand a task to a second coding agent, review its diff, land the commit yourself (`CLI`).
 - [strip-ai-tells](https://github.com/MichaelZelbel/teach-it-once-kit/blob/main/skills/strip-ai-tells.md) - Edits prose so it stops sounding machine-written and hands back the edited text, not a report. By the maintainer of this list. A folder ready to copy into `.agents/skills/` (Antigravity, Codex) or `.claude/skills/` (Claude Code) is [in this repository](intelligence/skills/strip-ai-tells).
 - [n8n vibe coding skill](https://github.com/MichaelZelbel/awesome-antigravity/blob/main/intelligence/skills/n8n-vibe-coding-skill.md) - Build n8n workflows from inside the agent. Lives in this repository.
+- [klingai-dev/antigravity-plugin](https://github.com/klingai-dev/antigravity-plugin) - Kling's own plugin for making images and videos through its hosted MCP server. Needs a Kling account (`CLI`).
+- [ParkerHwang/OpenSocrates](https://github.com/ParkerHwang/OpenSocrates) - Reasoning procedures for checking assumptions, comparing options and weighing evidence. Installs a rule and a skill.
+- [krutytskyi/kissmypost-gemini](https://github.com/krutytskyi/kissmypost-gemini) - Reddit audience data for the agent: which subreddits fit, when to post, where your brand is mentioned. Runs on KissMyPost's hosted server and needs a free account with daily limits.
 
 ## Spec-driven development
 
 - [gemini-cli-extensions/conductor](https://github.com/gemini-cli-extensions/conductor) - Specify, plan, then implement. Works in Antigravity and Claude Code (`CLI`).
 - [gotalab/cc-sdd](https://github.com/gotalab/cc-sdd) - A small harness that turns an approved spec into a long autonomous run.
+- [wjgoarxiv/litgravity](https://github.com/wjgoarxiv/litgravity) - Start a request with `lit` and the Antigravity CLI plans it, builds it with tests, reviews it and closes it with a handoff note (`CLI`).
 
 ## Memory and context
 
@@ -97,12 +107,17 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [mksglu/context-mode](https://github.com/mksglu/context-mode) - Keeps bulky tool output out of the context window and persists session memory (`CLI` `IDE`).
 - [ctxrs/ctx](https://github.com/ctxrs/ctx) - Search the agent sessions already on your machine. Git blame for agent history.
 - [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
+- [cerredz/vidbyte-memory](https://github.com/cerredz/vidbyte-memory) - Turns each correction into a fact the agent loads, a test where one can be written, and a Git commit (`CLI`).
+- [minyaozhu/work-plan](https://github.com/minyaozhu/work-plan) - Keeps a task plan, handoffs between chats and project memory in a local database, and warns when two chats edit the same files (`IDE`).
+- [AncientiCe/palace-rs](https://github.com/AncientiCe/palace-rs) - Local memory for coding agents in one program and one SQLite file, with local embeddings and keyword plus vector search (`IDE`).
 
 ## Code intelligence
 
 - [colbymchenry/codegraph](https://github.com/colbymchenry/codegraph) - A local, pre-indexed graph of your code so the agent needs fewer tool calls (`IDE`).
 - [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) - Turns a codebase with its docs, schemas and PDFs into a knowledge graph you can query.
 - [zzet/gortex](https://github.com/zzet/gortex) - Code-intelligence engine over CLI, MCP and API for 257 languages and several repositories at once.
+- [jaon13/code-xray](https://github.com/jaon13/code-xray) - Local symbol index, clone detector and MCP server for C#, XAML, Rust, TypeScript, JavaScript, Svelte and Python.
+- [INK-Q/agy-fast](https://github.com/INK-Q/agy-fast) - Lets the agent batch searches, outline symbols, edit several files and run checks in one step, so a task takes fewer turns and tokens (`CLI` `IDE`).
 
 ## Quota and usage monitors
 
@@ -113,6 +128,11 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [xiufengsun/TokenTracker](https://github.com/xiufengsun/TokenTracker) - Local usage and cost tracker that never reads your prompts.
 - [vinzdg/codenotch](https://github.com/vinzdg/codenotch) - macOS app that pins your usage limits to a screen edge.
 - [tddworks/ClaudeBar](https://github.com/tddworks/ClaudeBar) - macOS menu bar monitor for Claude, Codex, Antigravity and Gemini.
+- [jungdosa/QuotaDock](https://github.com/jungdosa/QuotaDock) - Windows desktop widget showing Antigravity quotas next to Claude Code and Codex, each with its reset time. Reads the IDE's local language server, so checking costs no quota (`IDE`).
+- [wassim-azi/agy-powerline](https://github.com/wassim-azi/agy-powerline) - Status line for the Antigravity CLI with live 5-hour and 7-day quota meters, the model in use, context and Git branch (`CLI`).
+- [vladsboev-web/chat_tokens](https://github.com/vladsboev-web/chat_tokens) - Side panel for Antigravity 2.0 that shows how full the context is and offers a one-click handoff prompt, plus a `/ctx` command that costs no tokens.
+- [vladsboev-web/ContextRing](https://github.com/vladsboev-web/ContextRing) - macOS ring and menu bar monitor for how full the context of Antigravity 2.0 is, with 24-hour and 7-day stats. Reads local files only.
+- [Staaaying/ag-vario](https://github.com/Staaaying/ag-vario) - Read-only macOS overlay for Antigravity 2.0 with tokens, context, subagents and quota for each pane, and a 30-day usage heatmap.
 
 ## Safety
 
@@ -125,16 +145,30 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team (`CLI`).
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: Git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
+- [todd866/antigravity-mission-control](https://github.com/todd866/antigravity-mission-control) - Dashboard inside Antigravity that shows the state of each project's agents, with AI briefings and next steps, across several Macs.
+- [maxipavlovic/agent-eye](https://github.com/maxipavlovic/agent-eye) - Local index of your Antigravity CLI sessions next to Claude Code, Codex and OpenCode ones: search, resume, live status and what each session left running (`CLI`).
+- [Muzaqil555/gemini-pro-mcp](https://github.com/Muzaqil555/gemini-pro-mcp) - MCP server that lets Claude Code, Codex and other tools ask Gemini, review files and run research through the Antigravity CLI you are signed in to (`CLI`).
+- [Tesseract](https://tesseract.dev) - Desktop app for macOS, Windows and Linux that runs the Antigravity CLI and 13 other coding agent frameworks in one window, a different one in each conversation. Closed source, free (`CLI`).
+- [jaon13/agent-plugins](https://github.com/jaon13/agent-plugins) - Antigravity plugins that lock modules so parallel sessions do not edit the same code, with .NET and Rust build rules and a side panel.
+- [TardisBooo/antigravity-codex-orchestrator](https://github.com/TardisBooo/antigravity-codex-orchestrator) - Codex Direct Relay: hand a coding task from Antigravity to the Codex CLI, read-only by default, and get a summary of the changes back (`CLI`).
 
 ## Fixes and quality of life
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [tycefaus181-tech/clipboard-file-paste](https://github.com/tycefaus181-tech/clipboard-file-paste) - On Windows, copy files or folders in File Explorer and paste them into the Antigravity chat as `@file` references (`IDE`).
+- [jiangnanquan/agy-meme](https://github.com/jiangnanquan/agy-meme) - Reaction stickers in the Antigravity 2.0 chat, with a picker in the input box.
+- [jiangnanquan/agy-desktop-exo](https://github.com/jiangnanquan/agy-desktop-exo) - Patches Antigravity 2.0 for a wider chat layout, Office and EPUB previews in the sidebar, and a Simplified Chinese interface.
+- [Wlaeg/antigravity-pet](https://github.com/Wlaeg/antigravity-pet) - Pixel pet on your Windows or Mac desktop that shows what the agent is doing. Click it to jump to that conversation (`IDE`).
+- [lukeinx/agy-remote-wecom](https://github.com/lukeinx/agy-remote-wecom) - Control Antigravity CLI sessions on your Mac from WeCom on your phone: resume sessions, send files, approve tool calls. Chinese interface (`CLI`).
+- [yuanwansi/antigravity-zh-cn](https://github.com/yuanwansi/antigravity-zh-cn) - Translates the Antigravity 2.0 interface into Simplified Chinese by patching the app, and restores the original from a backup.
+- [GHSaiMo/antigravity-mobile](https://github.com/GHSaiMo/antigravity-mobile) - Multigravity: watch and approve your Antigravity sessions from an iPhone, an Android phone or a browser, through a small gateway on your computer (`CLI` `IDE`).
 
 ## Known CLI problems
 
 Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tracker for the CLI](https://github.com/google-antigravity/antigravity-cli/issues), which had 662 open issues that day. Nothing here was tested or reproduced by this list. Each line gives the error as reported, its status, and the thread. Google's [troubleshooting page](https://antigravity.google/docs/cli/troubleshooting/) covers four other things: the shell PATH, keyring permissions, clipboard forwarding and the self-updater.
 
+<!--lint ignore double-link-->
 - [#44 "Agent execution terminated due to error"](https://github.com/google-antigravity/antigravity-cli/issues/44) - Open since 2026-05-20. The reporter says it happens every time and that signing in again does not help.
 - [#415 "1.0.9 update breaks authentication"](https://github.com/google-antigravity/antigravity-cli/issues/415) - After the update the CLI stops at "Eligibility check failed". Closed on 2026-09-18 as obsolete. The maintainer asks for a new issue if it still happens on 1.2.6.
 - [#76 `agy --print` drops its output when not run in a terminal](https://github.com/google-antigravity/antigravity-cli/issues/76) - Hits pipes, subprocesses and redirects. Closed. A maintainer names 1.0.15 for the Windows part and 1.1.1 for silent server errors and hangs in scripts.
