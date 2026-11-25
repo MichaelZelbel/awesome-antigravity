@@ -78,6 +78,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) - 73 game development skills for Godot, Unity, Unreal, three.js and more, with a router that picks the right one.
 - [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
 - [Aident Loadout](https://aident.ai) - Hosted MCP server, CLI and [Agent Skill](https://github.com/Aident-AI/aident-skill) that give an agent 400+ ready-made Skills and the apps you connect once, with API keys kept away from the model and an audit log of each action. Closed source, pay-as-you-go.
+- [zColdWater/omniforge-skills](https://github.com/zColdWater/omniforge-skills) - 50 read-only pre-launch audit skills covering web/Supabase/Next.js security, SPF/DKIM/DMARC email DNS, 78-TLD domain and USPTO checks, and `/llms.txt` visibility (`CLI`).
 
 ## Single skills worth installing
 
