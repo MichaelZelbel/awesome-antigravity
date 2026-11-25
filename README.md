@@ -123,6 +123,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [awslabs/cli-agent-orchestrator](https://github.com/awslabs/cli-agent-orchestrator) - Coordinates several coding CLIs in separate tmux sessions (`CLI`).
 - [codeaholicguy/ai-devkit](https://github.com/codeaholicguy/ai-devkit) - One control plane for the coding agents on your machine.
+- [maxipavlovic/agent-eye](https://github.com/maxipavlovic/agent-eye) - Local index of your agy sessions next to Claude Code, Codex and OpenCode ones: search, resume, live status and what each session left running (`CLI`).
 - [Observal/Observal](https://github.com/Observal/Observal) - Self-hosted registry to share skills, MCP servers and agents inside a team (`CLI`).
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: Git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
 
