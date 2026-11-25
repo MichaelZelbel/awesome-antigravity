@@ -149,6 +149,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [clipboard-file-paste](https://github.com/tycefaus181-tech/clipboard-file-paste) - Paste files and folders copied in Windows File Explorer (`Ctrl+C`) directly into the Antigravity chat input box (`Ctrl+V`) as native `@file` context pills, with a sidecar UI panel and `PreInvocation` hook. `Antigravity 2.0` `IDE`
 - [agy-meme](https://github.com/jiangnanquan/agy-meme) - Bidirectional Neko reaction stickers, inline composer picker, and Desktop-isolated MCP plugin for Antigravity Desktop.
 - [jiangnanquan/agy-desktop-exo](https://github.com/jiangnanquan/agy-desktop-exo) - Adds a compact wide-layout toggle, inline Office/EPUB sidebar preview, and Simplified Chinese localization for Antigravity Desktop.
+- [Antigravity Pet](https://github.com/Wlaeg/antigravity-pet) - A native pixel desktop pet for Windows and macOS that mirrors your agent's live status; click it to jump back to the matching conversation. (`IDE`)
 
 ## Known CLI problems
 
