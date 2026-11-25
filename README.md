@@ -130,6 +130,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 
 - [FutureisinPast/antigravity-conversation-fix](https://github.com/FutureisinPast/antigravity-conversation-fix) - Repairs missing and out-of-order conversation history (`IDE`).
 - [PeonPing/peon-ping](https://github.com/PeonPing/peon-ping) - A Warcraft peon tells you when the agent is done, so you can stop watching the terminal.
+- [GHSaiMo/antigravity-mobile](https://github.com/GHSaiMo/antigravity-mobile) - Multigravity, an MIT open-source native iOS (App Store), Android, and Web PWA mobile companion with a local Go gateway (`mgy`) for monitoring chats and `/swarm`, lock-screen APNs command approvals, Dynamic Island live steps, and 5h/weekly quota and cache-hit dashboards over LAN, Tailscale, Cloudflare Tunnel, or E2EE relay (`CLI`, `IDE`).
 
 ## Known CLI problems
 
