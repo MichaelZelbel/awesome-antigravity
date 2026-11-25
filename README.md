@@ -106,6 +106,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [mattpocock/skills: handoff](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) - A skill you call by name. It writes up a long session as one Markdown file so a fresh agent, another tool or a colleague can continue the work. Matt Pocock [explains when to use it](https://www.aihero.dev/skills-handoff).
 - [cerredz/vidbyte-memory](https://github.com/cerredz/vidbyte-memory) - Turns corrections into facts the agent loads, pytest tests where a check can be written, and git commits (`CLI`).
 - [minyaozhu/work-plan](https://github.com/minyaozhu/work-plan) - Cuts multi-session token usage by ~60% (2–3× faster) via focused `[WORK PLAN]` turn briefs, structured task handoffs, categorized Memory, and progressive-disclosure OKF / Markdown Knowledge Packs — plus a local SQLite task DAG UI and live same-folder/worktree edit guards for parallel chats (`IDE`).
+- [AncientiCe/palace-rs](https://github.com/AncientiCe/palace-rs) - Local-first memory for coding agents: one Rust binary and one SQLite file, local embeddings, hybrid BM25 plus vector search. Install with `palace install --client antigravity`, which writes MCP config to `~/.gemini/config/mcp_config.json` and an always-on rule to `~/.gemini/config/rules/palace.md`. LongMemEval s_cleaned retrieval recall R@5 0.987. Not associated in any way with the popular mempalace python. (`IDE`)
 
 ## Code intelligence
 
