@@ -128,6 +128,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [jungdosa/QuotaDock](https://github.com/jungdosa/QuotaDock) - Windows desktop widget showing Antigravity quotas next to Claude Code and Codex, each with its reset time. Reads the IDE's local language server, so checking costs no quota (`IDE`).
 - [wassim-azi/agy-powerline](https://github.com/wassim-azi/agy-powerline) - Fast, configurable statusline with live Gemini 5h/7d quota meters, pace markers, and TUI and [browser](https://agy-powerline.com/configure/) configurators (`CLI`).
 - [vladsboev-web/chat_tokens](https://github.com/vladsboev-web/chat_tokens) - Antigravity 2.0 plugin with a live Sidecar Context Monitor side panel (thresholds, compaction detection, one-click HANDOFF prompt) and a zero-token `/ctx` PreInvocation hook reading local `transcript.jsonl`.
+- [Staaaying/ag-vario](https://github.com/Staaaying/ag-vario) - Read-only macOS HUD for Antigravity Desktop showing per-pane session tokens, context breakdown, subagents, quota rings, and a 30-day usage heatmap.
 
 ## Safety
 
