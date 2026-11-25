@@ -136,6 +136,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [Tesseract](https://tesseract.dev) - Desktop app for macOS, Windows and Linux that runs the Antigravity CLI and 13 other coding agent frameworks in one window, a different one in each conversation. Closed source, free (`CLI`).
 - [WFD Faro](https://btcwfd.github.io/wfd-faro-site/) - Windows desktop panel for many projects at once: Git health, kanban, scripts. Closed source, free tier. The live view of your Antigravity subagents is part of the paid plan.
 - [jaon13/agent-plugins](https://github.com/jaon13/agent-plugins) - Antigravity plugins with module-level SQLite WAL locking across parallel sessions and swarms, .NET and Rust build rules, and a sidecar panel.
+- [Codex Direct Relay](https://github.com/TardisBooo/antigravity-codex-orchestrator) - Send an engineering task from Antigravity to the Codex CLI, with read-only mode by default and a summary of changes and checks. `CLI`
 
 ## Fixes and quality of life
 
