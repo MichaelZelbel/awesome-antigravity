@@ -159,6 +159,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [INK-Q/agy-fast](https://github.com/INK-Q/agy-fast) - Local MCP plugin and SessionStart snapshot hook that batches searches, 15-language symbol outlines, multi-file edits with inline verification, and parallel build/test checks to reduce turns and token usage (`CLI` `IDE`).
 - [lukeinx/agy-remote-wecom](https://github.com/lukeinx/agy-remote-wecom) - Control local Antigravity terminal and background `agy acp` sessions from WeCom on your phone over an outbound WebSocket connection, with session resume, attachments, model/mode switching, and tool-approval cards; macOS, Chinese UI (`CLI`).
 - [yuanwansi/antigravity-zh-cn](https://github.com/yuanwansi/antigravity-zh-cn) - Simplified Chinese UI patcher and rules plugin for Antigravity 2.0 Desktop: localizes menus, settings and panels, switches languages live with a shortcut, and restores the original archive from a verified backup.
+- [GHSaiMo/antigravity-mobile](https://github.com/GHSaiMo/antigravity-mobile) - Multigravity, an MIT open-source native iOS (App Store), Android, and Web PWA mobile companion with a local Go gateway (`mgy`) for monitoring chats and `/swarm`, lock-screen APNs command approvals, Dynamic Island live steps, and 5h/weekly quota and cache-hit dashboards over LAN, Tailscale, Cloudflare Tunnel, or E2EE relay (`CLI`, `IDE`).
 
 ## Known CLI problems
 
