@@ -94,6 +94,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [klingai-dev/antigravity-plugin](https://github.com/klingai-dev/antigravity-plugin) - Kling's own plugin for making images and videos through its hosted MCP server. Needs a Kling account (`CLI`).
 - [ParkerHwang/OpenSocrates](https://github.com/ParkerHwang/OpenSocrates) - Reasoning procedures for checking assumptions, comparing options and weighing evidence. Installs a rule and a skill.
 - [krutytskyi/kissmypost-gemini](https://github.com/krutytskyi/kissmypost-gemini) - Reddit audience data for the agent: which subreddits fit, when to post, where your brand is mentioned. Runs on KissMyPost's hosted server and needs a free account with daily limits.
+- [ultrafastmov/ultrafast](https://github.com/ultrafastmov/ultrafast) - Makes and edits videos as JSON documents rendered on your own GPU: a skill and a local MCP server to check them, look at frames, review the text and export MP4, ProRes, WebM or GIF. Open source (`CLI`).
 
 ## Spec-driven development
 
