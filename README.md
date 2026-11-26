@@ -133,6 +133,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [vladsboev-web/chat_tokens](https://github.com/vladsboev-web/chat_tokens) - Side panel for Antigravity 2.0 that shows how full the context is and offers a one-click handoff prompt, plus a `/ctx` command that costs no tokens.
 - [vladsboev-web/ContextRing](https://github.com/vladsboev-web/ContextRing) - macOS ring and menu bar monitor for how full the context of Antigravity 2.0 is, with 24-hour and 7-day stats. Reads local files only.
 - [Staaaying/ag-vario](https://github.com/Staaaying/ag-vario) - Read-only macOS overlay for Antigravity 2.0 with tokens, context, subagents and quota for each pane, and a 30-day usage heatmap.
+- [qiudai0627/agy-usage](https://github.com/qiudai0627/agy-usage) - Local web dashboard, macOS menu bar pill, Windows widget and terminal status line showing separate Gemini and Claude/GPT 5-hour and 7-day quotas and reset times (`CLI` `IDE`).
 
 ## Safety
 
