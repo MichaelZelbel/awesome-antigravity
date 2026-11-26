@@ -83,6 +83,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
 - [zColdWater/omniforge-skills](https://github.com/zColdWater/omniforge-skills) - 50 read-only checks to run before a launch: web and Supabase security, email DNS records, domain and trademark lookups (`CLI`).
 - [Aident Loadout](https://aident.ai) - Hosted service that gives an agent 400+ ready-made skills and the apps you connect once, through an MCP server, a CLI or an [Agent Skill](https://github.com/Aident-AI/aident-skill). Closed source, pay-as-you-go.
+- [Antigravity Skills](https://antigravityskills.com/skills) - Web directory of agent skill pages with install guides; independent and closed source, free to browse, downloads need a Google account and are paid after the first one.
 
 ## Single skills worth installing
 
