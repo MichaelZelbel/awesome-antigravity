@@ -81,6 +81,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [samber/cc-skills-golang](https://github.com/samber/cc-skills-golang) - Go skills from the author of `lo`.
 - [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills) - 73 game development skills for Godot, Unity, Unreal, three.js and more, with a router that picks the right one.
 - [Pranav-Nexus/antigravity-skill-porter](https://github.com/Pranav-Nexus/antigravity-skill-porter) - Converts skills written for Claude Code or Cursor into Antigravity plugins: swaps the tool names, reads `GEMINI.md` and `AGENTS.md`, adds the `plugin.json`.
+- [sipki-tech/antigravity-meta-plugin-kit](https://github.com/sipki-tech/antigravity-meta-plugin-kit) - Zero-dependency toolkit for scaffolding, linting, diagnosing and probing Antigravity plugins with an offline CI linter, local doctor, 11 authoring skills and 3 isolated subagents (`CLI` `IDE`).
 - [zColdWater/omniforge-skills](https://github.com/zColdWater/omniforge-skills) - 50 read-only checks to run before a launch: web and Supabase security, email DNS records, domain and trademark lookups (`CLI`).
 - [Aident Loadout](https://aident.ai) - Hosted service that gives an agent 400+ ready-made skills and the apps you connect once, through an MCP server, a CLI or an [Agent Skill](https://github.com/Aident-AI/aident-skill). Closed source, pay-as-you-go.
 
@@ -151,6 +152,7 @@ Antigravity loads skills from `.agents/skills/` in your workspace, one folder wi
 - [Tesseract](https://tesseract.dev) - Desktop app for macOS, Windows and Linux that runs the Antigravity CLI and 13 other coding agent frameworks in one window, a different one in each conversation. Closed source, free (`CLI`).
 - [jaon13/agent-plugins](https://github.com/jaon13/agent-plugins) - Antigravity plugins that lock modules so parallel sessions do not edit the same code, with .NET and Rust build rules and a side panel.
 - [TardisBooo/antigravity-codex-orchestrator](https://github.com/TardisBooo/antigravity-codex-orchestrator) - Codex Direct Relay: hand a coding task from Antigravity to the Codex CLI, read-only by default, and get a summary of the changes back (`CLI`).
+- [sipki-tech/antigravity-research-kit](https://github.com/sipki-tech/antigravity-research-kit) - Multi-agent deep research plugin with parallel scouts, an adversarial Red-Team verifier, an offline editorial writer and a zero-dependency CLI for fetching pages, unwrapping Google grounding redirects and auditing citations (`CLI` `IDE`).
 
 ## Fixes and quality of life
 
