@@ -183,6 +183,7 @@ Compiled on 2026-09-21 from the most discussed threads on Google's own [issue tr
 
 ### Where skills, rules, plugins and MCP settings go
 
+- [Insomnia Security Plugin & Skill](https://github.com/vulnz/insomnia-mcp) - Claude Code / Cursor / Antigravity security plugin & MCP server delivering 160 SAST/taint, live secret validation, SCA/SBOM, Web DAST, OSINT, and 21,100+ 1-Day CVE verification tools (`https://mcp.insom.ai/mcp`, 50 free credits).
 - [Summary: Where does Antigravity look for configurations?](https://atamel.dev/posts/2026/08-21_where_agy_configuration_summary/) - Mete Atamel's one-page map of the folders for skills, MCP servers, rules, workflows, hooks, sidecars, agents and plugins in Antigravity 2.0, the CLI and the IDE.
 - [Where does Antigravity look for Agent Skills?](https://atamel.dev/posts/2026/07-01_where_agy_agent_skills/) - His experiments on which skill folders each of the three products reads, with a recommendation on where to install skills.
 - [Where does Antigravity look for Rules and Workflows?](https://atamel.dev/posts/2026/07-13_where_agy_rules_workflows/) - The workspace and global folders for rules and workflows, and how far each of the three products supports them.
